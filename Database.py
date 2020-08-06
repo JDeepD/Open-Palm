@@ -11,8 +11,7 @@ class make_db:
         self.cursor.execute("INSERT INTO DATA VALUES(:Rollno , :StudentName , :Marks)", {
                             'Rollno': RollNo, 'StudentName': StudentName, 'Marks': Marks})
         self.mydb.commit()
-
-	class get_response(make_db):
+class get_response(make_db):
     def __init__(self, Database, query):
         self.query = query
         self.Database = Database
@@ -23,13 +22,13 @@ class make_db:
             self.cursor.execute(
                 f'SELECT *FROM DATA WHERE STUDENTNAME = :studentname', {'studentname': self.query})
             data = self.cursor.fetchall()
-            print(data)
+            return(data)
         except:
             return('No Such Query Available Available')
 
 
 if __name__ == '__main__':
     # db = make_db('Databs')  # Enter Database name
-    # db.store_values(12, 'Nick', 24)  # Enter Question and response
+    # db.store_values(12, 'Nick', 24)  # Enter Rollno,Studentname,marks
     d = get_response('Databs', 'Nick').get_data()
     print(d)
