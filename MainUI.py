@@ -1,8 +1,6 @@
 import tkinter as tk
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 
-# import Tkinter as tk     # python 2
-# import tkFont as tkfont  # python 2
 
 
 class Openpalm(tk.Tk):
