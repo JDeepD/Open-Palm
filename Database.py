@@ -30,6 +30,6 @@ class make_db:
 
 if __name__ == '__main__':
     # db = make_db('Databs')  # Enter Database name
-    # db.store_values(12, 'Nick', 24)  # Enter Question and response
+    # db.store_values(12, 'Nick', 24)  # Enter Rollno,Studentname,marks
     d = get_response('Databs', 'Nick').get_data()
     print(d)
