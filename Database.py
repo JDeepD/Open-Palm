@@ -22,7 +22,7 @@ class get_response(make_db):
             self.cursor.execute(
                 f'SELECT *FROM DATA WHERE STUDENTNAME = :studentname', {'studentname': self.query})
             data = self.cursor.fetchall()
-            print(data)
+            return(data)
         except:
             return('No Such Query Available Available')
 
