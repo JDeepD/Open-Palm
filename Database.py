@@ -11,8 +11,7 @@ class make_db:
         self.cursor.execute("INSERT INTO DATA VALUES(:Rollno , :StudentName , :Marks)", {
                             'Rollno': RollNo, 'StudentName': StudentName, 'Marks': Marks})
         self.mydb.commit()
-
-	class get_response(make_db):
+class get_response(make_db):
     def __init__(self, Database, query):
         self.query = query
         self.Database = Database
