@@ -1,12 +1,8 @@
 import tkinter as tk
 from tkinter.filedialog import askopenfilename, asksaveasfilename
-<<<<<<< HEAD
 from PIL import ImageTk, Image
 # import Tkinter as tk     # python 2
 # import tkFont as tkfont  # python 2
-=======
-
->>>>>>> ebc873952ccc15373826f1d07c5a3d82246da11e
 
 
 class Openpalm(tk.Tk):
@@ -162,6 +158,9 @@ class Teacher_Page_Login(tk.Frame):
 
 if __name__ == "__main__":
     window = Openpalm()
+    window.iconbitmap(tk.PhotoImage(
+        r'C:\Users\Asus\Documents\GitHub\Open-Palm\favicon\favicon.ico'))
+    window.title('OpenPalm')
     window.rowconfigure(0, minsize=800, weight=1)
     window.columnconfigure(0, minsize=800, weight=1)
     window.geometry("1500x800")
