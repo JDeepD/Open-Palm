@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter.filedialog import askopenfilename, asksaveasfilename
-
+from PIL import ImageTk, Image
 # import Tkinter as tk     # python 2
 # import tkFont as tkfont  # python 2
 
@@ -100,6 +100,7 @@ class Login_Page(tk.Frame):
 
         mainframe = tk.Frame(self)
         # The Design Aspect of the frame
+
         login_label = tk.Label(mainframe, text="This is Login Page")
         login_label.grid(row=0, column=0, sticky='ew')
 
