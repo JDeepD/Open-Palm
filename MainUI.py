@@ -156,8 +156,8 @@ class Teacher_Page_Login(tk.Frame):
 
 if __name__ == "__main__":
     window = Openpalm()
-    window.iconbitmap(tk.PhotoImage(
-        r'C:\Users\Asus\Documents\GitHub\Open-Palm\favicon\favicon.ico'))
+    window.iconphoto(True,tk.PhotoImage(
+        r'C:\Users\Asus\Documents\GitHub\Open-Palm\favicon\favicon.png'))
     window.title('OpenPalm')
     window.rowconfigure(0, minsize=800, weight=1)
     window.columnconfigure(0, minsize=800, weight=1)
