@@ -14,3 +14,5 @@ Modules Required
 1. tkinter (Tkinter for Python 2.x) #Preinstalled
 2. sqlite3 #Preinstalled
 3. smtplib
+
+*Note : This is modified for linux.
