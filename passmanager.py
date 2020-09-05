@@ -1,4 +1,4 @@
-# This is very very bad encrytion and is only implemented for simplicity of the Project.
+# This is very very bad ciphering technique and is only implemented for simplicity of the Project.
 # Please donot store the same password as your other accounts like Gmail,Facebook etc. Use this at your own risk
 import csv
 def storepass(user,passwd):
