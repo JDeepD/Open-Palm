@@ -1,5 +1,5 @@
 Welcome to Open Palm Open Source Project. This is a project which will be mainly based on Python 3.x and MySql
-
+Github page : https://nova-striker.github.io/openpalm/
 Requirements :
 
 Can be installed in the following way :
