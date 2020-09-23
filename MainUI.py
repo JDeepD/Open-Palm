@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from PIL import ImageTk, Image
-
+import passmanager as pm
 
 class Openpalm(tk.Tk):
 
@@ -135,31 +135,51 @@ class Teacher_Page_Login(tk.Frame):
         usr_lbl = tk.Label(semi_frm, text='User Name')
         usr_lbl.grid(row=1, column=0)
 
-        user_box = tk.Entry(semi_frm)
-        user_box.grid(row=1, column=1)
+        self.user_box = tk.Entry(semi_frm)
+        self.user_box.grid(row=1, column=1)
 
         passwd_lbl = tk.Label(semi_frm, text='Password')
         passwd_lbl.grid(row=2, column=0)
 
-        passwd_box = tk.Entry(semi_frm)
-        passwd_box.grid(row=2, column=1)
+        self.passwd_box = tk.Entry(semi_frm)
+        self.passwd_box.grid(row=2, column=1)
 
         semi_frm.grid(row=1, column=0, sticky='nsew')
         # The Design Aspect of the frame
-
-        goto_login = tk.Button(mainframe, text='Login Page',
+        self.sign_in = tk.Button(semi_frm, text="Sign In",command=self.get_user_info)
+        self.sign_in.grid(row=4, column=1, sticky='nsew')
+        goto_login = tk.Button(semi_frm, text='Login Page',
                                command=lambda: self.controller.show_frame("Login_Page"))
-        goto_login.grid(row=2, column=0, sticky='nsew')
+        goto_login.grid(row=4, column=0, sticky='nsew')
 
         mainframe.pack()  # Packing of the mainframe
+
+    def store_user_info(self):
+        userid = self.user_box.get()
+        userpass = self.passwd_box.get()
+        ciphered_id = pm.cipherpass(userid)
+        ciphered_pass = pm.cipherpass(userpass)
+        pm.storepass(ciphered_id,ciphered_pass)
+
+    def get_user_info(self):
+        userid = pm.cipherpass(self.user_box.get())
+        userpass = pm.cipherpass(self.passwd_box.get())
+
+        dic = pm.get_pass()
+
+        if userid in dic:
+            if userpass == dic[userid]:
+                print("passed")
+        else:
+            print("failed")
+
 
 
 if __name__ == "__main__":
     window = Openpalm()
-    window.iconphoto(True,tk.PhotoImage(
-        r'C:\Users\Asus\Documents\GitHub\Open-Palm\favicon\favicon.png'))
+    window.iconphoto(True, tk.PhotoImage(
+        r'..\favicon\favicon.png'))
     window.title('OpenPalm')
     window.rowconfigure(0, minsize=800, weight=1)
     window.columnconfigure(0, minsize=800, weight=1)
-    window.geometry("1500x800")
     window.mainloop()
