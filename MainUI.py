@@ -6,7 +6,7 @@ import passmanager as pm
 class Openpalm(tk.Tk):
 
     def __init__(self):
-        # Initialises all the variables og tk.Tk
+        # Initialises all the variables or tk.Tk
         tk.Tk.__init__(self)
 
         # the container is where we'll stack a bunch of frames
@@ -96,21 +96,29 @@ class Login_Page(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
 
-        mainframe = tk.Frame(self)
+        self.mainframe = tk.Frame(self)
         # The Design Aspect of the frame
 
-        login_label = tk.Label(mainframe, text="This is Login Page")
-        login_label.grid(row=0, column=0, sticky='ew')
+
+        img = ImageTk.PhotoImage(Image.open("./favicon/logo.png"))
+        imglbl = tk.Label(self.mainframe , image = img)
+        imglbl.image = img
+        #imglbl.place(x=0, y=0, relwidth=1, relheight=1)
+        imglbl.grid(row = 3 , column = 0)
+
+
+        login_label = tk.Label(self.mainframe, text="This is Login Page")
+        login_label.grid(row=0, column=0)
 
         # The Design Aspect of the frame
-        teacher_btn = tk.Button(mainframe, text='TEACHER', height=1, width=10,
+        teacher_btn = tk.Button(self.mainframe, text='TEACHER', height=1, width=15,
                                 command=lambda: self.controller.show_frame("Teacher_Page_Login"))
-        teacher_btn.grid(row=1, column=0, sticky='ew')
+        teacher_btn.grid(row=1, column=0 )
 
-        button = tk.Button(mainframe, text="Go to the Editor",
+        button = tk.Button(self.mainframe, text="Go to the Editor",
                            command=lambda: controller.show_frame("Editor"), height=1, width=15)
         button.grid(row=2, column=0)
-        mainframe.pack()
+        self.mainframe.pack()
 
 
 class Teacher_Page_Login(tk.Frame):
@@ -125,26 +133,34 @@ class Teacher_Page_Login(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         # The Frame that contains all the objects of the Teacher Page. It is the servant of self(Window)
-        mainframe = tk.Frame(self)
+
+        self.mainframe = tk.Frame(self)
+
         # The Design Aspect of the frame
-        lbl = tk.Label(mainframe, text="TEACHER'S PAGE")
+
+        img = ImageTk.PhotoImage(Image.open("./favicon/logo.png"))
+        imglbl = tk.Label(self.mainframe , image = img)
+        imglbl.image = img
+        #imglbl.place(x=0, y=0, relwidth=1, relheight=1)
+        imglbl.grid(row = 3 , column = 0)
+
+        lbl = tk.Label(self.mainframe, text="TEACHER'S PAGE",font=("Ubuntu", 14, ''))
         lbl.grid(row=0, column=0, sticky='nsew')
 
-        semi_frm = tk.Frame(mainframe)
+        semi_frm = tk.Frame(self.mainframe)
 
-        usr_lbl = tk.Label(semi_frm, text='User Name')
+        usr_lbl = tk.Label(semi_frm, text='User Name',font=("Courier", 12, ''))
         usr_lbl.grid(row=1, column=0)
 
         self.user_box = tk.Entry(semi_frm)
         self.user_box.grid(row=1, column=1)
 
-        passwd_lbl = tk.Label(semi_frm, text='Password')
+        passwd_lbl = tk.Label(semi_frm, text='Password',font=("courier", 12, ''))
         passwd_lbl.grid(row=2, column=0)
 
-        self.passwd_box = tk.Entry(semi_frm)
+        self.passwd_box = tk.Entry(semi_frm , show ="*")
         self.passwd_box.grid(row=2, column=1)
 
-        semi_frm.grid(row=1, column=0, sticky='nsew')
         # The Design Aspect of the frame
         self.sign_in = tk.Button(semi_frm, text="Sign In",command=self.get_user_info)
         self.sign_in.grid(row=4, column=1, sticky='nsew')
@@ -152,15 +168,12 @@ class Teacher_Page_Login(tk.Frame):
                                command=lambda: self.controller.show_frame("Login_Page"))
         goto_login.grid(row=4, column=0, sticky='nsew')
 
-        mainframe.pack()  # Packing of the mainframe
+        semi_frm.grid(row=1, column=0)
+
+        self.mainframe.pack()  # Packing of the mainframe
 
     def store_user_info(self):
-        userid = self.user_box.get()
-        userpass = self.passwd_box.get()
-        ciphered_id = pm.cipherpass(userid)
-        ciphered_pass = pm.cipherpass(userpass)
-        pm.storepass(ciphered_id,ciphered_pass)
-
+        pass
     def get_user_info(self):
         userid = pm.cipherpass(self.user_box.get())
         userpass = pm.cipherpass(self.passwd_box.get())
@@ -170,15 +183,22 @@ class Teacher_Page_Login(tk.Frame):
         if userid in dic:
             if userpass == dic[userid]:
                 print("passed")
+                self.prompt = tk.Label(self.mainframe , text = "Successful" , fg = 'green')
+                self.prompt.grid(row=2 , column = 0 , sticky = 'nsew')
+
+            else:
+                print("failed due to incorrect password")
+                self.prompt = tk.Label(self.mainframe , text = "The Username or the password is incorrect" , fg = 'red')
+                self.prompt.grid(row=2 , column = 0 , sticky = 'nsew')
         else:
             print("failed")
-
-
+            self.prompt = tk.Label(self.mainframe , text =  "The Username or the password is incorrect" , fg = 'red')
+            self.prompt.grid(row=2 , column = 0 , sticky = 'nsew')
 
 if __name__ == "__main__":
     window = Openpalm()
     window.iconphoto(True, tk.PhotoImage(
-        r'..\favicon\favicon.png'))
+        r'.\favicon\favicon.png'))
     window.title('OpenPalm')
     window.rowconfigure(0, minsize=800, weight=1)
     window.columnconfigure(0, minsize=800, weight=1)
