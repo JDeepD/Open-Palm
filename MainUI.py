@@ -19,16 +19,23 @@ class Openpalm(tk.Tk):
 
         # self.frames is a dictionary that stores function calls
         self.frames = {}
+
         self.frames["Editor"] = Editor(
             parent=container, controller=self)  # Calls the Editor Class
+
         self.frames["Login_Page"] = Login_Page(
             parent=container, controller=self)  # Calls the Login_Page Class
+
         self.frames["Teacher_Page_Login"] = Teacher_Page_Login(
             parent=container, controller=self)  # Calls the Teacher_Page_Login Class
+
+        self.frames["Master_Page"] = Master_Page( #Calls the Master_Page 
+            parent = container,controller=self)
 
         self.frames["Editor"].grid(row=0, column=0, sticky="nsew")
         self.frames["Login_Page"].grid(row=0, column=0, sticky="nsew")
         self.frames["Teacher_Page_Login"].grid(row=0, column=0, sticky="nsew")
+        self.frames["Master_Page"].grid(row=0,column=0,sticky="nsew")
 
         self.show_frame("Editor")
 
@@ -54,7 +61,7 @@ class Editor(tk.Frame):
 
         # The instatiation of buttons
         self.btn_submit = tk.Button(self.frm_btns, text='SUBMIT')
-        self.btn_clear = tk.Button(self.frm_btns, text='CLEAR')
+        self.btn_clear = tk.Button(self.frm_btns, text='CLEAR)
         self.btn_open = tk.Button(
             self.frm_btns, text='OPEN', command=self.open_file)
 
@@ -164,6 +171,7 @@ class Teacher_Page_Login(tk.Frame):
         # The Design Aspect of the frame
         self.sign_in = tk.Button(semi_frm, text="Sign In",command=self.get_user_info)
         self.sign_in.grid(row=4, column=1, sticky='nsew')
+
         goto_login = tk.Button(semi_frm, text='Login Page',
                                command=lambda: self.controller.show_frame("Login_Page"))
         goto_login.grid(row=4, column=0, sticky='nsew')
@@ -183,8 +191,9 @@ class Teacher_Page_Login(tk.Frame):
         if userid in dic:
             if userpass == dic[userid]:
                 print("passed")
-                self.prompt = tk.Label(self.mainframe , text = "Successful" , fg = 'green')
-                self.prompt.grid(row=2 , column = 0 , sticky = 'nsew')
+                self.passwd_box.delete(0,"end")
+                self.user_box.delete(0,'end')
+                self.controller.show_frame("Master_Page")
 
             else:
                 print("failed due to incorrect password")
@@ -194,6 +203,49 @@ class Teacher_Page_Login(tk.Frame):
             print("failed")
             self.prompt = tk.Label(self.mainframe , text =  "The Username or the password is incorrect" , fg = 'red')
             self.prompt.grid(row=2 , column = 0 , sticky = 'nsew')
+
+class Master_Page(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
+
+        self.mainframe = tk.Frame(self)
+
+        toolfrm = tk.Frame(self.mainframe)
+        toolfrm.grid(row = 0 , column = 0)
+
+        infofrm = tk.Frame(self.mainframe)
+        infofrm.grid(row = 0 , column = 1)
+
+        datafrm = tk.Frame(self.mainframe)
+        datafrm.grid(row = 1)
+
+        #--------------------------------------------------/\/\ Toolfrm start/\/\-------------------------------------------------------------
+        semi_frm_tool = tk.Frame(toolfrm)
+
+        send_data_btn = tk.Button(semi_frm_tool , text = "Send Data",height = 1 , width = 15)
+        send_data_btn.grid(row = 0 , column=0)
+
+        set_question_btn = tk.Button(semi_frm_tool, text="Questions",height = 1 , width = 15)
+        set_question_btn.grid(row =1 , column = 0)
+
+        back_btn = tk.Button(semi_frm_tool , text = "Back" , command = lambda: self.controller.show_frame("Login_Page"),height = 1 , width = 15)
+        back_btn.grid(row = 2 , column = 0 )
+
+        semi_frm_tool.grid(row = 0 , column=0)
+        #--------------------------------------------------/\/\ Toolfrm end  /\/\-------------------------------------------------------------
+
+        #--------------------------------------------------/\/\ Info start   /\/\-------------------------------------------------------------
+        semi_frm_info = tk.Frame(infofrm)
+
+        std_name = tk.Label(semi_frm_info , text="NAME")
+        std_name.grid(row = 0 ,column = 0)
+
+        semi_frm_info.grid(row=0,column=0)
+        #--------------------------------------------------/\/\ Info end     /\/\-------------------------------------------------------------
+        self.mainframe.pack()  # Packing of the mainframe
+
 
 if __name__ == "__main__":
     window = Openpalm()
