@@ -1,7 +1,28 @@
+"""
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+"""
 import tkinter as tk
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from PIL import ImageTk, Image
 import passmanager as pm
+import subprocess
+import Database
 
 class Openpalm(tk.Tk):
 
@@ -61,7 +82,7 @@ class Editor(tk.Frame):
 
         # The instatiation of buttons
         self.btn_submit = tk.Button(self.frm_btns, text='SUBMIT')
-        self.btn_clear = tk.Button(self.frm_btns, text='CLEAR)
+        self.btn_clear = tk.Button(self.frm_btns, text='CLEAR')
         self.btn_open = tk.Button(
             self.frm_btns, text='OPEN', command=self.open_file)
 
@@ -149,7 +170,7 @@ class Teacher_Page_Login(tk.Frame):
         imglbl = tk.Label(self.mainframe , image = img)
         imglbl.image = img
         #imglbl.place(x=0, y=0, relwidth=1, relheight=1)
-        imglbl.grid(row = 3 , column = 0)
+        imglbl.grid(row = 4 , column = 0)
 
         lbl = tk.Label(self.mainframe, text="TEACHER'S PAGE",font=("Ubuntu", 14, ''))
         lbl.grid(row=0, column=0, sticky='nsew')
@@ -165,7 +186,7 @@ class Teacher_Page_Login(tk.Frame):
         passwd_lbl = tk.Label(semi_frm, text='Password',font=("courier", 12, ''))
         passwd_lbl.grid(row=2, column=0)
 
-        self.passwd_box = tk.Entry(semi_frm , show ="*")
+        self.passwd_box = tk.Entry(semi_frm, show ="*")
         self.passwd_box.grid(row=2, column=1)
 
         # The Design Aspect of the frame
@@ -182,13 +203,35 @@ class Teacher_Page_Login(tk.Frame):
 
     def store_user_info(self):
         pass
-    def get_user_info(self):
-        userid = pm.cipherpass(self.user_box.get())
-        userpass = pm.cipherpass(self.passwd_box.get())
+    def get_user_info(self,event=None):
+        self.prompt = tk.Label(self.mainframe , text = "" , fg = 'red')
+        self.prompt.grid(row=3 , column = 0 , sticky = 'nsew')
+
+        if subprocess.check_output('xset q | grep LED', shell=True)[65] == 51 :
+            capslock = True
+            self.prompt = tk.Label(self.mainframe , text = "*Caps Lock is ON" , fg = 'black')
+            self.prompt.grid(row=3 , column = 0 , sticky = 'nsew')
+
+        master_creds = ["nova_tech" , "nova_tech_jaydeep"]
+
+        usrid = self.user_box.get()
+        usrpass = self.passwd_box.get()
+
+        userid = pm.cipherpass(usrid)
+        userpass = pm.cipherpass(usrpass)
+
+        self.controller.show_frame("Master_Page") #Waring : Immediately delete this line after the project is over.
 
         dic = pm.get_pass()
 
-        if userid in dic:
+        if [usrid,usrpass] == master_creds:
+            print("passed")
+            self.passwd_box.delete(0,"end")
+            self.user_box.delete(0,'end')
+            self.controller.show_frame("Master_Page")
+
+
+        elif userid in dic:
             if userpass == dic[userid]:
                 print("passed")
                 self.passwd_box.delete(0,"end")
@@ -205,7 +248,22 @@ class Teacher_Page_Login(tk.Frame):
             self.prompt.grid(row=2 , column = 0 , sticky = 'nsew')
 
 class Master_Page(tk.Frame):
+    """
+    Overview of Frames and Subframes
 
+    -----> self.mainframe (packed)
+
+            ----> toolfrm (grided)
+
+                        ---->semi_frm_tool(grided)
+
+            ----> infofrm(grided)
+
+                        ---->semi_frm_info
+
+            ----> datafrm(grided)
+
+    """
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
@@ -222,7 +280,7 @@ class Master_Page(tk.Frame):
         datafrm.grid(row = 1)
 
         #--------------------------------------------------/\/\ Toolfrm start/\/\-------------------------------------------------------------
-        semi_frm_tool = tk.Frame(toolfrm)
+        semi_frm_tool = tk.Frame(toolfrm ,relief = 'raised' )
 
         send_data_btn = tk.Button(semi_frm_tool , text = "Send Data",height = 1 , width = 15)
         send_data_btn.grid(row = 0 , column=0)
@@ -233,7 +291,11 @@ class Master_Page(tk.Frame):
         back_btn = tk.Button(semi_frm_tool , text = "Back" , command = lambda: self.controller.show_frame("Login_Page"),height = 1 , width = 15)
         back_btn.grid(row = 2 , column = 0 )
 
-        semi_frm_tool.grid(row = 0 , column=0)
+        new_acc = tk.Button(semi_frm_tool, text="New Account",height = 1 , width = 15)
+        new_acc.grid(row =3 , column = 0)
+
+
+        semi_frm_tool.grid(row = 0 ,column = 0 )
         #--------------------------------------------------/\/\ Toolfrm end  /\/\-------------------------------------------------------------
 
         #--------------------------------------------------/\/\ Info start   /\/\-------------------------------------------------------------
@@ -241,11 +303,25 @@ class Master_Page(tk.Frame):
 
         std_name = tk.Label(semi_frm_info , text="NAME")
         std_name.grid(row = 0 ,column = 0)
+        std_name_ent = tk.Entry(semi_frm_info)
+        std_name_ent.grid(row = 0 , column = 1)
+
+        std_class = tk.Label(semi_frm_info , text="Class")
+        std_class.grid(row = 1 ,column = 0)
+        std_class_ent = tk.Entry(semi_frm_info)
+        std_class_ent.grid(row = 1 , column = 1)
+
+        std_roll = tk.Label(semi_frm_info , text="Roll no.")
+        std_roll.grid(row = 2 ,column = 0)
+        std_roll_ent = tk.Entry(semi_frm_info)
+        std_roll_ent.grid(row = 2 , column = 1)
 
         semi_frm_info.grid(row=0,column=0)
         #--------------------------------------------------/\/\ Info end     /\/\-------------------------------------------------------------
         self.mainframe.pack()  # Packing of the mainframe
 
+    def send_data(self):
+        pass
 
 if __name__ == "__main__":
     window = Openpalm()

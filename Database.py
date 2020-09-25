@@ -27,8 +27,8 @@ class get_response(make_db):
             return('No Such Query Available Available')
 
 
-if __name__ == '__main__':
+#if __name__ == '__main__':
     # db = make_db('Databs')  # Enter Database name
     # db.store_values(12, 'Nick', 24)  # Enter Rollno,Studentname,marks
-    d = get_response('Databs', 'Nick').get_data()
-    print(d)
+    #d = get_response('Databs', 'Nick').get_data()
+    #print(d)
