@@ -22,7 +22,7 @@ from tkinter.filedialog import askopenfilename, asksaveasfilename
 from PIL import ImageTk, Image
 import passmanager as pm
 import subprocess
-import Database
+import Database as db
 
 class Openpalm(tk.Tk):
 
@@ -128,7 +128,7 @@ class Login_Page(tk.Frame):
         # The Design Aspect of the frame
 
 
-        img = ImageTk.PhotoImage(Image.open("./favicon/logo.png"))
+        img = ImageTk.PhotoImage(Image.open("../favicon/logo.png"))
         imglbl = tk.Label(self.mainframe , image = img)
         imglbl.image = img
         #imglbl.place(x=0, y=0, relwidth=1, relheight=1)
@@ -166,7 +166,7 @@ class Teacher_Page_Login(tk.Frame):
 
         # The Design Aspect of the frame
 
-        img = ImageTk.PhotoImage(Image.open("./favicon/logo.png"))
+        img = ImageTk.PhotoImage(Image.open("../favicon/logo.png"))
         imglbl = tk.Label(self.mainframe , image = img)
         imglbl.image = img
         #imglbl.place(x=0, y=0, relwidth=1, relheight=1)
@@ -303,30 +303,44 @@ class Master_Page(tk.Frame):
 
         std_name = tk.Label(semi_frm_info , text="NAME")
         std_name.grid(row = 0 ,column = 0)
-        std_name_ent = tk.Entry(semi_frm_info)
-        std_name_ent.grid(row = 0 , column = 1)
+        self.std_name_ent = tk.Entry(semi_frm_info)
+        self.std_name_ent.grid(row = 0 , column = 1)
 
         std_class = tk.Label(semi_frm_info , text="Class")
         std_class.grid(row = 1 ,column = 0)
-        std_class_ent = tk.Entry(semi_frm_info)
-        std_class_ent.grid(row = 1 , column = 1)
+        self.std_class_ent = tk.Entry(semi_frm_info)
+        self.std_class_ent.grid(row = 1 , column = 1)
 
         std_roll = tk.Label(semi_frm_info , text="Roll no.")
         std_roll.grid(row = 2 ,column = 0)
-        std_roll_ent = tk.Entry(semi_frm_info)
-        std_roll_ent.grid(row = 2 , column = 1)
+        self.std_roll_ent = tk.Entry(semi_frm_info)
+        self.std_roll_ent.grid(row = 2 , column = 1)
+
+        submit_btn = tk.Button(semi_frm_info , text = "Submit",height = 1 , width = 17 , command=self.send_data)
+        submit_btn.grid(row = 3 , column=1, pady = 10)
+
 
         semi_frm_info.grid(row=0,column=0)
         #--------------------------------------------------/\/\ Info end     /\/\-------------------------------------------------------------
+
+        #--------------------------------------------------/\/\ Data start   /\/\-------------------------------------------------------------
+        semi_frm_data = tk.Frame(datafrm)
+
+        self.show_data_btn = tk.Button(semi_frm_data , text = "Show Info",height=1 ,width=15)
+        self.show_data_btn.grid()
+
+        semi_frm_data.grid(row=0,column=0)
+        #--------------------------------------------------/\/\ Data start   /\/\-------------------------------------------------------------
+
         self.mainframe.pack()  # Packing of the mainframe
 
     def send_data(self):
-        pass
+        dbs = db.make_db("test")
 
 if __name__ == "__main__":
     window = Openpalm()
     window.iconphoto(True, tk.PhotoImage(
-        r'.\favicon\favicon.png'))
+        r'..\favicon\favicon.png'))
     window.title('OpenPalm')
     window.rowconfigure(0, minsize=800, weight=1)
     window.columnconfigure(0, minsize=800, weight=1)

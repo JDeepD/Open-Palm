@@ -5,11 +5,11 @@ class make_db:
         self.dbname = dbname
         self.mydb = sqlite3.connect(self.dbname + '.db')
         self.cursor = self.mydb.cursor()
-        self.cursor.execute("""CREATE TABLE IF NOT EXISTS DATA(RollNo INTEGER,StudentName TEXT,Marks INT )""")
+        self.cursor.execute("""CREATE TABLE IF NOT EXISTS DATA (RollNo INTEGER,StudentName TEXT,Class TEXT )""")
 
-    def store_values(self, RollNo, StudentName, Marks):
-        self.cursor.execute("INSERT INTO DATA VALUES(:Rollno , :StudentName , :Marks)", {
-                            'Rollno': RollNo, 'StudentName': StudentName, 'Marks': Marks})
+    def store_values(self, RollNo, StudentName, Class):
+        self.cursor.execute("INSERT INTO DATA VALUES(:Rollno , :StudentName , :Class)", {
+                            'Rollno': RollNo, 'StudentName': StudentName, 'Class': Class})
         self.mydb.commit()
 class get_response(make_db):
     def __init__(self, Database, query):
