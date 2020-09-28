@@ -18,6 +18,7 @@
  * DEALINGS IN THE SOFTWARE.
 """
 import tkinter as tk
+from tkinter import ttk
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from PIL import ImageTk, Image
 import passmanager as pm
@@ -67,11 +68,10 @@ class Openpalm(tk.Tk):
 
 
 class Editor(tk.Frame):
-
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        self.mainframe = tk.Frame(self, width=1600)
+        self.mainframe = tk.Frame(self , width=1600)
 
         # The Design Aspect of the frame
         self.Text_box = tk.Text(self.mainframe, bg='#333333', fg='#f2f2f2')
@@ -81,9 +81,9 @@ class Editor(tk.Frame):
         self.frm_btns = tk.Frame(self.mainframe)
 
         # The instatiation of buttons
-        self.btn_submit = tk.Button(self.frm_btns, text='SUBMIT')
-        self.btn_clear = tk.Button(self.frm_btns, text='CLEAR')
-        self.btn_open = tk.Button(
+        self.btn_submit = ttk.Button(self.frm_btns, text='SUBMIT')
+        self.btn_clear = ttk.Button(self.frm_btns, text='CLEAR')
+        self.btn_open = ttk.Button(
             self.frm_btns, text='OPEN', command=self.open_file)
 
         # The gridding of buttons
@@ -98,7 +98,7 @@ class Editor(tk.Frame):
         self.Text_box.grid(row=0, column=0, sticky='nsew')
         # THe Design aspect of the frame
 
-        move_to_page_1 = tk.Button(self.frm_btns, text="Go to Login Page",
+        move_to_page_1 = ttk.Button(self.frm_btns, text="Go to Login Page",
                                    command=lambda: controller.show_frame("Login_Page"))
 
         move_to_page_1.grid(row=3, column=0, sticky='ew')
@@ -139,12 +139,12 @@ class Login_Page(tk.Frame):
         login_label.grid(row=0, column=0)
 
         # The Design Aspect of the frame
-        teacher_btn = tk.Button(self.mainframe, text='TEACHER', height=1, width=15,
+        teacher_btn = ttk.Button(self.mainframe, text='TEACHER', width=15,
                                 command=lambda: self.controller.show_frame("Teacher_Page_Login"))
         teacher_btn.grid(row=1, column=0 )
 
-        button = tk.Button(self.mainframe, text="Go to the Editor",
-                           command=lambda: controller.show_frame("Editor"), height=1, width=15)
+        button = ttk.Button(self.mainframe, text="Go to the Editor",
+                           command=lambda: controller.show_frame("Editor"), width=15)
         button.grid(row=2, column=0)
         self.mainframe.pack()
 
@@ -190,10 +190,10 @@ class Teacher_Page_Login(tk.Frame):
         self.passwd_box.grid(row=2, column=1)
 
         # The Design Aspect of the frame
-        self.sign_in = tk.Button(semi_frm, text="Sign In",command=self.get_user_info)
+        self.sign_in = ttk.Button(semi_frm, text="Sign In",command=self.get_user_info)
         self.sign_in.grid(row=4, column=1, sticky='nsew')
 
-        goto_login = tk.Button(semi_frm, text='Login Page',
+        goto_login = ttk.Button(semi_frm, text='Login Page',
                                command=lambda: self.controller.show_frame("Login_Page"))
         goto_login.grid(row=4, column=0, sticky='nsew')
 
@@ -271,29 +271,25 @@ class Master_Page(tk.Frame):
         self.mainframe = tk.Frame(self)
 
         toolfrm = tk.Frame(self.mainframe)
-        toolfrm.grid(row = 0 , column = 0)
+        toolfrm.grid(row=0,column=0,sticky = "w")
 
-        infofrm = tk.Frame(self.mainframe)
-        infofrm.grid(row = 0 , column = 1)
-
-        datafrm = tk.Frame(self.mainframe)
-        datafrm.grid(row = 1)
+        infofrm = tk.Frame(self.mainframe )
+        infofrm.grid(row = 0 , column = 1,sticky="e")
 
         #--------------------------------------------------/\/\ Toolfrm start/\/\-------------------------------------------------------------
-        semi_frm_tool = tk.Frame(toolfrm ,relief = 'raised' )
+        semi_frm_tool = tk.Frame(toolfrm)
 
-        send_data_btn = tk.Button(semi_frm_tool , text = "Send Data",height = 1 , width = 15)
-        send_data_btn.grid(row = 0 , column=0)
+        send_data_btn = ttk.Button(semi_frm_tool , text = "Send Data", width = 15)
+        send_data_btn.grid(row = 0 , column=0 , sticky = "W")
 
-        set_question_btn = tk.Button(semi_frm_tool, text="Questions",height = 1 , width = 15)
+        set_question_btn = ttk.Button(semi_frm_tool, text="Questions",width = 15)
         set_question_btn.grid(row =1 , column = 0)
 
-        back_btn = tk.Button(semi_frm_tool , text = "Back" , command = lambda: self.controller.show_frame("Login_Page"),height = 1 , width = 15)
-        back_btn.grid(row = 2 , column = 0 )
+        new_acc = ttk.Button(semi_frm_tool, text="New Account" , width = 15)
+        new_acc.grid(row =2 , column = 0)
 
-        new_acc = tk.Button(semi_frm_tool, text="New Account",height = 1 , width = 15)
-        new_acc.grid(row =3 , column = 0)
-
+        back_btn = ttk.Button(semi_frm_tool , text = "Back" , command = lambda: self.controller.show_frame("Login_Page"), width = 15)
+        back_btn.grid(row = 3 , column = 0 )
 
         semi_frm_tool.grid(row = 0 ,column = 0 )
         #--------------------------------------------------/\/\ Toolfrm end  /\/\-------------------------------------------------------------
@@ -316,23 +312,14 @@ class Master_Page(tk.Frame):
         self.std_roll_ent = tk.Entry(semi_frm_info)
         self.std_roll_ent.grid(row = 2 , column = 1)
 
-        submit_btn = tk.Button(semi_frm_info , text = "Submit",height = 1 , width = 17 , command=self.send_data)
+        submit_btn = ttk.Button(semi_frm_info , text = "Submit", width = 17 , command=self.send_data)
         submit_btn.grid(row = 3 , column=1, pady = 10)
 
 
-        semi_frm_info.grid(row=0,column=0)
+        semi_frm_info.grid(row=0,column=1 ,sticky = 'nsew')
         #--------------------------------------------------/\/\ Info end     /\/\-------------------------------------------------------------
 
-        #--------------------------------------------------/\/\ Data start   /\/\-------------------------------------------------------------
-        semi_frm_data = tk.Frame(datafrm)
-
-        self.show_data_btn = tk.Button(semi_frm_data , text = "Show Info",height=1 ,width=15)
-        self.show_data_btn.grid()
-
-        semi_frm_data.grid(row=0,column=0)
-        #--------------------------------------------------/\/\ Data start   /\/\-------------------------------------------------------------
-
-        self.mainframe.pack()  # Packing of the mainframe
+        self.mainframe.grid()  # Packing of the mainframe
 
     def send_data(self):
         dbs = db.make_db("test")
