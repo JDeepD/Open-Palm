@@ -85,11 +85,15 @@ class Editor(tk.Frame):
         self.btn_clear = ttk.Button(self.frm_btns, text='CLEAR')
         self.btn_open = ttk.Button(
             self.frm_btns, text='OPEN', command=self.open_file)
+        self.btn_save = ttk.Button(
+            self.frm_btns, text='SAVE', command=self.save_file)
+
 
         # The gridding of buttons
         self.btn_submit.grid(row=0, column=0, sticky='ew')
         self.btn_clear.grid(row=1, column=0, sticky='ew')
         self.btn_open.grid(row=2, column=0, sticky='ew')
+        self.btn_save.grid(row=3, column=0, sticky='ew')
 
         # The gridding of the frame that contains all the buttons
         self.frm_btns.grid(row=0, column=2, sticky='ns')
@@ -101,7 +105,7 @@ class Editor(tk.Frame):
         move_to_page_1 = ttk.Button(self.frm_btns, text="Go to Login Page",
                                    command=lambda: controller.show_frame("Login_Page"))
 
-        move_to_page_1.grid(row=3, column=0, sticky='ew')
+        move_to_page_1.grid(row=4, column=0, sticky='ew')
 
         self.mainframe.pack(fill=tk.BOTH, expand=True)
         self.mainframe.rowconfigure(0, minsize=800, weight=1)
@@ -117,6 +121,16 @@ class Editor(tk.Frame):
             self.text = file.read()
             self.Text_box.insert(tk.END, self.text)
 
+    def save_file(self):
+        self.filepath = asksaveasfilename(
+        defaultextension="py",
+        filetypes=[("python files", "*.py"), ("All Files", "*.*")],
+        )
+        if not self.filepath:
+            return
+        with open(self.filepath, "w") as output_file:
+            text = self.Text_box.get("1.0", tk.END)
+            output_file.write(text)
 
 class Login_Page(tk.Frame):
 
@@ -127,13 +141,11 @@ class Login_Page(tk.Frame):
         self.mainframe = tk.Frame(self)
         # The Design Aspect of the frame
 
-
         img = ImageTk.PhotoImage(Image.open("../favicon/logo.png"))
         imglbl = tk.Label(self.mainframe , image = img)
         imglbl.image = img
         #imglbl.place(x=0, y=0, relwidth=1, relheight=1)
         imglbl.grid(row = 3 , column = 0)
-
 
         login_label = tk.Label(self.mainframe, text="This is Login Page")
         login_label.grid(row=0, column=0)
@@ -147,7 +159,6 @@ class Login_Page(tk.Frame):
                            command=lambda: controller.show_frame("Editor"), width=15)
         button.grid(row=2, column=0)
         self.mainframe.pack()
-
 
 class Teacher_Page_Login(tk.Frame):
     '''
@@ -201,8 +212,6 @@ class Teacher_Page_Login(tk.Frame):
 
         self.mainframe.pack()  # Packing of the mainframe
 
-    def store_user_info(self):
-        pass
     def get_user_info(self,event=None):
         self.prompt = tk.Label(self.mainframe , text = "" , fg = 'red')
         self.prompt.grid(row=3 , column = 0 , sticky = 'nsew')
@@ -234,8 +243,7 @@ class Teacher_Page_Login(tk.Frame):
         elif userid in dic:
             if userpass == dic[userid]:
                 print("passed")
-                self.passwd_box.delete(0,"end")
-                self.user_box.delete(0,'end')
+                self.passwd_box.delete(0,"end"), self.user_box.delete(0,'end')
                 self.controller.show_frame("Master_Page")
 
             else:
@@ -320,6 +328,9 @@ class Master_Page(tk.Frame):
         #--------------------------------------------------/\/\ Info end     /\/\-------------------------------------------------------------
 
         self.mainframe.grid()  # Packing of the mainframe
+
+    def store_user_info(self):
+        pass
 
     def send_data(self):
         dbs = db.make_db("test")
