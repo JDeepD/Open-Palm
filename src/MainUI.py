@@ -24,6 +24,7 @@ from PIL import ImageTk, Image
 import passmanager as pm
 import subprocess
 import Database as db
+import analyse as an
 
 class Openpalm(tk.Tk):
 
@@ -87,13 +88,21 @@ class Editor(tk.Frame):
             self.frm_btns, text='OPEN', command=self.open_file)
         self.btn_save = ttk.Button(
             self.frm_btns, text='SAVE', command=self.save_file)
+        self.btn_test = ttk.Button(
+            self.frm_btns, text='Test', command = self.test_it)
 
+        self.option = tk.StringVar()
+        self.option.set("Select Code")
+        self.dropdown = ttk.Combobox(self.frm_btns ,state = "readonly", textvariable = self.option , width= 15)
+        self.dropdown['values'] = ["#1" , "#2" , "#3" , "#4"]
 
         # The gridding of buttons
-        self.btn_submit.grid(row=0, column=0, sticky='ew')
+        self.btn_submit.grid(row=4, column=0, sticky='ew')
         self.btn_clear.grid(row=1, column=0, sticky='ew')
         self.btn_open.grid(row=2, column=0, sticky='ew')
         self.btn_save.grid(row=3, column=0, sticky='ew')
+        self.btn_test.grid(row=0, column=0, sticky='ew')
+        self.dropdown.grid(row = 6 , column=0 , sticky = 'es')
 
         # The gridding of the frame that contains all the buttons
         self.frm_btns.grid(row=0, column=2, sticky='ns')
@@ -105,7 +114,7 @@ class Editor(tk.Frame):
         move_to_page_1 = ttk.Button(self.frm_btns, text="Go to Login Page",
                                    command=lambda: controller.show_frame("Login_Page"))
 
-        move_to_page_1.grid(row=4, column=0, sticky='ew')
+        move_to_page_1.grid(row=5, column=0, sticky='ew')
 
         self.mainframe.pack(fill=tk.BOTH, expand=True)
         self.mainframe.rowconfigure(0, minsize=800, weight=1)
@@ -131,6 +140,37 @@ class Editor(tk.Frame):
         with open(self.filepath, "w") as output_file:
             text = self.Text_box.get("1.0", tk.END)
             output_file.write(text)
+    def save_for_test(self):
+        with open("test_it.py","w+") as file:
+            text = self.Text_box.get("1.0", tk.END)
+            file.write(text)
+
+    def test_it(self):
+        self.save_for_test()
+        import test_it
+        self.questions = an.questions
+        self.testcases = an.testcases
+        tmp_qns = ["check_even", "bubble_sort", "fibonacci", "check_palin"]
+
+        self.code = self.option.get()[1]
+
+        if self.code.isalpha() :
+            print("Please Select a Question Code")
+        else:
+            ver_soln = an.chk(int(self.code) , self.testcases[int(self.code)] )
+            #---------user soln----------------
+            testdata = self.testcases[int(self.code)]
+            usr_soln = []
+            for i in testdata:
+                try:
+                    res = getattr(test_it , tmp_qns[int(self.code)-1])(i)
+                    usr_soln.append(res)
+                except Exception as exception:
+                    print(exception.__class__.__name__)
+                    break
+
+            print(usr_soln)
+
 
 class Login_Page(tk.Frame):
 

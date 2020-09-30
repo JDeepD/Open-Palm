@@ -1,4 +1,4 @@
-def foo(func,*args,**kwargs):
+def chk(func,*args,**kwargs):
     return(questions[func](args))
 
 def check_even(n):          #Checks if a number is even or not
@@ -72,5 +72,3 @@ testcases = {
               4 : [ 'pop' , 'malayalam' , 'qwerty' , 'popopopop','ewruiu','miami' ]
 
             }
-a = foo(4, testcases[4])
-print(a)
