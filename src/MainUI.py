@@ -162,16 +162,18 @@ class Editor(tk.Frame):
             ver_soln = an.chk(int(self.code) , self.testcases[int(self.code)] )
             #---------user soln----------------
             testdata = self.testcases[int(self.code)]
-            usr_soln = []
-            for i in testdata:
+
+            for i,j in zip(testdata , ver_soln):
                 try:
-                    res = getattr(test_it , tmp_qns[int(self.code)-1])(i)
-                    usr_soln.append(res)
+                    res = getattr(test_it,tmp_qns[int(self.code)-1])(i)
+                    if res == j :
+                        print("Passed at test case =" , i)
+                    else:
+                        print("Failed when input was " , i ," Expected Output :",j , "; Your Output :" ,res)
+
                 except Exception as exception:
                     print(exception.__class__.__name__)
                     break
-
-            print(usr_soln)
 
 
 class Login_Page(tk.Frame):
@@ -298,80 +300,77 @@ class Teacher_Page_Login(tk.Frame):
             self.prompt.grid(row=2 , column = 0 , sticky = 'nsew')
 
 class Master_Page(tk.Frame):
-    """
-    Overview of Frames and Subframes
 
-    -----> self.mainframe (packed)
-
-            ----> toolfrm (grided)
-
-                        ---->semi_frm_tool(grided)
-
-            ----> infofrm(grided)
-
-                        ---->semi_frm_info
-
-            ----> datafrm(grided)
-
-    """
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
 
         self.mainframe = tk.Frame(self)
 
-        toolfrm = tk.Frame(self.mainframe)
-        toolfrm.grid(row=0,column=0,sticky = "w")
+        lbl_frm_table = ttk.LabelFrame(self.mainframe, text = "Student Data")
+        lbl_frm_data = ttk.LabelFrame(self.mainframe , text = "Information")
+        lbl_frm_info = ttk.LabelFrame(self.mainframe , text = "Data Entry")
 
-        infofrm = tk.Frame(self.mainframe )
-        infofrm.grid(row = 0 , column = 1,sticky="e")
+#       ----------------------------------------------------/\/\ Frame table (lbl_frm_table) (s)/\/\-----------------------------------------------
+        self.trview = ttk.Treeview(lbl_frm_table , columns = (1,2,3,4) , show = "headings" , height = 6)
+        self.trview.pack(fill = "both" ,expand=True , ipady = 5)
+        self.trview.heading(1,text="Name")
+        self.trview.heading(2,text="Class")
+        self.trview.heading(3,text="Section")
+        self.trview.heading(4,text="Roll no")
+#       ----------------------------------------------------/\/\ Frame table (lbl_frm_table)(e) /\/\-----------------------------------------------
 
-        #--------------------------------------------------/\/\ Toolfrm start/\/\-------------------------------------------------------------
-        semi_frm_tool = tk.Frame(toolfrm)
+#       ----------------------------------------------------/\/\ Frame data (lbl_frm_data)(s) /\/\-----------------------------------------------
+        src_lbl = ttk.Label(lbl_frm_data, text="Search by name : ")
+        src_ent = ttk.Entry(lbl_frm_data)
+        src_btn = ttk.Button(lbl_frm_data, text="Search")
+        src_lbl.pack(side = "left" , padx = 20)
+        src_ent.pack(side="left" )
+        src_btn.pack(side="left", padx = 10)
+#       ----------------------------------------------------/\/\ Frame data (lbl_frm_data)(e) /\/\-----------------------------------------------
 
-        send_data_btn = ttk.Button(semi_frm_tool , text = "Send Data", width = 15)
-        send_data_btn.grid(row = 0 , column=0 , sticky = "W")
+#       ----------------------------------------------------/\/\ Frame info (lbl_frm_info)(s) /\/\-----------------------------------------------
+        name_lbl = ttk.Label(lbl_frm_info , text = "Name ")
+        class_lbl = ttk.Label(lbl_frm_info , text = "Class ")
+        sec_lbl = ttk.Label(lbl_frm_info , text = "Section ")
+        roll_lbl = ttk.Label(lbl_frm_info , text = "Roll no ")
 
-        set_question_btn = ttk.Button(semi_frm_tool, text="Questions",width = 15)
-        set_question_btn.grid(row =1 , column = 0)
+        name_lbl.grid(row = 0 , column = 0 , pady = 10)
+        class_lbl.grid(row = 1 , column = 0, pady = 10)
+        sec_lbl.grid(row = 2 , column = 0, pady = 10)
+        roll_lbl.grid(row = 3 , column = 0, pady = 10)
 
-        new_acc = ttk.Button(semi_frm_tool, text="New Account" , width = 15)
-        new_acc.grid(row =2 , column = 0)
+        name_ent = ttk.Entry(lbl_frm_info)
+        class_ent = ttk.Entry(lbl_frm_info)
+        sec_ent = ttk.Entry(lbl_frm_info)
+        roll_ent = ttk.Entry(lbl_frm_info)
 
-        back_btn = ttk.Button(semi_frm_tool , text = "Back" , command = lambda: self.controller.show_frame("Login_Page"), width = 15)
-        back_btn.grid(row = 3 , column = 0 )
+        name_ent.grid(row = 0 , column = 1 , pady = 10)
+        class_ent.grid(row = 1 , column = 1, pady = 10)
+        sec_ent.grid(row = 2 , column = 1, pady = 10)
+        roll_ent.grid(row = 3 , column = 1, pady = 10)
 
-        semi_frm_tool.grid(row = 0 ,column = 0 )
-        #--------------------------------------------------/\/\ Toolfrm end  /\/\-------------------------------------------------------------
+        add_btn = ttk.Button(lbl_frm_info , text = "Add ")
+        update_btn = ttk.Button(lbl_frm_info , text = "Update ")
+        del_btn = ttk.Button(lbl_frm_info , text = "Delete ")
 
-        #--------------------------------------------------/\/\ Info start   /\/\-------------------------------------------------------------
-        semi_frm_info = tk.Frame(infofrm)
+        add_btn.grid(row = 0 , column = 3, pady = 10 ,padx = 50,sticky='e')
+        update_btn.grid(row = 1 , column = 3, pady = 10,padx = 50,sticky='e')
+        del_btn.grid(row = 2 , column = 3, pady = 10,padx = 50,sticky='e')
 
-        std_name = tk.Label(semi_frm_info , text="NAME")
-        std_name.grid(row = 0 ,column = 0)
-        self.std_name_ent = tk.Entry(semi_frm_info)
-        self.std_name_ent.grid(row = 0 , column = 1)
+        # ----------------------------------------------------/\/\ Frame info (lbl_frm_info)(e) /\/\-----------------------------------------------
 
-        std_class = tk.Label(semi_frm_info , text="Class")
-        std_class.grid(row = 1 ,column = 0)
-        self.std_class_ent = tk.Entry(semi_frm_info)
-        self.std_class_ent.grid(row = 1 , column = 1)
+        lbl_frm_table.pack(fill = "both" , expand = True , padx=20 , pady = 10)
+        lbl_frm_data.pack(fill = "both" , expand = True , padx=20 , pady = 10)
+        lbl_frm_info.pack(fill = "both" , expand = True , padx=20 , pady = 10)
 
-        std_roll = tk.Label(semi_frm_info , text="Roll no.")
-        std_roll.grid(row = 2 ,column = 0)
-        self.std_roll_ent = tk.Entry(semi_frm_info)
-        self.std_roll_ent.grid(row = 2 , column = 1)
-
-        submit_btn = ttk.Button(semi_frm_info , text = "Submit", width = 17 , command=self.send_data)
-        submit_btn.grid(row = 3 , column=1, pady = 10)
-
-
-        semi_frm_info.grid(row=0,column=1 ,sticky = 'nsew')
-        #--------------------------------------------------/\/\ Info end     /\/\-------------------------------------------------------------
-
-        self.mainframe.grid()  # Packing of the mainframe
+        self.mainframe.pack(fill = "both" , expand = True)  # Packing of the mainframe
 
     def store_user_info(self):
+        pass
+    def update_user_info(self):
+        pass
+    def delete_user_info(self):
         pass
 
     def send_data(self):

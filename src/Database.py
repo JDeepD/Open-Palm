@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
 import sqlite3
 
 class make_db:
@@ -26,11 +27,12 @@ class make_db:
         self.dbname = dbname
         self.mydb = sqlite3.connect(self.dbname + '.db')
         self.cursor = self.mydb.cursor()
-        self.cursor.execute("""CREATE TABLE IF NOT EXISTS DATA (RollNo INTEGER,StudentName TEXT,Class TEXT )""")
+        self.cursor.execute("""CREATE TABLE IF NOT EXISTS DATA (StudentName TEXT , Class TEXT , Section TEXT ,RollNo INTEGER)""")
 
-    def store_values(self, RollNo, StudentName, Class):
-        self.cursor.execute("INSERT INTO DATA VALUES(:Rollno , :StudentName , :Class)", {
-                            'Rollno': RollNo, 'StudentName': StudentName, 'Class': Class})
+    def store_values(self,StudentName,Class,Section,RollNo):
+        self.cursor.execute("INSERT INTO DATA VALUES( :StudentName , :Class, :Section , :Rollno)", {
+            'StudentName': StudentName ,'Class': Class , 'Section': Section,'Rollno': RollNo })
+
         self.mydb.commit()
 class get_response(make_db):
     def __init__(self, Database, query):
