@@ -67,7 +67,7 @@ class get_response(make_db):
         return(data)
 
     def delete_data(self,Name,Class,Section,Roll):
-        self.cursor.execute(f"DELETE FROM DATA WHERE STUDENTNAME=:Name AND CLASS=:Class AND SECTION=:Section AND ROLLNO=:Roll", {
+        self.cursor.execute(f"DELETE FROM DATA WHERE STUDENTNAME=:Name AND CLASS=:Class AND SECTION=:Section AND ROLLNO=:Roll LIMIT 1", {
             'Name': Name,
             'Class':Class,
             'Section':Section,

@@ -431,8 +431,11 @@ class Master_Page(tk.Frame):
 
 if __name__ == "__main__":
     window = Openpalm()
-    window.iconphoto(True, tk.PhotoImage(
+    window.iconphoto(True, tk.PhotoImage(       #Comment this if you using Windows
         r'..\favicon\favicon.png'))
+    #window.iconbitmap(tk.PhotoImage(           #Uncomment this if you are using Windows
+    #    r'..\favicon\favicon.png'))
+
     window.title('OpenPalm')
     window.rowconfigure(0, minsize=800, weight=1)
     window.columnconfigure(0, minsize=800, weight=1)
