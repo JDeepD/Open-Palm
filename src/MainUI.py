@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
 import tkinter as tk
 from tkinter import ttk
 from tkinter.filedialog import askopenfilename, asksaveasfilename
@@ -27,6 +28,7 @@ import passmanager as pm
 import subprocess
 import Database as db
 import analyse as an
+import tkinter.messagebox
 
 class Openpalm(tk.Tk):
 
@@ -311,22 +313,34 @@ class Master_Page(tk.Frame):
         lbl_frm_data = ttk.LabelFrame(self.mainframe , text = "Information")
         lbl_frm_info = ttk.LabelFrame(self.mainframe , text = "Data Entry")
 
+#       ----------------------------------------------------/\/\ micellaneous/\/\-----------------------------------------------
+        self.v1 = tk.StringVar()            #textvar of src_ent 
+        self.v2 = tk.StringVar()            #self.name_ent            
+        self.v3 = tk.StringVar()            #self.class_ent
+        self.v4 = tk.StringVar()            #self.sec_ent
+        self.v5 = tk.StringVar()            #self.roll_ent
+        self.v6 = tk.StringVar()            #
+#       ----------------------------------------------------/\/\ micellaneous/\/\-----------------------------------------------
+
 #       ----------------------------------------------------/\/\ Frame table (lbl_frm_table) (s)/\/\-----------------------------------------------
-        self.trview = ttk.Treeview(lbl_frm_table , columns = (1,2,3,4) , show = "headings" , height = 6)
+        self.trview = ttk.Treeview(lbl_frm_table , columns = (1,2,3,4),show = "headings" , height = 6)
         self.trview.pack(fill = "both" ,expand=True , ipady = 5)
         self.trview.heading(1,text="Name")
         self.trview.heading(2,text="Class")
         self.trview.heading(3,text="Section")
         self.trview.heading(4,text="Roll no")
+        self.trview.bind("<Double-Button-1>" , self.idrow)
 #       ----------------------------------------------------/\/\ Frame table (lbl_frm_table)(e) /\/\-----------------------------------------------
 
 #       ----------------------------------------------------/\/\ Frame data (lbl_frm_data)(s) /\/\-----------------------------------------------
         src_lbl = ttk.Label(lbl_frm_data, text="Search by name : ")
-        src_ent = ttk.Entry(lbl_frm_data)
-        src_btn = ttk.Button(lbl_frm_data, text="Search")
+        self.src_ent = ttk.Entry(lbl_frm_data , textvariable = self.v1 )
+        src_btn = ttk.Button(lbl_frm_data, text="Search", command= self.search_data)
         src_lbl.pack(side = "left" , padx = 20)
-        src_ent.pack(side="left" )
+        self.src_ent.pack(side="left" )
         src_btn.pack(side="left", padx = 10)
+        rfs_btn = ttk.Button(lbl_frm_data , text = "Refresh" , command=self.refresh)
+        rfs_btn.pack(side="left", padx=10)
 #       ----------------------------------------------------/\/\ Frame data (lbl_frm_data)(e) /\/\-----------------------------------------------
 
 #       ----------------------------------------------------/\/\ Frame info (lbl_frm_info)(s) /\/\-----------------------------------------------
@@ -340,23 +354,30 @@ class Master_Page(tk.Frame):
         sec_lbl.grid(row = 2 , column = 0, pady = 10)
         roll_lbl.grid(row = 3 , column = 0, pady = 10)
 
-        name_ent = ttk.Entry(lbl_frm_info)
-        class_ent = ttk.Entry(lbl_frm_info)
-        sec_ent = ttk.Entry(lbl_frm_info)
-        roll_ent = ttk.Entry(lbl_frm_info)
+        self.name_ent = ttk.Entry(lbl_frm_info , width = 35 , textvariable = self.v2)
+        self.class_ent = ttk.Entry(lbl_frm_info, width = 35, textvariable = self.v3)
+        self.sec_ent = ttk.Entry(lbl_frm_info, width = 35, textvariable = self.v4)
+        self.roll_ent = ttk.Entry(lbl_frm_info, width = 35, textvariable = self.v5)
 
-        name_ent.grid(row = 0 , column = 1 , pady = 10)
-        class_ent.grid(row = 1 , column = 1, pady = 10)
-        sec_ent.grid(row = 2 , column = 1, pady = 10)
-        roll_ent.grid(row = 3 , column = 1, pady = 10)
+        self.name_ent.grid(row = 0 , column = 1 , pady = 10)
+        self.class_ent.grid(row = 1 , column = 1, pady = 10)
+        self.sec_ent.grid(row = 2 , column = 1, pady = 10)
+        self.roll_ent.grid(row = 3 , column = 1, pady = 10)
 
-        add_btn = ttk.Button(lbl_frm_info , text = "Add ")
-        update_btn = ttk.Button(lbl_frm_info , text = "Update ")
-        del_btn = ttk.Button(lbl_frm_info , text = "Delete ")
+        frm_btn = tk.Frame(lbl_frm_info)
+        frm_btn.grid(row = 4,column = 1)
 
-        add_btn.grid(row = 0 , column = 3, pady = 10 ,padx = 50,sticky='e')
-        update_btn.grid(row = 1 , column = 3, pady = 10,padx = 50,sticky='e')
-        del_btn.grid(row = 2 , column = 3, pady = 10,padx = 50,sticky='e')
+        add_btn = ttk.Button(frm_btn , text = "Add " , command = self.add_user_info)
+        update_btn = ttk.Button(frm_btn, text = "Update ",command = self.update_data)
+        del_btn = ttk.Button(frm_btn, text = "Delete ",command = self.delete_user_info)
+
+        add_btn.grid(row = 0 , column = 0 ,padx =10)
+        update_btn.grid(row = 0 , column = 1,padx =10)
+        del_btn.grid(row = 0 , column = 2,padx =10)
+
+        std_data = db.get_response("StudentInfo")
+        self.data =std_data.get_all_data()
+        self.update_user_info(self.data)
 
         # ----------------------------------------------------/\/\ Frame info (lbl_frm_info)(e) /\/\-----------------------------------------------
 
@@ -366,15 +387,47 @@ class Master_Page(tk.Frame):
 
         self.mainframe.pack(fill = "both" , expand = True)  # Packing of the mainframe
 
-    def store_user_info(self):
-        pass
-    def update_user_info(self):
-        pass
+    def add_user_info(self):
+        datab = db.make_db('StudentInfo')
+        x = datab.check_dup(self.v2.get(),self.v3.get(),self.v4.get(),self.v5.get())
+        print(x)
+
+        datab.store_values(self.v2.get(),self.v3.get(),self.v4.get(),self.v5.get())
+        self.refresh()
+
+    def update_user_info(self , data):
+        self.trview.delete(*self.trview.get_children())
+        for i in data:
+            self.trview.insert('','end',values=i)
+
     def delete_user_info(self):
+        if tk.messagebox.askyesno("Confirm Delete" , "Do you really want to delete this Student ?"):
+            obj = db.get_response("StudentInfo")
+            obj.delete_data( self.v2.get(), self.v3.get(), self.v4.get() , self.v5.get() )
+            self.refresh()
+        else:
+            pass
+
+    def update_data(self):
         pass
 
-    def send_data(self):
-        dbs = db.make_db("test")
+    def idrow(self,event):
+        rownum = self.trview.identify('item',event.x,event.y)
+        item = self.trview.item(self.trview.focus())
+        self.v2.set(item['values'][0])
+        self.v3.set(item['values'][1])
+        self.v4.set(item['values'][2])
+        self.v5.set(item['values'][3])
+
+    def search_data(self):
+        std_name = self.src_ent.get()
+        obj = db.get_response('StudentInfo')
+        req_data = obj.get_data_by_query(std_name)
+        self.update_user_info(req_data)
+
+    def refresh(self):
+        self.data =db.get_response('StudentInfo').get_all_data()
+        self.update_user_info(self.data)
 
 if __name__ == "__main__":
     window = Openpalm()
