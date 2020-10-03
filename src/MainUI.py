@@ -28,6 +28,7 @@ import subprocess
 import Database as db
 import analyse as an
 
+
 class Openpalm(tk.Tk):
 
     def __init__(self):
@@ -54,13 +55,13 @@ class Openpalm(tk.Tk):
         self.frames["Teacher_Page_Login"] = Teacher_Page_Login(
             parent=container, controller=self)  # Calls the Teacher_Page_Login Class
 
-        self.frames["Master_Page"] = Master_Page( #Calls the Master_Page 
-            parent = container,controller=self)
+        self.frames["Master_Page"] = Master_Page(  # Calls the Master_Page
+            parent=container, controller=self)
 
         self.frames["Editor"].grid(row=0, column=0, sticky="nsew")
         self.frames["Login_Page"].grid(row=0, column=0, sticky="nsew")
         self.frames["Teacher_Page_Login"].grid(row=0, column=0, sticky="nsew")
-        self.frames["Master_Page"].grid(row=0,column=0,sticky="nsew")
+        self.frames["Master_Page"].grid(row=0, column=0, sticky="nsew")
 
         self.show_frame("Editor")
 
@@ -74,7 +75,7 @@ class Editor(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        self.mainframe = tk.Frame(self , width=1600)
+        self.mainframe = tk.Frame(self, width=1600)
 
         # The Design Aspect of the frame
         self.Text_box = tk.Text(self.mainframe, bg='#333333', fg='#f2f2f2')
@@ -91,12 +92,13 @@ class Editor(tk.Frame):
         self.btn_save = ttk.Button(
             self.frm_btns, text='SAVE', command=self.save_file)
         self.btn_test = ttk.Button(
-            self.frm_btns, text='Test', command = self.test_it)
+            self.frm_btns, text='Test', command=self.test_it)
 
         self.option = tk.StringVar()
         self.option.set("Select Code")
-        self.dropdown = ttk.Combobox(self.frm_btns ,state = "readonly", textvariable = self.option , width= 15)
-        self.dropdown['values'] = ["#1" , "#2" , "#3" , "#4"]
+        self.dropdown = ttk.Combobox(
+            self.frm_btns, state="readonly", textvariable=self.option, width=15)
+        self.dropdown['values'] = ["#1", "#2", "#3", "#4"]
 
         # The gridding of buttons
         self.btn_submit.grid(row=4, column=0, sticky='ew')
@@ -104,7 +106,7 @@ class Editor(tk.Frame):
         self.btn_open.grid(row=2, column=0, sticky='ew')
         self.btn_save.grid(row=3, column=0, sticky='ew')
         self.btn_test.grid(row=0, column=0, sticky='ew')
-        self.dropdown.grid(row = 6 , column=0 , sticky = 'es')
+        self.dropdown.grid(row=6, column=0, sticky='es')
 
         # The gridding of the frame that contains all the buttons
         self.frm_btns.grid(row=0, column=2, sticky='ns')
@@ -114,7 +116,7 @@ class Editor(tk.Frame):
         # THe Design aspect of the frame
 
         move_to_page_1 = ttk.Button(self.frm_btns, text="Go to Login Page",
-                                   command=lambda: controller.show_frame("Login_Page"))
+                                    command=lambda: controller.show_frame("Login_Page"))
 
         move_to_page_1.grid(row=5, column=0, sticky='ew')
 
@@ -134,8 +136,8 @@ class Editor(tk.Frame):
 
     def save_file(self):
         self.filepath = asksaveasfilename(
-        defaultextension="py",
-        filetypes=[("python files", "*.py"), ("All Files", "*.*")],
+            defaultextension="py",
+            filetypes=[("python files", "*.py"), ("All Files", "*.*")],
         )
         if not self.filepath:
             return
@@ -143,7 +145,7 @@ class Editor(tk.Frame):
             text = self.Text_box.get("1.0", tk.END)
             output_file.write(text)
     def save_for_test(self):
-        with open("test_it.py","w+") as file:
+        with open("test_it.py", "w+") as file:
             text = self.Text_box.get("1.0", tk.END)
             file.write(text)
 
@@ -156,24 +158,54 @@ class Editor(tk.Frame):
 
         self.code = self.option.get()[1]
 
+<<<<<<< Updated upstream
         if self.code.isalpha() :
             print("Please Select a Question Code")
         else:
             ver_soln = an.chk(int(self.code) , self.testcases[int(self.code)] )
             #---------user soln----------------
+=======
+        if self.code.isalpha():
+            tk.messagebox.showerror(
+                "Select Question Code", "Please Select a question Code")
+
+        else:
+            ver_soln = an.chk(int(self.code), self.testcases[int(self.code)])
+            user_soln = []
+
+            # ---------user soln----------------
+
+>>>>>>> Stashed changes
             testdata = self.testcases[int(self.code)]
 
             for i,j in zip(testdata , ver_soln):
                 try:
+<<<<<<< Updated upstream
                     res = getattr(test_it,tmp_qns[int(self.code)-1])(i)
                     if res == j :
                         print("Passed at test case =" , i)
                     else:
                         print("Failed when input was " , i ," Expected Output :",j , "; Your Output :" ,res)
+=======
+                    ans = getattr(test_it, tmp_qns[int(self.code)-1])(k)
+                    user_soln.append(ans)
+>>>>>>> Stashed changes
 
                 except Exception as exception:
                     print(exception.__class__.__name__)
                     break
+<<<<<<< Updated upstream
+
+=======
+            if user_soln == ver_soln:
+                tk.messagebox.showinfo(
+                    "Congatulations", "Your code has passed all the test cases. You may now submit the solution.")
+                print(user_soln)
+            else:
+                tk.messagebox.showinfo(
+                    "Try Again", "Your code has failed in one or multiple test cases.")
+                print(user_soln)
+>>>>>>> Stashed changes
 
 
 class Login_Page(tk.Frame):
@@ -186,23 +218,24 @@ class Login_Page(tk.Frame):
         # The Design Aspect of the frame
 
         img = ImageTk.PhotoImage(Image.open("../favicon/logo.png"))
-        imglbl = tk.Label(self.mainframe , image = img)
+        imglbl = tk.Label(self.mainframe, image=img)
         imglbl.image = img
         #imglbl.place(x=0, y=0, relwidth=1, relheight=1)
-        imglbl.grid(row = 3 , column = 0)
+        imglbl.grid(row=3, column=0)
 
         login_label = tk.Label(self.mainframe, text="This is Login Page")
         login_label.grid(row=0, column=0)
 
         # The Design Aspect of the frame
         teacher_btn = ttk.Button(self.mainframe, text='TEACHER', width=15,
-                                command=lambda: self.controller.show_frame("Teacher_Page_Login"))
-        teacher_btn.grid(row=1, column=0 )
+                                 command=lambda: self.controller.show_frame("Teacher_Page_Login"))
+        teacher_btn.grid(row=1, column=0)
 
         button = ttk.Button(self.mainframe, text="Go to the Editor",
-                           command=lambda: controller.show_frame("Editor"), width=15)
+                            command=lambda: controller.show_frame("Editor"), width=15)
         button.grid(row=2, column=0)
         self.mainframe.pack()
+
 
 class Teacher_Page_Login(tk.Frame):
     '''
@@ -222,50 +255,49 @@ class Teacher_Page_Login(tk.Frame):
         # The Design Aspect of the frame
 
         img = ImageTk.PhotoImage(Image.open("../favicon/logo.png"))
-        imglbl = tk.Label(self.mainframe , image = img)
+        imglbl = tk.Label(self.mainframe, image=img)
         imglbl.image = img
         #imglbl.place(x=0, y=0, relwidth=1, relheight=1)
-        imglbl.grid(row = 4 , column = 0)
+        imglbl.grid(row=4, column=0)
 
-        lbl = tk.Label(self.mainframe, text="TEACHER'S PAGE",font=("Ubuntu", 14, ''))
+        lbl = tk.Label(self.mainframe, text="TEACHER'S PAGE",
+                       font=("Ubuntu", 14, ''))
         lbl.grid(row=0, column=0, sticky='nsew')
 
         semi_frm = tk.Frame(self.mainframe)
 
-        usr_lbl = tk.Label(semi_frm, text='User Name',font=("Courier", 12, ''))
+        usr_lbl = tk.Label(semi_frm, text='User Name',
+                           font=("Courier", 12, ''))
         usr_lbl.grid(row=1, column=0)
 
         self.user_box = tk.Entry(semi_frm)
         self.user_box.grid(row=1, column=1)
 
-        passwd_lbl = tk.Label(semi_frm, text='Password',font=("courier", 12, ''))
+        passwd_lbl = tk.Label(semi_frm, text='Password',
+                              font=("courier", 12, ''))
         passwd_lbl.grid(row=2, column=0)
 
-        self.passwd_box = tk.Entry(semi_frm, show ="*")
+        self.passwd_box = tk.Entry(semi_frm, show="*")
         self.passwd_box.grid(row=2, column=1)
 
         # The Design Aspect of the frame
-        self.sign_in = ttk.Button(semi_frm, text="Sign In",command=self.get_user_info)
+        self.sign_in = ttk.Button(
+            semi_frm, text="Sign In", command=self.get_user_info)
         self.sign_in.grid(row=4, column=1, sticky='nsew')
 
         goto_login = ttk.Button(semi_frm, text='Login Page',
-                               command=lambda: self.controller.show_frame("Login_Page"))
+                                command=lambda: self.controller.show_frame("Login_Page"))
         goto_login.grid(row=4, column=0, sticky='nsew')
 
         semi_frm.grid(row=1, column=0)
 
         self.mainframe.pack()  # Packing of the mainframe
 
-    def get_user_info(self,event=None):
-        self.prompt = tk.Label(self.mainframe , text = "" , fg = 'red')
-        self.prompt.grid(row=3 , column = 0 , sticky = 'nsew')
+    def get_user_info(self, event=None):
+        self.prompt = tk.Label(self.mainframe, text="", fg='red')
+        self.prompt.grid(row=3, column=0, sticky='nsew')
 
-        if subprocess.check_output('xset q | grep LED', shell=True)[65] == 51 :
-            capslock = True
-            self.prompt = tk.Label(self.mainframe , text = "*Caps Lock is ON" , fg = 'black')
-            self.prompt.grid(row=3 , column = 0 , sticky = 'nsew')
-
-        master_creds = ["nova_tech" , "nova_tech_jaydeep"]
+        master_creds = ["nova_tech", "nova_tech_jaydeep"]
 
         usrid = self.user_box.get()
         usrpass = self.passwd_box.get()
@@ -273,31 +305,35 @@ class Teacher_Page_Login(tk.Frame):
         userid = pm.cipherpass(usrid)
         userpass = pm.cipherpass(usrpass)
 
-        self.controller.show_frame("Master_Page") #Waring : Immediately delete this line after the project is over.
+        # Waring : Immediately delete this line after the project is over.
+        self.controller.show_frame("Master_Page")
 
         dic = pm.get_pass()
 
-        if [usrid,usrpass] == master_creds:
+        if [usrid, usrpass] == master_creds:
             print("passed")
-            self.passwd_box.delete(0,"end")
-            self.user_box.delete(0,'end')
+            self.passwd_box.delete(0, "end")
+            self.user_box.delete(0, 'end')
             self.controller.show_frame("Master_Page")
-
 
         elif userid in dic:
             if userpass == dic[userid]:
                 print("passed")
-                self.passwd_box.delete(0,"end"), self.user_box.delete(0,'end')
+                self.passwd_box.delete(
+                    0, "end"), self.user_box.delete(0, 'end')
                 self.controller.show_frame("Master_Page")
 
             else:
                 print("failed due to incorrect password")
-                self.prompt = tk.Label(self.mainframe , text = "The Username or the password is incorrect" , fg = 'red')
-                self.prompt.grid(row=2 , column = 0 , sticky = 'nsew')
+                self.prompt = tk.Label(
+                    self.mainframe, text="The Username or the password is incorrect", fg='red')
+                self.prompt.grid(row=2, column=0, sticky='nsew')
         else:
             print("failed")
-            self.prompt = tk.Label(self.mainframe , text =  "The Username or the password is incorrect" , fg = 'red')
-            self.prompt.grid(row=2 , column = 0 , sticky = 'nsew')
+            self.prompt = tk.Label(
+                self.mainframe, text="The Username or the password is incorrect", fg='red')
+            self.prompt.grid(row=2, column=0, sticky='nsew')
+
 
 class Master_Page(tk.Frame):
 
@@ -307,10 +343,11 @@ class Master_Page(tk.Frame):
 
         self.mainframe = tk.Frame(self)
 
-        lbl_frm_table = ttk.LabelFrame(self.mainframe, text = "Student Data")
-        lbl_frm_data = ttk.LabelFrame(self.mainframe , text = "Information")
-        lbl_frm_info = ttk.LabelFrame(self.mainframe , text = "Data Entry")
+        lbl_frm_table = ttk.LabelFrame(self.mainframe, text="Student Data")
+        lbl_frm_data = ttk.LabelFrame(self.mainframe, text="Information")
+        lbl_frm_info = ttk.LabelFrame(self.mainframe, text="Data Entry")
 
+<<<<<<< Updated upstream
 #       ----------------------------------------------------/\/\ Frame table (lbl_frm_table) (s)/\/\-----------------------------------------------
         self.trview = ttk.Treeview(lbl_frm_table , columns = (1,2,3,4) , show = "headings" , height = 6)
         self.trview.pack(fill = "both" ,expand=True , ipady = 5)
@@ -318,10 +355,31 @@ class Master_Page(tk.Frame):
         self.trview.heading(2,text="Class")
         self.trview.heading(3,text="Section")
         self.trview.heading(4,text="Roll no")
+=======
+#       ----------------------------------------------------/\/\ micellaneous/\/\-----------------------------------------------
+        self.v1 = tk.StringVar()  # textvar of src_ent
+        self.v2 = tk.StringVar()  # self.name_ent
+        self.v3 = tk.StringVar()  # self.class_ent
+        self.v4 = tk.StringVar()  # self.sec_ent
+        self.v5 = tk.StringVar()  # self.roll_ent
+        self.v6 = tk.StringVar()            #
+#       ----------------------------------------------------/\/\ micellaneous/\/\-----------------------------------------------
+
+#       ----------------------------------------------------/\/\ Frame table (lbl_frm_table) (s)/\/\-----------------------------------------------
+        self.trview = ttk.Treeview(lbl_frm_table, columns=(
+            1, 2, 3, 4), show="headings", height=6)
+        self.trview.pack(fill="both", expand=True, ipady=5)
+        self.trview.heading(1, text="Name")
+        self.trview.heading(2, text="Class")
+        self.trview.heading(3, text="Section")
+        self.trview.heading(4, text="Roll no")
+        self.trview.bind("<Double-Button-1>", self.idrow)
+>>>>>>> Stashed changes
 #       ----------------------------------------------------/\/\ Frame table (lbl_frm_table)(e) /\/\-----------------------------------------------
 
 #       ----------------------------------------------------/\/\ Frame data (lbl_frm_data)(s) /\/\-----------------------------------------------
         src_lbl = ttk.Label(lbl_frm_data, text="Search by name : ")
+<<<<<<< Updated upstream
         src_ent = ttk.Entry(lbl_frm_data)
         src_btn = ttk.Button(lbl_frm_data, text="Search")
         src_lbl.pack(side = "left" , padx = 20)
@@ -357,15 +415,68 @@ class Master_Page(tk.Frame):
         add_btn.grid(row = 0 , column = 3, pady = 10 ,padx = 50,sticky='e')
         update_btn.grid(row = 1 , column = 3, pady = 10,padx = 50,sticky='e')
         del_btn.grid(row = 2 , column = 3, pady = 10,padx = 50,sticky='e')
+=======
+        self.src_ent = ttk.Entry(lbl_frm_data, textvariable=self.v1)
+        src_btn = ttk.Button(lbl_frm_data, text="Search",
+                             command=self.search_data)
+        src_lbl.pack(side="left", padx=20)
+        self.src_ent.pack(side="left")
+        src_btn.pack(side="left", padx=10)
+        rfs_btn = ttk.Button(lbl_frm_data, text="Refresh",
+                             command=self.refresh)
+        rfs_btn.pack(side="left", padx=10)
+#       ----------------------------------------------------/\/\ Frame data (lbl_frm_data)(e) /\/\-----------------------------------------------
+
+#       ----------------------------------------------------/\/\ Frame info (lbl_frm_info)(s) /\/\-----------------------------------------------
+        name_lbl = ttk.Label(lbl_frm_info, text="Name ")
+        class_lbl = ttk.Label(lbl_frm_info, text="Class ")
+        sec_lbl = ttk.Label(lbl_frm_info, text="Section ")
+        roll_lbl = ttk.Label(lbl_frm_info, text="Roll no ")
+
+        name_lbl.grid(row=0, column=0, pady=10)
+        class_lbl.grid(row=1, column=0, pady=10)
+        sec_lbl.grid(row=2, column=0, pady=10)
+        roll_lbl.grid(row=3, column=0, pady=10)
+
+        self.name_ent = ttk.Entry(lbl_frm_info, width=35, textvariable=self.v2)
+        self.class_ent = ttk.Entry(
+            lbl_frm_info, width=35, textvariable=self.v3)
+        self.sec_ent = ttk.Entry(lbl_frm_info, width=35, textvariable=self.v4)
+        self.roll_ent = ttk.Entry(lbl_frm_info, width=35, textvariable=self.v5)
+
+        self.name_ent.grid(row=0, column=1, pady=10)
+        self.class_ent.grid(row=1, column=1, pady=10)
+        self.sec_ent.grid(row=2, column=1, pady=10)
+        self.roll_ent.grid(row=3, column=1, pady=10)
+
+        frm_btn = tk.Frame(lbl_frm_info)
+        frm_btn.grid(row=4, column=1)
+
+        add_btn = ttk.Button(frm_btn, text="Add ", command=self.add_user_info)
+        update_btn = ttk.Button(frm_btn, text="Update ",
+                                command=self.update_data)
+        del_btn = ttk.Button(frm_btn, text="Delete ",
+                             command=self.delete_user_info)
+
+        add_btn.grid(row=0, column=0, padx=10)
+        update_btn.grid(row=0, column=1, padx=10)
+        del_btn.grid(row=0, column=2, padx=10)
+
+        std_data = db.get_response("StudentInfo")
+        self.data = std_data.get_all_data()
+        self.update_user_info(self.data)
+>>>>>>> Stashed changes
 
         # ----------------------------------------------------/\/\ Frame info (lbl_frm_info)(e) /\/\-----------------------------------------------
 
-        lbl_frm_table.pack(fill = "both" , expand = True , padx=20 , pady = 10)
-        lbl_frm_data.pack(fill = "both" , expand = True , padx=20 , pady = 10)
-        lbl_frm_info.pack(fill = "both" , expand = True , padx=20 , pady = 10)
+        lbl_frm_table.pack(fill="both", expand=True, padx=20, pady=10)
+        lbl_frm_data.pack(fill="both", expand=True, padx=20, pady=10)
+        lbl_frm_info.pack(fill="both", expand=True, padx=20, pady=10)
 
-        self.mainframe.pack(fill = "both" , expand = True)  # Packing of the mainframe
+        # Packing of the mainframe
+        self.mainframe.pack(fill="both", expand=True)
 
+<<<<<<< Updated upstream
     def store_user_info(self):
         pass
     def update_user_info(self):
@@ -375,12 +486,66 @@ class Master_Page(tk.Frame):
 
     def send_data(self):
         dbs = db.make_db("test")
+=======
+    def add_user_info(self):
+        datab = db.make_db('StudentInfo')
+        x = datab.check_dup(self.v2.get(), self.v3.get(),
+                            self.v4.get(), self.v5.get())
+        print(x)
+
+        datab.store_values(self.v2.get(), self.v3.get(),
+                           self.v4.get(), self.v5.get())
+        self.refresh()
+
+    def update_user_info(self, data):
+        self.trview.delete(*self.trview.get_children())
+        for i in data:
+            self.trview.insert('', 'end', values=i)
+
+    def delete_user_info(self):
+        if tk.messagebox.askyesno("Confirm Delete", "Do you really want to delete this Student ?"):
+            obj = db.get_response("StudentInfo")
+            obj.delete_data(self.v2.get(), self.v3.get(),
+                            self.v4.get(), self.v5.get())
+            self.refresh()
+        else:
+            pass
+
+    def update_data(self):
+        pass
+
+    def idrow(self, event):
+        rownum = self.trview.identify('item', event.x, event.y)
+        item = self.trview.item(self.trview.focus())
+        try:
+            self.v2.set(item['values'][0])
+            self.v3.set(item['values'][1])
+            self.v4.set(item['values'][2])
+            self.v5.set(item['values'][3])
+        except:
+            pass
+
+    def search_data(self):
+        std_name = self.src_ent.get()
+        obj = db.get_response('StudentInfo')
+        req_data = obj.get_data_by_query(std_name)
+        self.update_user_info(req_data)
+
+    def refresh(self):
+        self.data = db.get_response('StudentInfo').get_all_data()
+        self.update_user_info(self.data)
+>>>>>>> Stashed changes
+
 
 if __name__ == "__main__":
     window = Openpalm()
+<<<<<<< Updated upstream
     window.iconphoto(True, tk.PhotoImage(
         r'..\favicon\favicon.png'))
+=======
+>>>>>>> Stashed changes
     window.title('OpenPalm')
+    window.iconbitmap('../favicon/favicon.ico')
     window.rowconfigure(0, minsize=800, weight=1)
     window.columnconfigure(0, minsize=800, weight=1)
     window.mainloop()
