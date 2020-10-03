@@ -29,6 +29,7 @@ import subprocess
 import Database as db
 import analyse as an
 import tkinter.messagebox
+from importlib import reload
 
 class Openpalm(tk.Tk):
 
@@ -141,9 +142,11 @@ class Editor(tk.Frame):
         )
         if not self.filepath:
             return
+
         with open(self.filepath, "w") as output_file:
             text = self.Text_box.get("1.0", tk.END)
             output_file.write(text)
+
     def save_for_test(self):
         with open("test_it.py","w+") as file:
             text = self.Text_box.get("1.0", tk.END)
@@ -151,7 +154,9 @@ class Editor(tk.Frame):
 
     def test_it(self):
         self.save_for_test()
+
         import test_it
+        test_it = reload(test_it)
         self.questions = an.questions
         self.testcases = an.testcases
         tmp_qns = ["check_even", "bubble_sort", "fibonacci", "check_palin"]
@@ -159,24 +164,31 @@ class Editor(tk.Frame):
         self.code = self.option.get()[1]
 
         if self.code.isalpha() :
-            print("Please Select a Question Code")
+            tk.messagebox.showerror("Select Question Code" , "Please Select a question Code")
+
         else:
             ver_soln = an.chk(int(self.code) , self.testcases[int(self.code)] )
+            user_soln = []
+
             #---------user soln----------------
+
             testdata = self.testcases[int(self.code)]
 
-            for i,j in zip(testdata , ver_soln):
+            for k in testdata:
                 try:
-                    res = getattr(test_it,tmp_qns[int(self.code)-1])(i)
-                    if res == j :
-                        print("Passed at test case =" , i)
-                    else:
-                        print("Failed when input was " , i ," Expected Output :",j , "; Your Output :" ,res)
+                    ans = getattr(test_it,tmp_qns[int(self.code)-1])(k)
+                    user_soln.append(ans)
 
                 except Exception as exception:
+                    print(exception)
                     print(exception.__class__.__name__)
                     break
-
+            if user_soln == ver_soln :
+                tk.messagebox.showinfo("Congatulations" , "Your code has passed all the test cases. You may now submit the solution.")
+                print(user_soln)
+            else:
+                tk.messagebox.showinfo("Try Again" , "Your code has failed in one or multiple test cases.")
+                print(user_soln)
 
 class Login_Page(tk.Frame):
 
@@ -414,10 +426,13 @@ class Master_Page(tk.Frame):
     def idrow(self,event):
         rownum = self.trview.identify('item',event.x,event.y)
         item = self.trview.item(self.trview.focus())
-        self.v2.set(item['values'][0])
-        self.v3.set(item['values'][1])
-        self.v4.set(item['values'][2])
-        self.v5.set(item['values'][3])
+        try:
+            self.v2.set(item['values'][0])
+            self.v3.set(item['values'][1])
+            self.v4.set(item['values'][2])
+            self.v5.set(item['values'][3])
+        except:
+            pass
 
     def search_data(self):
         std_name = self.src_ent.get()
