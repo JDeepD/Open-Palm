@@ -274,11 +274,6 @@ class Teacher_Page_Login(tk.Frame):
         self.prompt = tk.Label(self.mainframe , text = "" , fg = 'red')
         self.prompt.grid(row=3 , column = 0 , sticky = 'nsew')
 
-        if subprocess.check_output('xset q | grep LED', shell=True)[65] == 51 :
-            capslock = True
-            self.prompt = tk.Label(self.mainframe , text = "*Caps Lock is ON" , fg = 'black')
-            self.prompt.grid(row=3 , column = 0 , sticky = 'nsew')
-
         master_creds = ["nova_tech" , "nova_tech_jaydeep"]
 
         usrid = self.user_box.get()
@@ -287,7 +282,7 @@ class Teacher_Page_Login(tk.Frame):
         userid = pm.cipherpass(usrid)
         userpass = pm.cipherpass(usrpass)
 
-        self.controller.show_frame("Master_Page") #Waring : Immediately delete this line after the project is over.
+        #self.controller.show_frame("Master_Page") #Waring : Immediately delete this line after the project is over.
 
         dic = pm.get_pass()
 
@@ -446,10 +441,10 @@ class Master_Page(tk.Frame):
 
 if __name__ == "__main__":
     window = Openpalm()
-    window.iconphoto(True, tk.PhotoImage(       #Comment this if you using Windows
-        r'..\favicon\favicon.png'))
-    #window.iconbitmap(tk.PhotoImage(           #Uncomment this if you are using Windows
-    #    r'..\favicon\favicon.png'))
+    #window.iconphoto(True, tk.PhotoImage(       #Comment this if you using Windows
+        #r'..\favicon\favicon.png'))
+    #window.iconbitmap(           #Uncomment this if you are using Windows
+    #    r'../favicon/favicon.png')
 
     window.title('OpenPalm')
     window.rowconfigure(0, minsize=800, weight=1)
