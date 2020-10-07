@@ -1,20 +1,23 @@
-Welcome to Open Palm Open Source Project. This is a project which will be mainly based on Python 3.x and MySql
+# INTRODUCTION
+## Welcome to Open Palm Open Source Project. This is a project which will be mainly based on Python 3.x and MySql
 
-Github page : https://nova-striker.github.io/openpalm/
+#### Q : What do I get with this software?
+#### A : This software is mainly built to aid the teachers in conducting CS practicals.The following are the things which are currently present in the software as of 7 October 2020 :
+| Features                    |                 Description |
+| ------------------------- | --------------------------- |
+| Reviewing the code on different test cases | Students can submit code on the default editor and Open-Palm can run it on pre-determined test cases      |
+| Maintaining a \*secured interface between Teacher's Page and Editor| It uses username - password based style of entry to the teacher's page|
+| Maintaining a responsive database of students | Open-Palm uses local database file to store data of students|
 
-Requirements :
+#### Q : What more features does it offer other than evaluating scripts?
+#### A : We are working on adding the following features in coming releases :
+- [ ] Sending the result of students directly through mail to the teacher.
+- [ ] Developing a website where students can check their solution and their result.
 
-Can be installed in the following way :
-Windows:
+#### Q : How can I contribute and/or request for a new feature?
+#### A : You can make an issue with the *feature-request* label with the description of feature.
 
-    1. Install pip (In most cases they are preinstalled)
-    2. Open CMD
-    2. Type : `pip install <package-name>`
+### Note : All Pull Requests made without an issue will be rejected.
 
-Modules Required
+\* *We neither claim nor advertise the security of the ciphering mechanism. We are working on implementing a more secure encryption system in the future releases.*
 
-1. tkinter (Tkinter for Python 2.x) #Preinstalled
-2. sqlite3 #Preinstalled
-3. smtplib
-
-*Note : This is modified for linux.
