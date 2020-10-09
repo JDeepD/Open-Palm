@@ -15,7 +15,7 @@
 - [ ] Developing a website where students can check their solution and their result.
 
 #### Q : How can I contribute and/or request for a new feature?
-#### A : You can make an issue with the *feature-request* label with the description of feature.
+ A : You can make an issue with the *feature-request* label with the description of feature.
 
 ### Note : All Pull Requests made without an issue will be rejected.
 
