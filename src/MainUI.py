@@ -81,6 +81,7 @@ class Editor(tk.Frame):
 
         # The Design Aspect of the frame
         self.Text_box = tk.Text(self.mainframe, bg='#333333', fg='#f2f2f2')
+
         self.Text_box.configure(font=("Courier", 16, ''),
                                 insertbackground='white')
         # The Frame that contains all the buttons
@@ -89,6 +90,7 @@ class Editor(tk.Frame):
         # The instatiation of buttons
         self.btn_submit = ttk.Button(self.frm_btns, text='SUBMIT')
         self.btn_clear = ttk.Button(self.frm_btns, text='CLEAR')
+        self.btn_docs = ttk.Button(self.frm_btns, text='Docs')
         self.btn_open = ttk.Button(
             self.frm_btns, text='OPEN', command=self.open_file)
         self.btn_save = ttk.Button(
@@ -97,17 +99,20 @@ class Editor(tk.Frame):
             self.frm_btns, text='Test', command = self.test_it)
 
         self.option = tk.StringVar()
+
         self.option.set("Select Code")
         self.dropdown = ttk.Combobox(self.frm_btns ,state = "readonly", textvariable = self.option , width= 15)
         self.dropdown['values'] = ["#1" , "#2" , "#3" , "#4"]
+        self.dropdown.bind("<<ComboboxSelected>>" , self.write_func)
 
         # The gridding of buttons
         self.btn_submit.grid(row=4, column=0, sticky='ew')
         self.btn_clear.grid(row=1, column=0, sticky='ew')
+        self.btn_docs.grid(row=6, column=0, sticky='ew')
         self.btn_open.grid(row=2, column=0, sticky='ew')
         self.btn_save.grid(row=3, column=0, sticky='ew')
         self.btn_test.grid(row=0, column=0, sticky='ew')
-        self.dropdown.grid(row = 6 , column=0 , sticky = 'es')
+        self.dropdown.grid(row = 7 , column=0 , sticky = 'es')
 
         # The gridding of the frame that contains all the buttons
         self.frm_btns.grid(row=0, column=2, sticky='ns')
@@ -124,6 +129,9 @@ class Editor(tk.Frame):
         self.mainframe.pack(fill=tk.BOTH, expand=True)
         self.mainframe.rowconfigure(0, minsize=800, weight=1)
         self.mainframe.columnconfigure(0, weight=1)
+
+        self.Text_box.insert('1.0' , "#It is highly recommended that you check your code first in IDLE first for syntax errors and then Test it here.\n\n")
+        self.Text_box.insert('3.0' , "#If your code has syntax errors ,Open-Palm will freeze. You have to restart it in that case \n\n")
 
     def open_file(self):  # Opens a saved file
         self.path = askopenfilename(filetypes=(
@@ -153,20 +161,22 @@ class Editor(tk.Frame):
             file.write(text)
 
     def test_it(self):
-        self.save_for_test()
 
-        import test_it
-        test_it = reload(test_it)
         self.questions = an.questions
         self.testcases = an.testcases
         tmp_qns = ["check_even", "bubble_sort", "fibonacci", "check_palin"]
 
-        self.code = self.option.get()[1]
+        self.code = self.option.get()[1] #It selects only the code number and not the '#'
 
         if self.code.isalpha() :
             tk.messagebox.showerror("Select Question Code" , "Please Select a question Code")
 
         else:
+
+            import test_it
+            self.save_for_test()
+            test_it = reload(test_it)
+
             ver_soln = an.chk(int(self.code) , self.testcases[int(self.code)] )
             user_soln = []
 
@@ -184,11 +194,53 @@ class Editor(tk.Frame):
                     print(exception.__class__.__name__)
                     break
             if user_soln == ver_soln :
-                tk.messagebox.showinfo("Congatulations" , "Your code has passed all the test cases. You may now submit the solution.")
+                tk.messagebox.showinfo("Congratulations" , "Your code has passed all the test cases. You may now submit the solution.")
                 print(user_soln)
             else:
                 tk.messagebox.showinfo("Try Again" , "Your code has failed in one or multiple test cases.")
                 print(user_soln)
+
+    def write_func(self,event):
+        if self.dropdown.get() == "#1":
+            self.Text_box.delete('1.0' , tk.END)
+
+            self.Text_box.insert('1.0' , "#It is highly recommended that you check your code first in IDLE first for syntax errors and then Test it here.\n\n")
+            self.Text_box.insert('3.0' , "#If your code has syntax errors ,Open-Palm will freeze. You have to restart it in that case \n\n")
+
+            self.Text_box.insert('5.0' , "def check_even(n):\n")
+            self.Text_box.insert('6.0' , "\t#Enter Code here\n")
+            self.Text_box.insert('7.0' , "\tpass")
+
+        if self.dropdown.get() == "#2":
+            self.Text_box.delete('1.0' , tk.END)
+            self.Text_box.insert('1.0' , "#It is highly recommended that you check your code first in IDLE first for syntax errors and then Test it here.\n\n")
+            self.Text_box.insert('3.0' , "#If your code has syntax errors ,Open-Palm will freeze. You have to restart it in that case \n\n")
+
+            self.Text_box.insert('5.0' , "def bubble_sort(arr):\n")
+            self.Text_box.insert('6.0' , "\t#Enter Code here\n")
+            self.Text_box.insert('7.0' , "\tpass")
+
+        if self.dropdown.get() == "#3":
+
+            self.Text_box.delete('1.0' , tk.END)
+
+            self.Text_box.insert('1.0' , "#It is highly recommended that you check your code first in IDLE first for syntax errors and then Test it here.\n\n")
+            self.Text_box.insert('3.0' , "#If your code has syntax errors ,Open-Palm will freeze. You have to restart it in that case \n\n")
+
+            self.Text_box.insert('5.0' , "def fibonacci(n):\n")
+            self.Text_box.insert('6.0' , "\t#Enter Code here\n")
+            self.Text_box.insert('7.0' , "\tpass")
+
+        if self.dropdown.get() == "#4":
+
+            self.Text_box.delete('1.0' , tk.END)
+            self.Text_box.insert('1.0' , "#It is highly recommended that you check your code first in IDLE first for syntax errors and then Test it here.\n\n")
+            self.Text_box.insert('3.0' , "#If your code has syntax errors ,Open-Palm will freeze. You have to restart it in that case \n\n")
+
+            self.Text_box.insert('5.0' , "def check_palin(s):\n")
+            self.Text_box.insert('6.0' , "\t#Enter Code here\n")
+            self.Text_box.insert('7.0' , "\tpass")
+
 
 class Login_Page(tk.Frame):
 
