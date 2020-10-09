@@ -27,3 +27,11 @@
 | #2| Write a function that inputs an array and returns a sorted array. (Use Bubble Sort)|
 | #3 | Write a function that that inputs an interger `n` and returns `n`th fibonacci number. (Fibonacci series starts with 1)|
 | #4 | Write a function that that inputs a string and returns `True` if its a palindrome else it returns `False`|
+
+
+### Screenshots :
+![alt text](https://github.com/Nova-Striker/Open-Palm/blob/master/screenshots/Screenshot%20from%202020-10-09%2023-17-20.jpg)
+![alt text](https://github.com/Nova-Striker/Open-Palm/blob/master/screenshots/Screenshot%20from%202020-10-09%2023-18-44%20(1).jpg)
+![alt text](https://github.com/Nova-Striker/Open-Palm/blob/master/screenshots/Screenshot%20from%202020-10-09%2023-19-19.jpg)
+
+
