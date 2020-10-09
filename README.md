@@ -21,3 +21,9 @@
 
 \* *We neither claim nor advertise the security of the ciphering mechanism. We are working on implementing a more secure encryption system in the future releases.*
 
+| Codes                    |                Question Description |
+| ------------------------- | --------------------------- |
+| #1 | Write a function that inputs an integer and returns `True` if its even else it returns False  |
+| #2| Write a function that inputs an array and returns a sorted array. (Use Bubble Sort)|
+| #3 | Write a function that that inputs an interger `n` and returns `n`th fibonacci number. (Fibonacci series starts with 1)|
+| #4 | Write a function that that inputs a string and returns `True` if its a palindrome else it returns `False`|
