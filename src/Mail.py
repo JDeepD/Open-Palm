@@ -43,13 +43,15 @@ class Mail:
         self.message['Subject'] = 'This is the subject of the a mail'
         try:
             self.server.send_message(self.message)
-            print('Done')
+            return True
         except:
-            return ('There is some error. PLease check the email address again')
-
+            return False
 
 if __name__ == '__main__':
     body = """#Enter your email here """
-    ml = Mail("receiver@gmail.com", body,
-              "sender@gmail.com", "passwd_of_sender")
+    ml = Mail("jaydeepjd.1125@gmail.com", body,
+              "openpalm680@gmail.com", "********************")
     ml.send_mail()
+
+
+

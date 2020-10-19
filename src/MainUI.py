@@ -30,6 +30,8 @@ import Database as db
 import analyse as an
 import tkinter.messagebox
 from importlib import reload
+import Mail as mail
+from time import sleep
 
 class Openpalm(tk.Tk):
 
@@ -88,7 +90,7 @@ class Editor(tk.Frame):
         self.frm_btns = tk.Frame(self.mainframe)
 
         # The instatiation of buttons
-        self.btn_submit = ttk.Button(self.frm_btns, text='SUBMIT')
+        self.btn_submit = ttk.Button(self.frm_btns, text='SUBMIT' , command=self.submit)
         self.btn_clear = ttk.Button(self.frm_btns, text='CLEAR')
         self.btn_docs = ttk.Button(self.frm_btns, text='Docs')
         self.btn_open = ttk.Button(
@@ -200,6 +202,7 @@ class Editor(tk.Frame):
                 tk.messagebox.showinfo("Try Again" , "Your code has failed in one or multiple test cases.")
                 print(user_soln)
 
+
     def write_func(self,event):
         if self.dropdown.get() == "#1":
             self.Text_box.delete('1.0' , tk.END)
@@ -240,6 +243,28 @@ class Editor(tk.Frame):
             self.Text_box.insert('5.0' , "def check_palin(s):\n")
             self.Text_box.insert('6.0' , "\t#Enter Code here\n")
             self.Text_box.insert('7.0' , "\tpass")
+    def submit(self):
+            if tk.messagebox.askyesno("Confirm Submit" , "Are you sure you want to submit? Once submitted , it cannot be undone."):
+                load = Loading()
+                body="Open Palm Service Mail"
+                ml = mail.Mail("jaydeepjd.8914@gmail.com" , body , "openpalm680@gmail.com" , "openpalmisopensource")
+                if ml.send_mail():
+                    tk.messagebox.showinfo("Done" , "Mail Send")
+                else:
+                    tk.messagebox.showinfo("Failed" , "Failed to send the mail. Check your internet connection or call your admin")
+
+
+class Loading(tk.Toplevel):
+    def __init__(self , title="Loading" , message="The process is loading..."):
+        tk.Toplevel.__init__(self)
+        self.geometry('400x200+200+100')
+        self.title(title)
+        self.messageLabel=tk.Label(self,text=message , bg = '#fff' ,fg='#000')
+        self.messageLabel.pack(expand=True,fill=tk.BOTH)
+
+    def update(self , text="Default" , message="Default"):
+        self.title(title)
+        self.messageLabel.configure(text=message)
 
 
 class Login_Page(tk.Frame):
