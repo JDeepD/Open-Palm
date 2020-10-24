@@ -49,8 +49,8 @@ class Mail:
 
 if __name__ == '__main__':
     body = """#Enter your email here """
-    ml = Mail("jaydeepjd.1125@gmail.com", body,
-              "openpalm680@gmail.com", "********************")
+    ml = Mail("Receiver mail", body,
+              "sender mail", "********************")
     ml.send_mail()
 
 

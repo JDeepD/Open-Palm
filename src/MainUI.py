@@ -247,7 +247,7 @@ class Editor(tk.Frame):
             if tk.messagebox.askyesno("Confirm Submit" , "Are you sure you want to submit? Once submitted , it cannot be undone."):
                 load = Loading()
                 body="Open Palm Service Mail"
-                ml = mail.Mail("jaydeepjd.8914@gmail.com" , body , "openpalm680@gmail.com" , "openpalmisopensource")
+                ml = mail.Mail("<Receiver Mail>", body , "<sender mail>xyz@gmail.com" , "<The password>") #Enter the password of the email address or else it will give error
                 if ml.send_mail():
                     tk.messagebox.showinfo("Done" , "Mail Send")
                 else:
