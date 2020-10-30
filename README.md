@@ -53,9 +53,6 @@ As of now, there is no pre build source. You have to manually run `MainUI.py` . 
 **NOTE** : If you dont use Virtual environment , then in some python versions which comes preinstalled with `PIL` , MainUI.py will throw an error. 
 
 
-
-
-
 ### Screenshots :
 ![alt text](https://github.com/Nova-Striker/Open-Palm/blob/master/screenshots/Screenshot%20from%202020-10-09%2023-17-20.jpg)
 ![alt text](https://github.com/Nova-Striker/Open-Palm/blob/master/screenshots/Screenshot%20from%202020-10-09%2023-18-44%20(1).jpg)
