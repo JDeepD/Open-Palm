@@ -1,6 +1,6 @@
 # INTRODUCTION
 ## Welcome to Open Palm Open Source Project. This is a project which will be mainly based on Python 3.x and MySql
-
+##### Note : For Windows Users , there are certain bugs which I am aware of and it is caused because of the different directory navigation style used by Windows and Linux. For example: `/` in linux is `\\` for Windows.I will be making a separate branch for Windows shortly 
 #### Q : What do I get with this software?
 #### A : This software is mainly built to aid the teachers in conducting CS practicals.The following are the things which are currently present in the software as of 7 October 2020 :
 | Features                    |                 Description |
