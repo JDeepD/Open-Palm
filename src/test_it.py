@@ -4,7 +4,7 @@
 
 def check_even(n):
 	#Enter Code here
-	if n%2==0:
-		return(True)
+	if n%2 == 0:
+		return True
 	else:
-		return(False)
+		return False

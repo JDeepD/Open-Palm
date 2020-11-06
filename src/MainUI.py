@@ -25,13 +25,12 @@ from tkinter import ttk
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from PIL import ImageTk, Image
 import passmanager as pm
-import subprocess
 import Database as db
 import analyse as an
 import tkinter.messagebox
 from importlib import reload
 import Mail as mail
-from time import sleep
+import threading
 
 class Openpalm(tk.Tk):
 
@@ -164,6 +163,7 @@ class Editor(tk.Frame):
 
     def test_it(self):
 
+
         self.questions = an.questions
         self.testcases = an.testcases
         tmp_qns = ["check_even", "bubble_sort", "fibonacci", "check_palin"]
@@ -245,27 +245,17 @@ class Editor(tk.Frame):
             self.Text_box.insert('7.0' , "\tpass")
     def submit(self):
             if tk.messagebox.askyesno("Confirm Submit" , "Are you sure you want to submit? Once submitted , it cannot be undone."):
-                load = Loading()
+                #tk.messagebox.showinfo("Sending..." , "Sending Mail... Donot turn of the internet.")
                 body="Open Palm Service Mail"
-                ml = mail.Mail("<Receiver Mail>", body , "<sender mail>xyz@gmail.com" , "<The password>") #Enter the password of the email address or else it will give error
+                self.multitask(self.prmp_send_mail,1)
+                ml = mail.Mail("", body , "" , "") #Enter the password of the email address or else it will give error
                 if ml.send_mail():
                     tk.messagebox.showinfo("Done" , "Mail Send")
                 else:
                     tk.messagebox.showinfo("Failed" , "Failed to send the mail. Check your internet connection or call your admin")
 
-
-class Loading(tk.Toplevel):
-    def __init__(self , title="Loading" , message="The process is loading..."):
-        tk.Toplevel.__init__(self)
-        self.geometry('400x200+200+100')
-        self.title(title)
-        self.messageLabel=tk.Label(self,text=message , bg = '#fff' ,fg='#000')
-        self.messageLabel.pack(expand=True,fill=tk.BOTH)
-
-    def update(self , text="Default" , message="Default"):
-        self.title(title)
-        self.messageLabel.configure(text=message)
-
+    def multitask(self,func,arg):  #func-> name of the function ; arg-> arguments of the function in the form of a list
+        pass
 
 class Login_Page(tk.Frame):
 
@@ -275,12 +265,6 @@ class Login_Page(tk.Frame):
 
         self.mainframe = tk.Frame(self)
         # The Design Aspect of the frame
-
-        img = ImageTk.PhotoImage(Image.open("../favicon/logo.png"))
-        imglbl = tk.Label(self.mainframe , image = img)
-        imglbl.image = img
-        #imglbl.place(x=0, y=0, relwidth=1, relheight=1)
-        imglbl.grid(row = 3 , column = 0)
 
         login_label = tk.Label(self.mainframe, text="This is Login Page")
         login_label.grid(row=0, column=0)
@@ -311,13 +295,6 @@ class Teacher_Page_Login(tk.Frame):
         self.mainframe = tk.Frame(self)
 
         # The Design Aspect of the frame
-
-        img = ImageTk.PhotoImage(Image.open("../favicon/logo.png"))
-        imglbl = tk.Label(self.mainframe , image = img)
-        imglbl.image = img
-        #imglbl.place(x=0, y=0, relwidth=1, relheight=1)
-        imglbl.grid(row = 4 , column = 0)
-
         lbl = tk.Label(self.mainframe, text="TEACHER'S PAGE",font=("Ubuntu", 14, ''))
         lbl.grid(row=0, column=0, sticky='nsew')
 
@@ -518,11 +495,6 @@ class Master_Page(tk.Frame):
 
 if __name__ == "__main__":
     window = Openpalm()
-    #window.iconphoto(True, tk.PhotoImage(       #Comment this if you using Windows
-        #r'..\favicon\favicon.png'))
-    #window.iconbitmap(           #Uncomment this if you are using Windows
-    #    r'../favicon/favicon.png')
-
     window.title('OpenPalm')
     window.rowconfigure(0, minsize=800, weight=1)
     window.columnconfigure(0, minsize=800, weight=1)
