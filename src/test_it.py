@@ -3,8 +3,8 @@
 #If your code has syntax errors ,Open-Palm will freeze. You have to restart it in that case 
 
 def check_even(n):
-	#Enter Code here
-	if n%2 == 0:
+	if n%2==0:
 		return True
 	else:
 		return False
+	pass
