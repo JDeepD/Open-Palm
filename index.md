@@ -3,11 +3,32 @@
 ##### Note : For Windows Users , there are certain bugs which I am aware of and it is caused because of the different directory navigation style used by Windows and Linux. For example: `/` in linux is `\\` for Windows.I will be making a separate branch for Windows shortly 
 #### Q : What do I get with this software?
 #### A : This software is mainly built to aid the teachers in conducting CS practicals.The following are the things which are currently present in the software as of 7 October 2020 :
-| Features                    |                 Description |
-| ------------------------- | --------------------------- |
-| Reviewing the code on different test cases | Students can submit code on the default editor and Open-Palm can run it on pre-determined test cases      |
-| Maintaining a \*secured interface between Teacher's Page and Editor| It uses username - password based style of entry to the teacher's page|
-| Maintaining a responsive database of students | Open-Palm uses local database file to store data of students|
+
+<table style="width:100%">
+  <tr>
+    <th>Features</th>
+    <th>Description</th>
+    
+  </tr>
+  <tr>
+    <td>Reviewing the code on different test cases</td>
+    <td>Students can submit code on the default editor and Open-Palm can run it on pre-determined test cases</td>
+    
+  </tr>
+  <tr>
+    <td>Maintaining a *secured interface between Teacher's Page and Editor</td>
+    <td>It uses username - password based style of entry to the teacher's page
+     </td>
+    
+  </tr>
+    <tr>
+    <td>Maintaining a responsive database of students</td>
+    <td>Open-Palm uses local database file to store data of students
+     </td>
+    
+  </tr>
+
+</table>
 
 #### Q : What more features does it offer other than evaluating scripts?
 #### A : We are working on adding the following features in coming releases :
