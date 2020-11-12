@@ -3,6 +3,29 @@ the scripts given by the user."""
 
 
 def chk(func, *args):
+    """
+    This function takes in two parameters:
+        1. func ---> The question code of the function
+        2. args ---> The arguments required by that func
+    It is the main function that is used to evaluate the
+    students code and Open-Palm's code.
+    For example:
+
+    func = 1
+    args = ([1,2,4,5,6])
+
+    Therefore, `questions[func]` is equivalent to
+    accessing `questions` dictionary and taking taking
+    out the corresponding function instance.
+    Here,
+    `questions[func]` is equal to `questions[1]` (since func = 1)
+
+    And,`questions[1]` will return `check_even`(from the dictionary`questions`)
+
+    Therefore, passing in the parameters, we get:
+    `questions[func](args)` is same as `questions[1](args)`
+    which is same as `check_even(args)`
+    """
     return questions[func](args)
 
 

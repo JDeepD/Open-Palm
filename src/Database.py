@@ -1,58 +1,79 @@
-
-# MIT License
-
-# Copyright (c) 2020 Jdeep
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all copies 
-# or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+"""This module will be used for interacting with the database file."""
 
 import sqlite3
 
 class make_db:
+    """This class will mainly deal with connecting, creating the database
+    and storing values into it.Its methods are:
+
+    1. constructor method( __init__ ) takes the name of the database
+       as argument and makes creates a database file with the given name
+       This function also creates a `cursor` object that allows to handle
+       Mysql commands through python strings.
+
+    2. store_values(self, StudentName, Class, Section, RollNo)
+        It takes in arguments : StudentName, Class, Section & Rollno
+        and stores it into the database.
+
+    3. `check_dup` method takes in Name, Class, Section, Rollno as parameter
+        and returs the number of duplicate entries of the given entry.
+    """
     def __init__(self, dbname):
         self.dbname = dbname
         self.mydb = sqlite3.connect(self.dbname + '.db')
         self.cursor = self.mydb.cursor()
         self.cursor.execute("""CREATE TABLE IF NOT EXISTS DATA (StudentName TEXT , Class TEXT , Section TEXT ,RollNo TEXT)""")
 
-    def store_values(self,StudentName,Class,Section,RollNo):
+    def store_values(self, StudentName, Class, Section, RollNo):
+        """See the class docstring"""
+
         self.cursor.execute("INSERT INTO DATA VALUES( :StudentName , :Class, :Section , :Rollno)", {
-            'StudentName': StudentName ,'Class': Class , 'Section': Section,'Rollno': RollNo })
+            'StudentName': StudentName, 'Class': Class, 'Section': Section, 'Rollno': RollNo})
 
         self.mydb.commit()
 
-    def check_dup(self,Name,Class,Section,Roll):
-        self.cursor.execute(f"SELECT COUNT (*) FROM DATA WHERE STUDENTNAME=:Name AND CLASS=:Class AND SECTION=:Section AND ROLLNO=:Roll",{
+    def check_dup(self, Name, Class, Section, Roll):
+        """See the class docstring"""
+
+        self.cursor.execute(f"SELECT COUNT (*) FROM DATA WHERE STUDENTNAME=:Name AND CLASS=:Class AND SECTION=:Section AND ROLLNO=:Roll", {
             'Name': Name,
-            'Class':Class,
-            'Section':Section,
-            'Roll':Roll
+            'Class': Class,
+            'Section': Section,
+            'Roll': Roll
         })
         return(self.cursor.fetchall())
 
 
 class get_response(make_db):
+    """
+    This is a child class of `make_db`. It has the following methods.
+
+    1. constructor method(__init__)that takes in the Database name as parameter
+       This database name is then used to create a connection with the `.db`
+       file created earlier.
+       Note: This class does not creates a `cursor` object on its own but it
+       inherits the `cursor`object from its parent `make_db`.
+       The `super().__init__(Database)` is same as calling the
+       __init__ method from `make_db` class that creates a connection as
+       well as  `cursor`. This cursor is accesible
+       to all the methods of `get_response`.
+
+    2. `get_data_by_query` that takes in the query (Student Name) as parameter
+        and returns the entry containing that query.
+
+    3. `delete_data` takes in Name, Class, Section, Roll as parameter and
+        deletes the entry containing those values.
+        This function returns nothing.
+
+    """
 
     def __init__(self, Database):
         self.Database = Database
         super().__init__(Database)
 
-    def get_data_by_query(self , query):
+    def get_data_by_query(self, query):
+        """See the class docstring"""
+
         self.query = query
         try:
             self.cursor.execute(
@@ -63,23 +84,27 @@ class get_response(make_db):
             return('No Such Query Available Available')
 
     def get_all_data(self):
+        """See the class docstring"""
+
         self.cursor.execute("Select * FROM DATA")
         data = self.cursor.fetchall()
         return(data)
 
-    def delete_data(self,Name,Class,Section,Roll):
+    def delete_data(self, Name, Class, Section, Roll):
+        """See the class docstring"""
+
         self.cursor.execute(f"DELETE FROM DATA WHERE STUDENTNAME=:Name AND CLASS=:Class AND SECTION=:Section AND ROLLNO=:Roll LIMIT 1", {
             'Name': Name,
-            'Class':Class,
-            'Section':Section,
-            'Roll':Roll
+            'Class': Class,
+            'Section': Section,
+            'Roll': Roll
         })
         self.mydb.commit()
-#if __name__ == '__main__':
+# if __name__ == '__main__':
     # db = make_db('Databs')  # Enter Database name
     # db.store_values(12, 'Nick', 24)  # Enter Rollno,Studentname,marks
-    #d = get_response('Databs', 'Nick').get_data()
-    #print(d)
+    # d = get_response('Databs', 'Nick').get_data()
+    # print(d)
 
 
 
