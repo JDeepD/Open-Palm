@@ -22,18 +22,16 @@
 
 # pylint disable=C0321
 
+from os import (path, mkdir)
 import tkinter as tk
 from tkinter import ttk
 from tkinter.filedialog import askopenfilename, asksaveasfilename
-from PIL import ImageTk, Image
+import tkinter.messagebox  # pylint: disable=unused-import
+from importlib import reload
 import passmanager as pm
 import Database as db
 import analyse as an
-import tkinter.messagebox
-from importlib import reload
 import Mail as mail
-import threading
-from os import (path, mkdir)
 
 
 def validate(func):
@@ -45,7 +43,9 @@ def validate(func):
     def inner(*args):
         if not path.isdir("creds"):
             mkdir("creds")
-            func()
+            func(*args)
+        else:
+            func(*args)  # if directory exists, do the function
 
     return inner
 
@@ -192,7 +192,7 @@ class Editor(tk.Frame):
             file.write(text)
 
     @logs
-    def testit(self):
+    def testit(self, *args):
 
         self.questions = an.questions
         self.testcases = an.testcases
@@ -355,10 +355,10 @@ class Teacher_Page_Login(tk.Frame):
         self.mainframe.pack()  # Packing of the mainframe
 
     def get_user_info(self,event=None):
-        self.prompt = tk.Label(self.mainframe , text = "" , fg = 'red')
+        self.prompt = tk.Label(self.mainframe, text="", fg='red')
         self.prompt.grid(row=3, column=0, sticky='nsew')
 
-        master_creds = ["nova_tech", "nova_tech_jaydeep"]
+        master_creds = ["jaydeep", "12345"]
 
         usrid = self.user_box.get()
         usrpass = self.passwd_box.get()
@@ -410,6 +410,8 @@ class Master_Page(tk.Frame):
         self.v3 = tk.StringVar()            #self.class_ent
         self.v4 = tk.StringVar()            #self.sec_ent
         self.v5 = tk.StringVar()            #self.roll_ent
+        self.v6 = tk.StringVar()            #Admin-User
+        self.v7 = tk.StringVar()            #Admin-Pass
 #       ----------------------------------------------------/\/\ micellaneous/\/\-----------------------------------------------
 
 #       ----------------------------------------------------/\/\ Frame table (lbl_frm_table) (s)/\/\-----------------------------------------------
@@ -472,13 +474,23 @@ class Master_Page(tk.Frame):
         # ----------------------------------------------------/\/\ Frame info (lbl_frm_info)(e) /\/\-----------------------------------------------
 
         # ----------------------------------------------------/\/\ Frame info (lbl_frm_admin)(s) /\/\-----------------------------------------------
-        add_admin = ttk.Button(lbl_frm_admin, text="Add User")
-        back_btn = ttk.Button(lbl_frm_admin, text="Back", command=lambda: controller.show_frame("Editor"))
-        set_mail = ttk.Button(lbl_frm_admin, text="Add Email Address")
+        btn_frm = ttk.Frame(lbl_frm_admin)
+        ent_frm = ttk.Frame(lbl_frm_admin)
+        add_admin = ttk.Button(btn_frm, text="Add User", command=self.add_admin)
+        back_btn = ttk.Button(btn_frm, text="Back", command=lambda: controller.show_frame("Editor"))
+        set_mail = ttk.Button(btn_frm, text="Add Email Address")
+
+        self.usr_ent = ttk.Entry(ent_frm, width=20, textvariable=self.v6)
+        self.pass_ent = ttk.Entry(ent_frm, width=20, textvariable=self.v7)
 
         add_admin.grid(row=0, column=0, padx=10)
         back_btn.grid(row=0, column=1, padx=10)
         set_mail.grid(row=0, column=2, padx=10)
+
+        self.usr_ent.grid(row=1, column=0, pady=5, padx=5)
+        self.pass_ent.grid(row=1, column=1, pady=5, padx=5)
+        btn_frm.grid(row=0, column=0)
+        ent_frm.grid(row=1, column=0)
         # ----------------------------------------------------/\/\ Frame info (lbl_frm_admin)(e) /\/\-----------------------------------------------
 
         lbl_frm_table.pack(fill="both", expand=True, padx=20, pady=10)
@@ -488,10 +500,18 @@ class Master_Page(tk.Frame):
 
         self.mainframe.pack(fill="both", expand=True)  # Packing of mainframe
 
-    def add_admin(self):
-        pass
+    @validate
+    def add_admin(self, *args):
+        """This method will be used to add new master users to Open Palm"""
 
+        user_id = pm.cipherpass(self.usr_ent.get())
+        user_pass = pm.cipherpass(self.pass_ent.get())
+
+        pm.storepass(user_id, user_pass)
+
+    @validate
     def set_mail(self):
+        """This method will be used to set new email ids."""
         pass
 
     def add_user_info(self):

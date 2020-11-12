@@ -1,50 +1,61 @@
-# MIT License
+"""This module will deal with password management"""
 
-# Copyright (c) 2020 Jdeep
 
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# This is very very bad ciphering technique and is only implemented for simplicity of the Project.
-# Please donot store the same password as your other accounts like Gmail,Facebook etc. Use this at your own risk
 import csv
 
-def storepass(user,passwd):
-    with open("data.csv",'a+') as fil :
+
+def storepass(user, passwd, target="admins.csv"):
+    """This function is used for storing user-pass combo
+    as elements to a csv file. By default, the values will be
+    stored in `creds/admins.csv`. The csvs will always be
+    saved in the `creds` directory but the filenames can
+    be changed by using the optional `target` parameter
+    """
+
+    with open(f"creds/{target}", 'a+') as fil:
         writer = csv.writer(fil)
-        writer.writerow([user,passwd])
+        writer.writerow([user, passwd])
+
 
 def cipherpass(passwd):
+    """Inputs a string. Ciphers it using the following
+    algorithm and returns the ciphered password
+    Algo:
+    1. Takes the string.
+    2. Tranverse though each letter.
+    3. Take the ascii value of that letter
+       and doubles it using `chr` function
+    4. Converts the new ascii value back to
+       a new letter.
+    5. Adds that letter to an empty string and
+       repeat from Step 1 until all letters are
+       traversed.
+    6. Returns the `ciphered` string.
+    """
     tmp = ""
     for i in passwd:
-       tmp += chr(ord(i)*2)
-    return(tmp)
+        tmp += chr(ord(i)*2)
+    return tmp
+
 
 def decipherpass(encr):
+    """Inputs a strings. Deciphers in using the same algorithm
+    that was used in `cipherpass`. Returns the original passwd
+    """
     tmp = ""
     for i in encr:
         tmp += chr(int(ord(i)/2))
-    return(tmp)
+    return tmp
 
-def get_pass():     #gets the user info from the Csv file
-    with open("data.csv",'r+') as fil:
+
+def get_pass(target="admins.csv"):  # gets the user info from the Csv file
+    """This function is used for reading a csv file
+    and returning the contents in the form of a
+    dictionary
+    """
+    with open(f"creds/{target}", 'r+') as fil:
         reader = csv.reader(fil)
         dic = {}
         for i in reader:
             dic[i[0]] = i[1]
-        return(dic)
+        return dic
