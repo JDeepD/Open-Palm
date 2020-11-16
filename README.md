@@ -1,4 +1,15 @@
-# INTRODUCTION
+# Open Palm
+
+![GitHub Pipenv locked Python version](https://img.shields.io/github/pipenv/locked/python-version/Nova-Striker/Open-Palm)
+![GitHub last commit](https://img.shields.io/github/last-commit/Nova-Striker/Open-Palm)
+![GitHub contributors](https://img.shields.io/github/contributors/Nova-Striker/Open-Palm)
+![GitHub issues](https://img.shields.io/github/issues/Nova-Striker/Open-Palm)
+![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/Nova-Striker/Open-Palm)
+
+[![forthebadge](https://forthebadge.com/images/badges/just-plain-nasty.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/ctrl-c-ctrl-v.svg)](https://forthebadge.com)
+
 ## Welcome to Open Palm Open Source Project. This is a project which will be mainly based on Python 3.x and MySql
 ##### Note : For Windows Users , there are certain bugs which I am aware of and it is caused because of the different directory navigation style used by Windows and Linux. For example: `/` in linux is `\\` for Windows.I will be making a separate branch for Windows shortly 
 #### Q : What do I get with this software?
