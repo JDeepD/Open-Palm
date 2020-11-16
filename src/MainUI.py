@@ -1,4 +1,7 @@
+"""This will be used for creating the UI elements and apis for OpenPalm"""
+
 from os import (path, mkdir)
+from functools import wraps
 import tkinter as tk
 from tkinter import ttk
 from tkinter.filedialog import askopenfilename, asksaveasfilename
@@ -11,11 +14,46 @@ import Mail as mail
 
 
 def validate(func):
-    """params: args: In case, if this function is called
-    from a method , then args=self"""
-    """It checks whether the `creds` directory exists or not"""
+    """
+    This is the `validate` function
+    params: args: In case, if this function is called
+    from a method , then args=self
+    It checks whether the `creds` directory exists or not.
+    If it does not exist, it first creates it and then
+    execute the function.
+    It will be wrapper function for some methods.
+    The `wraps(func)` decorator of functools library
+    will allow to retain the docstring of the method to
+    which it wraps.
+    For example:
+
+    def decorated(func):
+        def wrapper():
+            print("Decorated")
+            func()
+        return wrapper
+
+    @decorated
+    def main():
+    '''This is the function docstring'''
+        print("This is the original func")
+
+    main()
+    >> Decorated
+       This is the original func
+
+    main.__docs__
+    >> None
+
+    Here, the docstring of `main` is lost because of
+    the wrapper function.
+    To prevent this, we decorate our decorator with
+    functools.wrap(func) decorator which retains the
+    metadata and docstrings from the original function.
+    """
 
     @logs
+    @wraps(func)
     def inner(*args):
         if not path.isdir("creds"):
             mkdir("creds")
@@ -27,7 +65,13 @@ def validate(func):
 
 
 def logs(func):
-    """In case, called from a class , then *args=self """
+    """
+    In case, called from a class , then *args=self.
+    This function will work as a decorator that will
+    call the wrapped function in a `try` - `except` block
+    and in case of any exception, it will create/append a
+    `logs.txt` file that will contain the exception information.
+    """
     def inner(*args):
         try:
             func(*args)     # if called from class: Translates to : func(self)
@@ -39,6 +83,34 @@ def logs(func):
 
 
 class Openpalm(tk.Tk):
+    """
+    This class will inherit the methods of tk.Tk class
+    This class has the following methods:
+        1. constructor(__init__)
+            This constructor initialises:
+                (i) container (tk.Frame object)
+                (ii) frames (dictionary object)
+
+            (a) `container` is tkinter Frame object and a
+                child of the tkinter window. Note that in
+                Open Palm, we have only tkinter Window instance
+                open. All the other UI frame child of
+                the `container`
+
+            (b) `frames` (or self.frames after binding it to the object)
+                is a dictionary that contains the
+                 ->(i) `name of the page` as key
+                 ->(ii) `the instance of the child `frames` of
+                        `container` as value.
+                        This means if you call any item of the
+                        dictionary `frames` , then it will return a
+                        `tk.Frame` object which will be used to show that
+                        frame.
+
+        2. show_frame takes name of the frame as argument and shows that frame
+           whenever this function is called.
+
+    """
 
     def __init__(self):
         # Initialises all the variables or tk.Tk
@@ -62,9 +134,9 @@ class Openpalm(tk.Tk):
             parent=container, controller=self)  # Calls the Login_Page Class
 
         self.frames["Teacher_Page_Login"] = Teacher_Page_Login(
-            parent=container, controller=self)  # Calls Teacher_Page_Login 
+            parent=container, controller=self)  # Calls Teacher_Page_Login
 
-        self.frames["Master_Page"] = Master_Page( # Calls Master_Page 
+        self.frames["Master_Page"] = Master_Page(  # Calls Master_Page
             parent=container, controller=self)
 
         self.frames["Editor"].grid(row=0, column=0, sticky="nsew")
@@ -81,6 +153,38 @@ class Openpalm(tk.Tk):
 
 
 class Editor(tk.Frame):
+    """
+    This is the Editor class.
+    It inherits tkinter Frame class and returns a
+    tkinter Frame object. Its methods & attributes are:
+        1. constructor(__init__)
+           takes in args : parent & controller.
+
+               *parent* is the argument which will tell
+               this Frame whose child it is.
+               For example: parent=container is same as
+               creating a tkinter Frame:
+               child = tk.Frame(container)
+
+               *controller* is a argument which
+               allows out tkinter Frame(Editor)
+               to access selective attributes of its parent
+               without explicitly calling all the methods
+               using `super().__init__(self)`
+
+               Exmple:
+               In our Openpalm class(above) , we had given
+               `controller=self` meaning that our controller
+               variable(or argument) now contains the instance
+               of Openpalm class.
+
+               Therefore using: `controller.show_frame()`
+               is same as saying `Openpalm.show_frame()`
+               that is accessing only the `show_frame` method
+               of Openpalm class.
+
+
+    """
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
