@@ -28,8 +28,8 @@
 #### Q : How can I contribute and/or request for a new feature?
  A : You can make an issue with the *feature-request* label with the description of feature.
 
-### Note : All Pull Requests made without an issue will be rejected.
-### Note : Pull requests must be made to the feature branch.
+#### Note : All Pull Requests made without an issue will be rejected.
+#### Note : Pull requests must be made to the feature branch.
 \* *We neither claim nor advertise the security of the ciphering mechanism. We are working on implementing a more secure encryption system in the future releases.*
 
 | Codes                    |                Question Description |
