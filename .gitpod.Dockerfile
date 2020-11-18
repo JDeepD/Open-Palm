@@ -6,5 +6,7 @@ USER gitpod
 # For example, the command below would install "bastet" - a command line tetris clone:
 #
 
-RUN sudo apt-get -q update && \
-    sudo apt-get install python-tk python3-tk tk-dev
+RUN sudo apt update \
+    sudo apt install wget software-properties-common \
+    sudo add-apt-repository ppa:deadsnakes/ppa \
+    sudo apt install python3.9\
