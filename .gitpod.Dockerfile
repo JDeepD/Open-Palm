@@ -74,7 +74,6 @@ USER gitpod
 RUN sudo apt-get update && \
     sudo apt-get install -y python3-pip && \
     sudo rm -rf /var/lib/apt/lists/*
-    sudo apt-get install -q tk-dev
     
 ENV PATH=$HOME/.pyenv/bin:$HOME/.pyenv/shims:$PATH
 RUN curl -fsSL https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash \
