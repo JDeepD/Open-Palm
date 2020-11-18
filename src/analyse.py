@@ -135,9 +135,9 @@ def fibonacci(inp):
             if n < 0:
                 print("Incorrect input")
             elif n == 0:
-                return a
+                ls.append(0)
             elif n == 1:
-                return b
+                ls.append(1)
             else:
                 for i in range(2,n+1):
                     c = a + b
