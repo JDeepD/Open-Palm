@@ -73,5 +73,3 @@ As of now, there is no pre build source. You have to manually run `MainUI.py` . 
 ![alt text](https://github.com/Nova-Striker/Open-Palm/blob/master/screenshots/Screenshot%20from%202020-10-09%2023-18-44%20(1).jpg)
 ![alt text](https://github.com/Nova-Striker/Open-Palm/blob/master/screenshots/Screenshot%20from%202020-10-09%2023-19-19.jpg)
 
-
-[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?style=for-the-badge&logo=gitpod)](https://gitpod.io/#https://github.com/Nova-Striker/Open-Palm)
