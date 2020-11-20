@@ -1,13 +1,13 @@
 
 # Open Palm
 
-![GitHub Pipenv locked Python version](https://img.shields.io/github/pipenv/locked/python-version/Nova-Striker/Open-Palm)
-![GitHub last commit](https://img.shields.io/github/last-commit/Nova-Striker/Open-Palm)
-![GitHub contributors](https://img.shields.io/github/contributors/Nova-Striker/Open-Palm)
-![GitHub issues](https://img.shields.io/github/issues/Nova-Striker/Open-Palm)
-![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/Nova-Striker/Open-Palm)
-[![Build Status](https://dev.azure.com/jaydeepjd1125/jaydeepjd1125/_apis/build/status/Nova-Striker.Open-Palm?branchName=master)](https://dev.azure.com/jaydeepjd1125/jaydeepjd1125/_build/latest?definitionId=1&branchName=master)
-[![Build Status](https://travis-ci.com/Nova-Striker/Open-Palm.svg?branch=master)](https://travis-ci.com/Nova-Striker/Open-Palm)
+![GitHub Pipenv locked Python version](https://img.shields.io/github/pipenv/locked/python-version/JDeepD/Open-Palm)
+![GitHub last commit](https://img.shields.io/github/last-commit/JDeepD/Open-Palm)
+![GitHub contributors](https://img.shields.io/github/contributors/JDeepD/Open-Palm)
+![GitHub issues](https://img.shields.io/github/issues/JDeepD/Open-Palm)
+![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/JDeepD/Open-Palm)
+[![Build Status](https://dev.azure.com/jaydeepjd1125/jaydeepjd1125/_apis/build/status/JDeepD.Open-Palm?branchName=master)](https://dev.azure.com/jaydeepjd1125/jaydeepjd1125/_build/latest?definitionId=1&branchName=master)
+[![Build Status](https://travis-ci.com/JDeepD/Open-Palm.svg?branch=master)](https://travis-ci.com/Nova-Striker/Open-Palm)
 
 
 [![forthebadge](https://forthebadge.com/images/badges/just-plain-nasty.svg)](https://forthebadge.com)
