@@ -4,7 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-Pillow = "==8.0.0"
 
 [dev-packages]
 
