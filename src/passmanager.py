@@ -55,7 +55,9 @@ def get_pass(target="admins.csv"):  # gets the user info from the Csv file
     """
     with open(f"creds/{target}", 'r+') as fil:
         reader = csv.reader(fil)
+        print(list(reader))
         dic = {}
         for i in reader:
             dic[i[0]] = i[1]
         return dic
+

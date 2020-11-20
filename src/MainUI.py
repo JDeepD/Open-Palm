@@ -245,6 +245,11 @@ class Editor(tk.Frame):
         self.Text_box.insert('3.0', "#If your code has syntax errors ,Open-Palm will freeze. You have to restart it in that case \n\n")
 
     def open_file(self):  # Opens a saved file
+        """This method is bound to the
+           `OPEN` button of Editor frame.
+           This method opens any `.py` file
+           in the Editor buffer
+        """
         self.path = askopenfilename(filetypes=(
             ("python files", ".py"), ("All Files", "*.py")))
         if not self.path:
@@ -255,10 +260,11 @@ class Editor(tk.Frame):
             self.Text_box.insert(tk.END, self.text)
 
     def save_file(self):
-        self.filepath = asksaveasfilename(
-        defaultextension="py",
-        filetypes=[("python files", "*.py"), ("All Files", "*.*")],
-        )
+        """
+        This method is used to save the current file
+        in the buffer to the system
+        """
+        self.filepath = asksaveasfilename(defaultextension="py", filetypes=[("python files", "*.py"), ("All Files", "*.*")],)
         if not self.filepath:
             return
 
@@ -267,13 +273,24 @@ class Editor(tk.Frame):
             output_file.write(text)
 
     def save_for_test(self):
+        """
+        This function is a special method that
+        saves the current buffer in the Editor
+        frame in the `test_it.py` file.
+        """
         with open("test_it.py", "w+") as file:
             text = self.Text_box.get("1.0", tk.END)
             file.write(text)
 
     @logs
     def testit(self, *args):
-
+        """
+        This method has the following tasks:
+            1. Save the current file in the Editor buffer in `test_it.py`
+            2. import test_it.py and run test cases on it
+        This method is wrapped around the `logs` function to capture
+        any errors that happen during the evaluation process.
+        """
         self.questions = an.questions
         self.testcases = an.testcases
         tmp_qns = ["check_even", "bubble_sort", "fibonacci", "check_palin"]
@@ -314,6 +331,10 @@ class Editor(tk.Frame):
 
 
     def write_func(self,event):
+        """
+        This method writes the boiler plates for each question whenever
+        a selection is made by the user.
+        """
         if self.dropdown.get() == "#1":
             self.Text_box.delete('1.0', tk.END)
 
@@ -353,21 +374,26 @@ class Editor(tk.Frame):
             self.Text_box.insert('5.0', "def check_palin(s):\n")
             self.Text_box.insert('6.0', "\t#Enter Code here\n")
             self.Text_box.insert('7.0', "\tpass")
-    def submit(self):
-            if tk.messagebox.askyesno("Confirm Submit" , "Are you sure you want to submit? Once submitted , it cannot be undone."):
-                # tk.messagebox.showinfo("Sending..." , "Sending Mail... Donot turn of the internet.")
-                body="Open Palm Service Mail"
-                # Enter the password of the email address
-                ml = mail.Mail("", body, "", "")
-                if ml.send_mail():
-                    tk.messagebox.showinfo("Done" , "Mail Send")
-                else:
-                    tk.messagebox.showinfo("Failed" , "Failed to send the mail. Check your internet connection or call your admin")
 
-    def multitask(self,func,arg):  #func-> name of the function ; arg-> arguments of the function in the form of a list
-        pass
+    def submit(self):
+        """This method generates a prompt whenever the user
+        clicks the submit button"""
+        if tk.messagebox.askyesno("Confirm Submit", "Are you sure you want to submit? Once submitted , it cannot be undone."):
+            body = "Open Palm Service Mail"
+            # Enter the password of the email address
+            ml = mail.Mail("", body, "", "")
+            if ml.send_mail():
+                tk.messagebox.showinfo("Done", "Mail Send")
+            else:
+                tk.messagebox.showinfo("Failed", "Failed to send the mail. Check your internet connection or call your admin")
+
 
 class Login_Page(tk.Frame):
+    """
+    This page creates a basic login page
+    which asks the user to go the the
+    Teacher page login or the Editor
+    """
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -390,13 +416,11 @@ class Login_Page(tk.Frame):
         self.mainframe.pack()
 
 class Teacher_Page_Login(tk.Frame):
-    '''
-    The theory is simple.
-    All the Entry Boxes, 'Username' labels are servants of the frame:'semi_frm'
-    The 'semi_frm' and 'TEACHER PAGE' label are servants of mainframe
-    The mainframe is a servant if self.
-    '''
-
+    """
+    This page creates a basic login interface
+    that asks the user for a password to access
+    the Master page.
+    """
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
@@ -434,7 +458,13 @@ class Teacher_Page_Login(tk.Frame):
 
         self.mainframe.pack()  # Packing of the mainframe
 
-    def get_user_info(self,event=None):
+    def get_user_info(self, event=None):
+        """This method is bound to `sign_in` button.
+           It fetches whatever is written in the
+           `username` and `password` entry boxes
+           and checcks if those credentials exists in `admins.csv`
+           file.
+        """
         self.prompt = tk.Label(self.mainframe, text="", fg='red')
         self.prompt.grid(row=3, column=0, sticky='nsew')
 
@@ -445,8 +475,6 @@ class Teacher_Page_Login(tk.Frame):
 
         userid = pm.cipherpass(usrid)
         userpass = pm.cipherpass(usrpass)
-
-        #self.controller.show_frame("Master_Page") #Waring : Immediately delete this line after the project is over.
 
         dic = pm.get_pass()
 
@@ -473,6 +501,13 @@ class Teacher_Page_Login(tk.Frame):
 
 class Master_Page(tk.Frame):
 
+    """
+    This is the master page. It handles all the database
+    connectivity and UI of the Students Table.
+    Its methods are:
+        1. class constructor (__init__)
+                It creates the UI for this Frame
+    """
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
@@ -602,7 +637,14 @@ class Master_Page(tk.Frame):
         datab.store_values(self.v2.get(), self.v3.get(), self.v4.get(), self.v5.get())
         self.refresh()
 
-    def update_user_info(self , data):
+    def update_user_info(self, data):
+        """
+        Every time a new entry has been made,
+        the `refresh` method will call this method
+        to display update the table to show the newly
+        inserted data
+        *self.trview is an unpacked tuple
+        """
         self.trview.delete(*self.trview.get_children())
         for i in data:
             self.trview.insert('', 'end', values=i)
@@ -619,7 +661,11 @@ class Master_Page(tk.Frame):
         pass
 
     @logs
-    def idrow(self,event):
+    def idrow(self, _):
+        """
+        Whenever a user double clicks on any entry,
+        it is shown in the editable boxes
+        """
         item = self.trview.item(self.trview.focus())
         try:
             self.v2.set(item['values'][0])
@@ -630,12 +676,22 @@ class Master_Page(tk.Frame):
             pass
 
     def search_data(self):
+        """
+        This method is bound to the `search` button.
+        Its task is to get the value given in tkinter entry box and
+        search for that entry containing that value in the database.
+        """
         std_name = self.src_ent.get()
         obj = db.get_response('StudentInfo')
         req_data = obj.get_data_by_query(std_name)
         self.update_user_info(req_data)
 
     def refresh(self):
+        """
+        This method is bound to the `refresh` button.
+        Its task is to show all the values in the treeview
+        after a search has been made.
+        """
         self.data = db.get_response('StudentInfo').get_all_data()
         self.update_user_info(self.data)
 
