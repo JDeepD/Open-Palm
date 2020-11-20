@@ -7,6 +7,8 @@
 ![GitHub issues](https://img.shields.io/github/issues/Nova-Striker/Open-Palm)
 ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/Nova-Striker/Open-Palm)
 [![Build Status](https://dev.azure.com/jaydeepjd1125/jaydeepjd1125/_apis/build/status/Nova-Striker.Open-Palm?branchName=master)](https://dev.azure.com/jaydeepjd1125/jaydeepjd1125/_build/latest?definitionId=1&branchName=master)
+[![Build Status](https://travis-ci.com/Nova-Striker/Open-Palm.svg?branch=master)](https://travis-ci.com/Nova-Striker/Open-Palm)
+
 
 [![forthebadge](https://forthebadge.com/images/badges/just-plain-nasty.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
@@ -71,5 +73,3 @@ As of now, there is no pre build source. You have to manually run `MainUI.py` . 
 ![alt text](https://github.com/Nova-Striker/Open-Palm/blob/master/screenshots/Screenshot%20from%202020-10-09%2023-18-44%20(1).jpg)
 ![alt text](https://github.com/Nova-Striker/Open-Palm/blob/master/screenshots/Screenshot%20from%202020-10-09%2023-19-19.jpg)
 
-
-[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?style=for-the-badge&logo=gitpod)](https://gitpod.io/#https://github.com/Nova-Striker/Open-Palm)
