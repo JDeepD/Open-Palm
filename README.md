@@ -1,7 +1,8 @@
+## This project is no longer maintained
 
 # Open Palm
 
-**This project is no longer maintained**
+
 
 ![GitHub Pipenv locked Python version](https://img.shields.io/github/pipenv/locked/python-version/JDeepD/Open-Palm)
 ![GitHub last commit](https://img.shields.io/github/last-commit/JDeepD/Open-Palm)
