@@ -1,4 +1,4 @@
-## This project is no longer maintained
+## :warning: This project is no longer maintained :warning:
 
 # Open Palm
 
