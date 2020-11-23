@@ -191,7 +191,7 @@ class Editor(tk.Frame):
         self.mainframe = tk.Frame(self, width=1600)
 
         # The Design Aspect of the frame
-        self.Text_box = tk.Text(self.mainframe, bg='#333333', fg='#f2f2f2')
+        self.Text_box = tk.Text(self.mainframe, bg='#333333', fg='#f2f2f2')  # noqa:E501 pylint:disable=invalid-name
 
         self.Text_box.configure(font=("Courier", 16, ''),
                                 insertbackground='white')
@@ -199,7 +199,7 @@ class Editor(tk.Frame):
         self.frm_btns = tk.Frame(self.mainframe)
 
         # The instatiation of buttons
-        self.btn_submit = ttk.Button(self.frm_btns, text='SUBMIT', command=self.submit)
+        self.btn_submit = ttk.Button(self.frm_btns, text='SUBMIT', command=self.submit)  # noqa E501
         self.btn_clear = ttk.Button(self.frm_btns, text='CLEAR')
         self.btn_docs = ttk.Button(self.frm_btns, text='Docs')
         self.btn_open = ttk.Button(
@@ -212,7 +212,7 @@ class Editor(tk.Frame):
         self.option = tk.StringVar()
 
         self.option.set("Select Code")
-        self.dropdown = ttk.Combobox(self.frm_btns,state="readonly", textvariable=self.option, width=15)
+        self.dropdown = ttk.Combobox(self.frm_btns, state="readonly", textvariable=self.option, width=15)  # noqa: E501 pylint: disable=line-too-long
         self.dropdown['values'] = ["#1", "#2", "#3", "#4"]
         self.dropdown.bind("<<ComboboxSelected>>", self.write_func)
 
@@ -232,8 +232,8 @@ class Editor(tk.Frame):
         self.Text_box.grid(row=0, column=0, sticky='nsew')
         # THe Design aspect of the frame
 
-        move_to_page_1 = ttk.Button(self.frm_btns, text="Go to Login Page",
-                                   command=lambda: controller.show_frame("Login_Page"))
+        move_to_page_1 = ttk.Button(self.frm_btns, text="Go to Login Page",  # noqa E501
+                                   command=lambda: controller.show_frame("Login_Page"))  # noqa E501
 
         move_to_page_1.grid(row=5, column=0, sticky='ew')
 
@@ -241,8 +241,8 @@ class Editor(tk.Frame):
         self.mainframe.rowconfigure(0, minsize=800, weight=1)
         self.mainframe.columnconfigure(0, weight=1)
 
-        self.Text_box.insert('1.0', "#It is highly recommended that you check your code first in IDLE first for syntax errors and then Test it here.\n\n")
-        self.Text_box.insert('3.0', "#If your code has syntax errors ,Open-Palm will freeze. You have to restart it in that case \n\n")
+        self.Text_box.insert('1.0', "#It is highly recommended that you check your code first in IDLE first for syntax errors and then Test it here.\n\n")  # noqa E501 pylint: disable-all
+        self.Text_box.insert('3.0', "#If your code has syntax errors ,Open-Palm will freeze. You have to restart it in that case \n\n")  # noqa E501
 
     def open_file(self):  # Opens a saved file
         """This method is bound to the
@@ -264,7 +264,7 @@ class Editor(tk.Frame):
         This method is used to save the current file
         in the buffer to the system
         """
-        self.filepath = asksaveasfilename(defaultextension="py", filetypes=[("python files", "*.py"), ("All Files", "*.*")],)
+        self.filepath = asksaveasfilename(defaultextension="py", filetypes=[("python files", "*.py"), ("All Files", "*.*")],)  # noqa E501 pylint: disable=all
         if not self.filepath:
             return
 
@@ -283,7 +283,7 @@ class Editor(tk.Frame):
             file.write(text)
 
     @logs
-    def testit(self, *args):
+    def testit(self, *args):  # pylint: disable=unused-argument
         """
         This method has the following tasks:
             1. Save the current file in the Editor buffer in `test_it.py`
@@ -291,30 +291,31 @@ class Editor(tk.Frame):
         This method is wrapped around the `logs` function to capture
         any errors that happen during the evaluation process.
         """
-        self.questions = an.questions
-        self.testcases = an.testcases
+        self.questions = an.questions  # noqa:E501 pylint: disable=attribute-defined-outside-init
+        self.testcases = an.testcases  # noqa:E501 pylint: disable=attribute-defined-outside-init
         tmp_qns = ["check_even", "bubble_sort", "fibonacci", "check_palin"]
 
-        self.code = self.option.get()[1] #It selects only the code number and not the '#'
+        # It selects only the code number and not the '#'
+        self.code = self.option.get()[1]  # noqa: E501 pylint: disable=attribute-defined-outside-init
 
         if self.code.isalpha():
-            tk.messagebox.showerror("Select Question Code", "Please Select a question Code")
+            tk.messagebox.showerror("Select Question Code", "Please Select a question Code")  # noqa: E501  pylint: disable=line-too-long
 
         else:
-            import test_it  # pylint: disable=import-outside-toplevel,syntax-error
+            import test_it  # noqa: E501  # pylint: disable=import-outside-toplevel,syntax-error
             self.save_for_test()
             test_it = reload(test_it)
 
             ver_soln = an.chk(int(self.code), self.testcases[int(self.code)])
             user_soln = []
 
-            #---------user soln----------------
+            # ---------user soln----------------
 
             testdata = self.testcases[int(self.code)]
 
             for k in testdata:
                 try:
-                    ans = getattr(test_it,tmp_qns[int(self.code)-1])(k)
+                    ans = getattr(test_it, tmp_qns[int(self.code)-1])(k)
                     user_soln.append(ans)
 
                 except Exception as exception:
@@ -323,14 +324,13 @@ class Editor(tk.Frame):
 
                     break
             if user_soln == ver_soln:
-                tk.messagebox.showinfo("Congratulations", "Your code has passed all the test cases. You may now submit the solution.")
+                tk.messagebox.showinfo("Congratulations", "Your code has passed all the test cases. You may now submit the solution.")  # noqa E501
                 print(user_soln)
             else:
-                tk.messagebox.showinfo("Try Again" , "Your code has failed in one or multiple test cases.")
+                tk.messagebox.showinfo("Try Again" , "Your code has failed in one or multiple test cases.")  # noqa E501
                 print(user_soln)
 
-
-    def write_func(self,event):
+    def write_func(self, event):  # pylint: disable=all
         """
         This method writes the boiler plates for each question whenever
         a selection is made by the user.
@@ -338,8 +338,8 @@ class Editor(tk.Frame):
         if self.dropdown.get() == "#1":
             self.Text_box.delete('1.0', tk.END)
 
-            self.Text_box.insert('1.0', "#It is highly recommended that you check your code first in IDLE first for syntax errors and then Test it here.\n\n")
-            self.Text_box.insert('3.0', "#If your code has syntax errors ,Open-Palm will freeze. You have to restart it in that case \n\n")
+            self.Text_box.insert('1.0', "#It is highly recommended that you check your code first in IDLE first for syntax errors and then Test it here.\n\n")  # noqa E501
+            self.Text_box.insert('3.0', "#If your code has syntax errors ,Open-Palm will freeze. You have to restart it in that case \n\n")  # noqa E501
 
             self.Text_box.insert('5.0', "def check_even(n):\n")
             self.Text_box.insert('6.0', "\t#Enter Code here\n")
@@ -347,8 +347,8 @@ class Editor(tk.Frame):
 
         if self.dropdown.get() == "#2":
             self.Text_box.delete('1.0', tk.END)
-            self.Text_box.insert('1.0', "#It is highly recommended that you check your code first in IDLE first for syntax errors and then Test it here.\n\n")
-            self.Text_box.insert('3.0', "#If your code has syntax errors ,Open-Palm will freeze. You have to restart it in that case \n\n")
+            self.Text_box.insert('1.0', "#It is highly recommended that you check your code first in IDLE first for syntax errors and then Test it here.\n\n")  # noqa E501
+            self.Text_box.insert('3.0', "#If your code has syntax errors ,Open-Palm will freeze. You have to restart it in that case \n\n")  # noqa E501
 
             self.Text_box.insert('5.0', "def bubble_sort(arr):\n")
             self.Text_box.insert('6.0', "\t#Enter Code here\n")
@@ -358,8 +358,8 @@ class Editor(tk.Frame):
 
             self.Text_box.delete('1.0', tk.END)
 
-            self.Text_box.insert('1.0', "#It is highly recommended that you check your code first in IDLE first for syntax errors and then Test it here.\n\n")
-            self.Text_box.insert('3.0', "#If your code has syntax errors ,Open-Palm will freeze. You have to restart it in that case \n\n")
+            self.Text_box.insert('1.0', "#It is highly recommended that you check your code first in IDLE first for syntax errors and then Test it here.\n\n")  # noqa E501
+            self.Text_box.insert('3.0', "#If your code has syntax errors ,Open-Palm will freeze. You have to restart it in that case \n\n")  # noqa E501
 
             self.Text_box.insert('5.0', "def fibonacci(n):\n")
             self.Text_box.insert('6.0', "\t#Enter Code here\n")
@@ -368,8 +368,8 @@ class Editor(tk.Frame):
         if self.dropdown.get() == "#4":
 
             self.Text_box.delete('1.0', tk.END)
-            self.Text_box.insert('1.0', "#It is highly recommended that you check your code first in IDLE first for syntax errors and then Test it here.\n\n")
-            self.Text_box.insert('3.0', "#If your code has syntax errors ,Open-Palm will freeze. You have to restart it in that case \n\n")
+            self.Text_box.insert('1.0', "#It is highly recommended that you check your code first in IDLE first for syntax errors and then Test it here.\n\n")  # noqa E501
+            self.Text_box.insert('3.0', "#If your code has syntax errors ,Open-Palm will freeze. You have to restart it in that case \n\n")  # noqa E501
 
             self.Text_box.insert('5.0', "def check_palin(s):\n")
             self.Text_box.insert('6.0', "\t#Enter Code here\n")
@@ -378,14 +378,14 @@ class Editor(tk.Frame):
     def submit(self):
         """This method generates a prompt whenever the user
         clicks the submit button"""
-        if tk.messagebox.askyesno("Confirm Submit", "Are you sure you want to submit? Once submitted , it cannot be undone."):
+        if tk.messagebox.askyesno("Confirm Submit", "Are you sure you want to submit? Once submitted , it cannot be undone."):  # noqa E501
             body = "Open Palm Service Mail"
             # Enter the password of the email address
             ml = mail.Mail("", body, "", "")
             if ml.send_mail():
                 tk.messagebox.showinfo("Done", "Mail Send")
             else:
-                tk.messagebox.showinfo("Failed", "Failed to send the mail. Check your internet connection or call your admin")
+                tk.messagebox.showinfo("Failed", "Failed to send the mail. Check your internet connection or call your admin")  # noqa E501
 
 
 class Login_Page(tk.Frame):
@@ -407,13 +407,14 @@ class Login_Page(tk.Frame):
 
         # The Design Aspect of the frame
         teacher_btn = ttk.Button(self.mainframe, text='TEACHER', width=15,
-                                command=lambda: self.controller.show_frame("Teacher_Page_Login"))
+                                command=lambda: self.controller.show_frame("Teacher_Page_Login"))  # noqa E501
         teacher_btn.grid(row=1, column=0)
 
         button = ttk.Button(self.mainframe, text="Go to the Editor",
-                           command=lambda: controller.show_frame("Editor"), width=15)
+                           command=lambda: controller.show_frame("Editor"), width=15)  # noqa E501
         button.grid(row=2, column=0)
         self.mainframe.pack()
+
 
 class Teacher_Page_Login(tk.Frame):
     """
@@ -424,34 +425,34 @@ class Teacher_Page_Login(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        # The Frame that contains all the objects of the Teacher Page. It is the servant of self(Window)
+        # The Frame that contains all the objects of the Teacher Page. It is the servant of self(Window)  # noqa E501
 
         self.mainframe = tk.Frame(self)
 
         # The Design Aspect of the frame
-        lbl = tk.Label(self.mainframe, text="TEACHER'S PAGE", font=("Ubuntu", 14, ''))
+        lbl = tk.Label(self.mainframe, text="TEACHER'S PAGE", font=("Ubuntu", 14, ''))  # noqa E501
         lbl.grid(row=0, column=0, sticky='nsew')
 
         semi_frm = tk.Frame(self.mainframe)
 
-        usr_lbl = tk.Label(semi_frm, text='User Name', font=("Courier", 12, ''))
+        usr_lbl = tk.Label(semi_frm, text='User Name', font=("Courier", 12, ''))  # noqa E501J
         usr_lbl.grid(row=1, column=0)
 
         self.user_box = tk.Entry(semi_frm)
         self.user_box.grid(row=1, column=1)
 
-        passwd_lbl = tk.Label(semi_frm, text='Password', font=("courier", 12, ''))
+        passwd_lbl = tk.Label(semi_frm, text='Password', font=("courier", 12, ''))  # noqa E501
         passwd_lbl.grid(row=2, column=0)
 
         self.passwd_box = tk.Entry(semi_frm, show="*")
         self.passwd_box.grid(row=2, column=1)
 
         # The Design Aspect of the frame
-        self.sign_in = ttk.Button(semi_frm, text="Sign In", command=self.get_user_info)
+        self.sign_in = ttk.Button(semi_frm, text="Sign In", command=self.get_user_info)  # noqa E501
         self.sign_in.grid(row=4, column=1, sticky='nsew')
 
         goto_login = ttk.Button(semi_frm, text='Login Page',
-                               command=lambda: self.controller.show_frame("Login_Page"))
+                               command=lambda: self.controller.show_frame("Login_Page"))  # noqa E501
         goto_login.grid(row=4, column=0, sticky='nsew')
 
         semi_frm.grid(row=1, column=0)
@@ -487,17 +488,18 @@ class Teacher_Page_Login(tk.Frame):
         elif userid in dic:
             if userpass == dic[userid]:
                 print("passed")
-                self.passwd_box.delete(0,"end"), self.user_box.delete(0,'end')
+                self.passwd_box.delete(0,"end"), self.user_box.delete(0, 'end')  # noqa E501
                 self.controller.show_frame("Master_Page")
 
             else:
                 print("failed due to incorrect password")
-                self.prompt = tk.Label(self.mainframe , text = "The Username or the password is incorrect" , fg = 'red')
+                self.prompt = tk.Label(self.mainframe , text = "The Username or the password is incorrect", fg='red')  # noqa E501
                 self.prompt.grid(row=2, column=0, sticky='nsew')
         else:
             print("failed")
-            self.prompt = tk.Label(self.mainframe , text =  "The Username or the password is incorrect" , fg = 'red')
+            self.prompt = tk.Label(self.mainframe, text="The Username or the password is incorrect", fg='red')  # noqa E501
             self.prompt.grid(row=2, column=0, sticky='nsew')
+
 
 class Master_Page(tk.Frame):
 
@@ -519,38 +521,38 @@ class Master_Page(tk.Frame):
         lbl_frm_info = ttk.LabelFrame(self.mainframe, text="Data Entry")
         lbl_frm_admin = ttk.LabelFrame(self.mainframe, text="Admin")
 
-#       ----------------------------------------------------/\/\ micellaneous/\/\-----------------------------------------------
-        self.v1 = tk.StringVar()            #textvar of src_ent 
-        self.v2 = tk.StringVar()            #self.name_ent            
-        self.v3 = tk.StringVar()            #self.class_ent
-        self.v4 = tk.StringVar()            #self.sec_ent
-        self.v5 = tk.StringVar()            #self.roll_ent
-        self.v6 = tk.StringVar()            #Admin-User
-        self.v7 = tk.StringVar()            #Admin-Pass
-#       ----------------------------------------------------/\/\ micellaneous/\/\-----------------------------------------------
+        # --------------/\/\ micellaneous/\/\---------------------
+        self.v1 = tk.StringVar()            # textvar of src_ent
+        self.v2 = tk.StringVar()            # self.name_ent
+        self.v3 = tk.StringVar()            # self.class_ent
+        self.v4 = tk.StringVar()            # self.sec_ent
+        self.v5 = tk.StringVar()            # self.roll_ent
+        self.v6 = tk.StringVar()            # Admin-User
+        self.v7 = tk.StringVar()            # Admin-Pass
+        # -------------/\/\ micellaneous/\/\----------------------
 
-#       ----------------------------------------------------/\/\ Frame table (lbl_frm_table) (s)/\/\-----------------------------------------------
-        self.trview = ttk.Treeview(lbl_frm_table , columns = (1,2,3,4),show = "headings" , height = 6)
+        # ------------/\/\ Frame table (lbl_frm_table) (s)/\/\----
+        self.trview = ttk.Treeview(lbl_frm_table, columns=(1, 2, 3, 4), show="headings", height=6)  # noqa E501
         self.trview.pack(fill="both", expand=True, ipady=5)
         self.trview.heading(1, text="Name")
         self.trview.heading(2, text="Class")
         self.trview.heading(3, text="Section")
         self.trview.heading(4, text="Roll no")
         self.trview.bind("<Double-Button-1>", self.idrow)
-#       ----------------------------------------------------/\/\ Frame table (lbl_frm_table)(e) /\/\-----------------------------------------------
+        # -----------/\/\ Frame table (lbl_frm_table)(e) /\/\-----
 
-#       ----------------------------------------------------/\/\ Frame data (lbl_frm_data)(s) /\/\-----------------------------------------------
+        # -----------/\/\ Frame data (lbl_frm_data)(s) /\/\-------
         src_lbl = ttk.Label(lbl_frm_data, text="Search by name : ")
         self.src_ent = ttk.Entry(lbl_frm_data, textvariable=self.v1)
-        src_btn = ttk.Button(lbl_frm_data, text="Search", command=self.search_data)
+        src_btn = ttk.Button(lbl_frm_data, text="Search", command=self.search_data)  # noqa E501
         src_lbl.pack(side="left", padx=20)
         self.src_ent.pack(side="left")
         src_btn.pack(side="left", padx=10)
-        rfs_btn = ttk.Button(lbl_frm_data, text="Refresh", command=self.refresh)
+        rfs_btn = ttk.Button(lbl_frm_data, text="Refresh", command=self.refresh)  # noqa E501J
         rfs_btn.pack(side="left", padx=10)
-#       ----------------------------------------------------/\/\ Frame data (lbl_frm_data)(e) /\/\-----------------------------------------------
+        # ----------/\/\ Frame data (lbl_frm_data)(e) /\/\---------
 
-#       ----------------------------------------------------/\/\ Frame info (lbl_frm_info)(s) /\/\-----------------------------------------------
+        # ---------/\/\ Frame info (lbl_frm_info)(s) /\/\----------
         name_lbl = ttk.Label(lbl_frm_info, text="Name ")
         class_lbl = ttk.Label(lbl_frm_info, text="Class ")
         sec_lbl = ttk.Label(lbl_frm_info, text="Section ")
@@ -562,7 +564,7 @@ class Master_Page(tk.Frame):
         roll_lbl.grid(row=3, column=0, pady=10)
 
         self.name_ent = ttk.Entry(lbl_frm_info, width=35, textvariable=self.v2)
-        self.class_ent = ttk.Entry(lbl_frm_info, width=35, textvariable=self.v3)
+        self.class_ent = ttk.Entry(lbl_frm_info, width=35, textvariable=self.v3)  # noqa E501
         self.sec_ent = ttk.Entry(lbl_frm_info, width=35, textvariable=self.v4)
         self.roll_ent = ttk.Entry(lbl_frm_info, width=35, textvariable=self.v5)
 
@@ -575,8 +577,8 @@ class Master_Page(tk.Frame):
         frm_btn.grid(row=4, column=1)
 
         add_btn = ttk.Button(frm_btn, text="Add ", command=self.add_user_info)
-        update_btn = ttk.Button(frm_btn, text="Update ", command=self.update_data)
-        del_btn = ttk.Button(frm_btn, text="Delete ", command=self.delete_user_info)
+        update_btn = ttk.Button(frm_btn, text="Update ", command=self.update_data)  # noqa E501
+        del_btn = ttk.Button(frm_btn, text="Delete ", command=self.delete_user_info)  # noqa E501
 
         add_btn.grid(row=0, column=0, padx=10)
         update_btn.grid(row=0, column=1, padx=10)
@@ -586,13 +588,13 @@ class Master_Page(tk.Frame):
         self.data = std_data.get_all_data()
         self.update_user_info(self.data)
 
-        # ----------------------------------------------------/\/\ Frame info (lbl_frm_info)(e) /\/\-----------------------------------------------
+        # ----------/\/\ Frame info (lbl_frm_info)(e) /\/\---------
 
-        # ----------------------------------------------------/\/\ Frame info (lbl_frm_admin)(s) /\/\-----------------------------------------------
+        # ----------/\/\ Frame info (lbl_frm_admin)(s) /\/\------
         btn_frm = ttk.Frame(lbl_frm_admin)
         ent_frm = ttk.Frame(lbl_frm_admin)
-        add_admin = ttk.Button(btn_frm, text="Add User", command=self.add_admin)
-        back_btn = ttk.Button(btn_frm, text="Back", command=lambda: controller.show_frame("Editor"))
+        add_admin = ttk.Button(btn_frm, text="Add User", command=self.add_admin)  # noqa E501
+        back_btn = ttk.Button(btn_frm, text="Back", command=lambda: controller.show_frame("Editor"))  # noqa E501
         set_mail = ttk.Button(btn_frm, text="Add Email Address")
 
         self.usr_ent = ttk.Entry(ent_frm, width=20, textvariable=self.v6)
@@ -606,7 +608,7 @@ class Master_Page(tk.Frame):
         self.pass_ent.grid(row=1, column=1, pady=5, padx=5)
         btn_frm.grid(row=0, column=0)
         ent_frm.grid(row=1, column=0)
-        # ----------------------------------------------------/\/\ Frame info (lbl_frm_admin)(e) /\/\-----------------------------------------------
+        # ----------/\/\ Frame info (lbl_frm_admin)(e) /\/\-------
 
         lbl_frm_table.pack(fill="both", expand=True, padx=20, pady=10)
         lbl_frm_data.pack(fill="both", expand=True, padx=20, pady=10)
@@ -631,10 +633,10 @@ class Master_Page(tk.Frame):
 
     def add_user_info(self):
         datab = db.make_db('StudentInfo')
-        x = datab.check_dup(self.v2.get(),self.v3.get(),self.v4.get(),self.v5.get())
+        x = datab.check_dup(self.v2.get(), self.v3.get(), self.v4.get(), self.v5.get())  # noqa E501
         print(x)
 
-        datab.store_values(self.v2.get(), self.v3.get(), self.v4.get(), self.v5.get())
+        datab.store_values(self.v2.get(), self.v3.get(), self.v4.get(), self.v5.get())  # noqa E501
         self.refresh()
 
     def update_user_info(self, data):
@@ -650,9 +652,9 @@ class Master_Page(tk.Frame):
             self.trview.insert('', 'end', values=i)
 
     def delete_user_info(self):
-        if tk.messagebox.askyesno("Confirm Delete", "Do you really want to delete this Student ?"):
+        if tk.messagebox.askyesno("Confirm Delete", "Do you really want to delete this Student ?"):  # noqa E501
             obj = db.get_response("StudentInfo")
-            obj.delete_data(self.v2.get(), self.v3.get(), self.v4.get(), self.v5.get())
+            obj.delete_data(self.v2.get(), self.v3.get(), self.v4.get(), self.v5.get())  # noqa E501
             self.refresh()
         else:
             pass
@@ -672,7 +674,7 @@ class Master_Page(tk.Frame):
             self.v3.set(item['values'][1])
             self.v4.set(item['values'][2])
             self.v5.set(item['values'][3])
-        except:
+        except:  # noqa E501
             pass
 
     def search_data(self):

@@ -1,6 +1,7 @@
-"""This module will be used for interacting with the database file."""
+"""This module will be used for interacting with the database file."""  # noqa pylint: disable=invalid-name 
 
 import sqlite3
+
 
 class make_db:
     """This class will mainly deal with connecting, creating the database
@@ -22,20 +23,20 @@ class make_db:
         self.dbname = dbname
         self.mydb = sqlite3.connect(self.dbname + '.db')
         self.cursor = self.mydb.cursor()
-        self.cursor.execute("""CREATE TABLE IF NOT EXISTS DATA (StudentName TEXT , Class TEXT , Section TEXT ,RollNo TEXT)""")
+        self.cursor.execute("""CREATE TABLE IF NOT EXISTS DATA (StudentName TEXT , Class TEXT , Section TEXT ,RollNo TEXT)""")  # noqa pylint: disable=all
 
     def store_values(self, StudentName, Class, Section, RollNo):
         """See the class docstring"""
 
-        self.cursor.execute("INSERT INTO DATA VALUES( :StudentName , :Class, :Section , :Rollno)", {
-            'StudentName': StudentName, 'Class': Class, 'Section': Section, 'Rollno': RollNo})
+        self.cursor.execute("INSERT INTO DATA VALUES( :StudentName , :Class, :Section , :Rollno)", {  # noqa
+            'StudentName': StudentName, 'Class': Class, 'Section': Section, 'Rollno': RollNo})  # noqa
 
         self.mydb.commit()
 
     def check_dup(self, Name, Class, Section, Roll):
         """See the class docstring"""
 
-        self.cursor.execute(f"SELECT COUNT (*) FROM DATA WHERE STUDENTNAME=:Name AND CLASS=:Class AND SECTION=:Section AND ROLLNO=:Roll", {
+        self.cursor.execute(f"SELECT COUNT (*) FROM DATA WHERE STUDENTNAME=:Name AND CLASS=:Class AND SECTION=:Section AND ROLLNO=:Roll", {  # noqa
             'Name': Name,
             'Class': Class,
             'Section': Section,
@@ -77,10 +78,10 @@ class get_response(make_db):
         self.query = query
         try:
             self.cursor.execute(
-                f'SELECT *FROM DATA WHERE STUDENTNAME = :studentname', {'studentname': self.query})
+                f'SELECT *FROM DATA WHERE STUDENTNAME = :studentname', {'studentname': self.query})  # noqa
             data = self.cursor.fetchall()
             return(data)
-        except:
+        except:  # noqa
             return('No Such Query Available Available')
 
     def get_all_data(self):
@@ -93,7 +94,7 @@ class get_response(make_db):
     def delete_data(self, Name, Class, Section, Roll):
         """See the class docstring"""
 
-        self.cursor.execute(f"DELETE FROM DATA WHERE STUDENTNAME=:Name AND CLASS=:Class AND SECTION=:Section AND ROLLNO=:Roll LIMIT 1", {
+        self.cursor.execute(f"DELETE FROM DATA WHERE STUDENTNAME=:Name AND CLASS=:Class AND SECTION=:Section AND ROLLNO=:Roll LIMIT 1", {  # noqa
             'Name': Name,
             'Class': Class,
             'Section': Section,

@@ -1,11 +1,11 @@
-"""This function will be used for sending mails"""
+"""This function will be used for sending mails"""   # noqa E501 pylint: disable=invalid-name
 
 
 import smtplib
 from email.mime.text import MIMEText
 
 
-class Mail:
+class Mail:  # pylint: disable=all
     """This class will handle the sending of mails. It has the
     following methods:
     1. constructor(__init__) which takes in the following parameters
@@ -40,7 +40,7 @@ class Mail:
         try:
             self.server.send_message(self.message)
             return True
-        except:
+        except:  # noqa
             return False
 
 

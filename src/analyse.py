@@ -29,7 +29,7 @@ def chk(func, *args):
     return questions[func](args)
 
 
-def check_even(n):   # Checks if a number is even or not
+def check_even(n):   # Checks if a number is even or not # pylint: disable=all
     """This is `Open-Palm's` function that checks if a
     number is even or odd.
     The input `n` is a tuple of single argument. Therefore only the
@@ -92,7 +92,7 @@ def bubble_sort(ar):     # Bubbles sorts the array
     """
 
 
-    ls = []
+    ls = []  # noqa pylint: disable=all
     ar = ar[0]
     try:
         for arr in ar:
@@ -139,7 +139,7 @@ def fibonacci(inp):
             elif n == 1:
                 ls.append(1)
             else:
-                for i in range(2,n+1):
+                for i in range(2, n+1):
                     c = a + b
                     a = b
                     b = c
@@ -179,7 +179,6 @@ def check_palin(s):
         print("Wrong Data Type")
 
 
-
 """This dictionary stores the `question code` as key
 and the function instance (Open-Palm's function) as its value
 This means that accessing one value of the `questions` dictionary
@@ -212,10 +211,10 @@ testcases = {
               1: [1, 2, 3, 4, 10, 12, 83, 12],
               2: [
                   [1, 2, 3, 45, 2, 32, 3],
-                  [1, 12, 3, 213, 22, 34, 21, 45, 6, 7, 894, 34, 23, 244, 34, 34, 4343, 4343],
+                  [1, 12, 3, 213, 22, 34, 21, 45, 6, 7, 894, 34, 23, 244, 34, 34, 4343, 4343],  # noqa
                   [123, 123241324, 123, 4234, 12, 3, 4345, 12342, 433242, 234],
                   [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
-                  [21312434, 3453646, 3453453, 324534, 25435345, 45345345, 543545, 345345435, 34534534, 546865, 6586856, 8657567, 765756, 4645645, 4564654, 56656]
+                  [21312434, 3453646, 3453453, 324534, 25435345, 45345345, 543545, 345345435, 34534534, 546865, 6586856, 8657567, 765756, 4645645, 4564654, 56656]  # noqa
                  ],
               3: [10, 32, 21, 12, 55],
               4: ['pop', 'malayalam', 'qwerty', 'popopopop', 'ewruiu', 'miami']
