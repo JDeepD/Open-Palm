@@ -52,7 +52,6 @@ def validate(func):
     metadata and docstrings from the original function.
     """
 
-    @logs
     @wraps(func)
     def inner(*args):
         if not path.isdir("creds"):
