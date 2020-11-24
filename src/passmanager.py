@@ -53,7 +53,7 @@ def get_pass(target="admins.csv"):  # gets the user info from the Csv file
     and returning the contents in the form of a
     dictionary
     """
-    with open(f"creds/{target}", 'r+') as fil:
+    with open(f"creds/{target}", 'r+', encoding="utf8") as fil:
         reader = csv.reader(fil)
         print(list(reader))
         dic = {}

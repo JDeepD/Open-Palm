@@ -2,6 +2,9 @@
 
 #If your code has syntax errors ,Open-Palm will freeze. You have to restart it in that case 
 
-def bubble_sort(arr):
+def check_even(n):
 	#Enter Code here
-	pass
+	if n%2 == 0:
+		return True
+	else:
+		return False
