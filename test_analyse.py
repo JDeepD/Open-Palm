@@ -1,5 +1,5 @@
 import unittest
-import src.analyse as analyse
+from src import analyse
 
 
 class TestAnalyse(unittest.TestCase):
