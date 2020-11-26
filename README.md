@@ -11,6 +11,8 @@
 ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/JDeepD/Open-Palm)
 
 [![Build Status](https://dev.azure.com/jaydeepjd1125/jaydeepjd1125/_apis/build/status/JDeepD.Open-Palm?branchName=master)](https://dev.azure.com/jaydeepjd1125/jaydeepjd1125/_build/latest?definitionId=2&branchName=master)
+[![Build Status](https://travis-ci.org/JDeepD/Open-Palm.svg?branch=master)](https://travis-ci.org/JDeepD/Open-Palm)
+
 
 [![forthebadge](https://forthebadge.com/images/badges/just-plain-nasty.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
