@@ -61,7 +61,7 @@ As of now, there is no pre build source. You have to manually run `MainUI.py` . 
    
    **Note : Cpython is the preferred version.**
 
-**_Steps 2, 4, 6 can be ignored after Pillow is removed as a dependency_**
+** :warning: _Steps 2, 4, 6 can be ignored after Pillow is removed as a dependency_**
 
 2. If you have virtual environment installed , Go to step 3.
    **else:**
