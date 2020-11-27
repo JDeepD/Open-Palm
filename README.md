@@ -51,6 +51,8 @@
 
 As of now, there is no pre build source. You have to manually run `MainUI.py` . Make sure you follow the exact steps. Raise an issue if there is some problem/error.
 
+
+
 1. Check your python version.Python version should be above 3.6 .Open your shell
 
    **Windows**: `python --version` or `python3 --version`
@@ -58,14 +60,18 @@ As of now, there is no pre build source. You have to manually run `MainUI.py` . 
    **Ubuntu/Debian** : `python --version` or `python3 --veersion`
    
    **Note : Cpython is the preferred version.**
- 
+
+**_Steps 2, 4, 6 can be ignored after Pillow is removed as a dependency_**
+
 2. If you have virtual environment installed , Go to step 3.
    **else:**
    1. Install virtual environment using the following command :    
     `pip install virtualenv`     
  3. Clone/Download the repository.Navigate to the folder and  create a virtual environment using `virtualenv open-palm`.
  4. Activate the virtual environment using `source open-palm/bin/activate` 
- 5. Install `Pillow`  while in venv using `pip install Pillow` 
+ 
+ ~~5. Install `Pillow`  while in venv using `pip install Pillow`~~ (Removed Pillow as a dependency.)
+ 
  6. While in Virtual Environment, Navigate to src and run the `MainUI.py` file using `python MainUI.py` or `python3 MainUI.py` 
    
 
