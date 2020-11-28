@@ -198,7 +198,7 @@ class Editor(tk.Frame):
         self.frm_btns = tk.Frame(self.mainframe)
 
         # The instatiation of buttons
-        self.btn_submit = ttk.Button(self.frm_btns, text='SUBMIT', command=self.submit)  # noqa E501
+        self.btn_submit = ttk.Button(self.frm_btns, text='SUBMIT')  # noqa E501
         self.btn_clear = ttk.Button(self.frm_btns, text='CLEAR')
         self.btn_docs = ttk.Button(self.frm_btns, text='Docs')
         self.btn_open = ttk.Button(

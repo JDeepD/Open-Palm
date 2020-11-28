@@ -1,4 +1,9 @@
-from src import MainUI  # noqa pylint: disable=all
+
+try:
+    import MainUI  # noqa pylint: disable=all
+except ImportError:
+    from src import MainUI
+
 
 window = MainUI.Openpalm()
 window.title('OpenPalm')
