@@ -1,8 +1,8 @@
 ## :warning: This project is no longer maintained :warning:
-
+ 
 # Open Palm
 
-
+**For pdf, visit [here](https://github.com/JDeepD/schoolproject)**
 
 ![GitHub Pipenv locked Python version](https://img.shields.io/github/pipenv/locked/python-version/JDeepD/Open-Palm)
 ![GitHub last commit](https://img.shields.io/github/last-commit/JDeepD/Open-Palm)

@@ -11,6 +11,7 @@ import passmanager as pm
 import Database as db
 import analyse as an
 import Mail as mail
+import mailman as mman
 
 
 def validate(func):
@@ -619,9 +620,10 @@ class Master_Page(tk.Frame):
     @validate
     def add_admin(self, *args):
         """This method will be used to add new master users to Open Palm"""
-
-        user_id = pm.cipherpass(self.usr_ent.get())
-        user_pass = pm.cipherpass(self.pass_ent.get())
+        if any([self.v6.get(), self.v7.get()]):
+            print("Cannot input empty vals")
+        user_id = pm.cipherpass(self.v6.get())
+        user_pass = pm.cipherpass(self.v7.get())
 
         pm.storepass(user_id, user_pass)
 
