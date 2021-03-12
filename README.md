@@ -10,8 +10,9 @@
 ![GitHub issues](https://img.shields.io/github/issues/JDeepD/Open-Palm)
 ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/JDeepD/Open-Palm)
 
-[![Build Status](https://travis-ci.com/Nova-Striker/Open-Palm.svg?branch=master)](https://travis-ci.com/Nova-Striker/Open-Palm)
 [![Build Status](https://dev.azure.com/jaydeepjd1125/jaydeepjd1125/_apis/build/status/JDeepD.Open-Palm?branchName=master)](https://dev.azure.com/jaydeepjd1125/jaydeepjd1125/_build/latest?definitionId=2&branchName=master)
+[![Build Status](https://travis-ci.org/JDeepD/Open-Palm.svg?branch=master)](https://travis-ci.org/JDeepD/Open-Palm)
+
 
 [![forthebadge](https://forthebadge.com/images/badges/just-plain-nasty.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
@@ -50,6 +51,8 @@
 
 As of now, there is no pre build source. You have to manually run `MainUI.py` . Make sure you follow the exact steps. Raise an issue if there is some problem/error.
 
+
+
 1. Check your python version.Python version should be above 3.6 .Open your shell
 
    **Windows**: `python --version` or `python3 --version`
@@ -57,14 +60,18 @@ As of now, there is no pre build source. You have to manually run `MainUI.py` . 
    **Ubuntu/Debian** : `python --version` or `python3 --veersion`
    
    **Note : Cpython is the preferred version.**
- 
+
+** :warning: _Steps 2, 4, 6 can be ignored after Pillow is removed as a dependency_**
+
 2. If you have virtual environment installed , Go to step 3.
    **else:**
    1. Install virtual environment using the following command :    
     `pip install virtualenv`     
  3. Clone/Download the repository.Navigate to the folder and  create a virtual environment using `virtualenv open-palm`.
  4. Activate the virtual environment using `source open-palm/bin/activate` 
- 5. Install `Pillow`  while in venv using `pip install Pillow` 
+ 
+ ~~5. Install `Pillow`  while in venv using `pip install Pillow`~~ (Removed Pillow as a dependency.)
+ 
  6. While in Virtual Environment, Navigate to src and run the `MainUI.py` file using `python MainUI.py` or `python3 MainUI.py` 
    
 
