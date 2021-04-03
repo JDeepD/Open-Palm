@@ -1,10 +1,12 @@
-* 5894a7b - Wed, 17 Mar 2021 07:17:47 +0000 (2 weeks ago) (HEAD -> master, origin/master, origin/HEAD)
+* b1ab731 - Sat, 3 Apr 2021 10:40:51 +0530 (8 minutes ago) (HEAD -> master, origin/master, origin/HEAD)
+|           Added:new file::graph.md - Jaydeep
+* 5894a7b - Wed, 17 Mar 2021 07:17:47 +0000 (2 weeks ago)
 |           Add .deepsource.toml - DeepSource Bot
 * e3d8a6e - Fri, 12 Mar 2021 21:32:00 +0530 (3 weeks ago)
 |           .. - JDEEP
 * 9ee76a9 - Fri, 12 Mar 2021 21:29:49 +0530 (3 weeks ago)
 |           resolved conflicts - JDEEP
-| *   0951c28 - Fri, 12 Mar 2021 21:28:13 +0530 (3 weeks ago) (feature)
+| *   0951c28 - Fri, 12 Mar 2021 21:28:13 +0530 (3 weeks ago) (origin/feature, feature)
 | |\            resolved conflicts - JDEEP
 | |/  
 |/|   
@@ -32,7 +34,7 @@
 | |           added files - JDEEP
 | * e435fc0 - Sat, 28 Nov 2020 23:15:52 +0530 (4 months ago)
 | |           Modified imports - JDEEP
-| * cf3bd7f - Fri, 27 Nov 2020 13:56:32 +0530 (4 months ago) (origin/feature)
+| * cf3bd7f - Fri, 27 Nov 2020 13:56:32 +0530 (4 months ago)
 | |           Update azure-pipelines.yml - Jaydeep Das
 | * 1e34bf2 - Fri, 27 Nov 2020 13:49:22 +0530 (4 months ago)
 | |           from src import MainUI - JDEEP
