@@ -1,0 +1,320 @@
+* 5894a7b - Wed, 17 Mar 2021 07:17:47 +0000 (2 weeks ago) (HEAD -> master, origin/master, origin/HEAD)
+|           Add .deepsource.toml - DeepSource Bot
+* e3d8a6e - Fri, 12 Mar 2021 21:32:00 +0530 (3 weeks ago)
+|           .. - JDEEP
+* 9ee76a9 - Fri, 12 Mar 2021 21:29:49 +0530 (3 weeks ago)
+|           resolved conflicts - JDEEP
+| *   0951c28 - Fri, 12 Mar 2021 21:28:13 +0530 (3 weeks ago) (feature)
+| |\            resolved conflicts - JDEEP
+| |/  
+|/|   
+* | 3076ff6 - Fri, 27 Nov 2020 14:11:32 +0530 (4 months ago)
+| |           Update README.md - Jaydeep Das
+* | 7757269 - Fri, 27 Nov 2020 14:10:49 +0530 (4 months ago)
+| |           Update README.md - Jaydeep Das
+* | 235ccf3 - Fri, 27 Nov 2020 13:50:31 +0530 (4 months ago)
+| |           Create greetings.yml - Jaydeep Das
+* | 6b1211b - Thu, 26 Nov 2020 23:03:39 +0530 (4 months ago)
+| |           Update README.md - Jaydeep Das
+* | e251e30 - Thu, 26 Nov 2020 09:31:17 +0530 (4 months ago)
+| |           Create label.yml - Jaydeep Das
+* | 41e9458 - Thu, 26 Nov 2020 09:30:01 +0530 (4 months ago)
+| |           Removed Travis build due to issues - Jaydeep Das
+* | 261ecd5 - Thu, 26 Nov 2020 09:28:31 +0530 (4 months ago)
+| |           Create codeql-analysis.yml - Jaydeep Das
+* |   b02e159 - Thu, 26 Nov 2020 01:01:13 +0530 (4 months ago)
+|\ \            modified files - JDEEP
+| * | 420ee6b - Wed, 25 Nov 2020 08:30:14 +0530 (4 months ago)
+| | |           Update __init__.py - Jaydeep Das
+* | | a957632 - Thu, 26 Nov 2020 00:59:54 +0530 (4 months ago)
+|/ /            Removed files dependencies to fix build - JDEEP
+| * 8fb8e23 - Fri, 12 Mar 2021 21:26:07 +0530 (3 weeks ago)
+| |           added files - JDEEP
+| * e435fc0 - Sat, 28 Nov 2020 23:15:52 +0530 (4 months ago)
+| |           Modified imports - JDEEP
+| * cf3bd7f - Fri, 27 Nov 2020 13:56:32 +0530 (4 months ago) (origin/feature)
+| |           Update azure-pipelines.yml - Jaydeep Das
+| * 1e34bf2 - Fri, 27 Nov 2020 13:49:22 +0530 (4 months ago)
+| |           from src import MainUI - JDEEP
+| * 8a2a0c6 - Thu, 26 Nov 2020 00:57:17 +0530 (4 months ago)
+| |           modified files - JDEEP
+| * 3dc242c - Thu, 26 Nov 2020 00:53:39 +0530 (4 months ago)
+|/            	modified:   test_analyse.py - JDEEP
+*   a41e26f - Wed, 25 Nov 2020 00:19:11 +0530 (4 months ago)
+|\            Merge branch 'master' of https://github.com/Nova-Striker/Open-Palm - JDEEP
+| * a8b62b9 - Mon, 23 Nov 2020 19:11:21 +0530 (4 months ago)
+| |           resolved bug in windows - Nova-Striker
+* | e20fdf5 - Wed, 25 Nov 2020 00:19:04 +0530 (4 months ago)
+|/            added __init__.py and __main__.py - JDEEP
+* ff667da - Mon, 23 Nov 2020 23:38:45 +0530 (4 months ago)
+|           minor - JDEEP
+*   9c50ca9 - Mon, 23 Nov 2020 23:30:49 +0530 (4 months ago)
+|\            Merge branch 'master' of https://github.com/Nova-Striker/Open-Palm - JDEEP
+| * 6d4996a - Sat, 21 Nov 2020 10:47:31 +0530 (4 months ago)
+| |           Update README.md - Jaydeep Das
+| * 624911f - Sat, 21 Nov 2020 00:23:30 +0530 (4 months ago)
+| |           Update README.md - Jaydeep Das
+| * 7557d54 - Sat, 21 Nov 2020 00:18:59 +0530 (4 months ago)
+| |           Update README.md - Jaydeep Das
+| * 4902d4a - Sat, 21 Nov 2020 00:12:28 +0530 (4 months ago)
+| |           Update README.md - Jaydeep Das
+| * 0cc4bc6 - Sat, 21 Nov 2020 00:07:18 +0530 (4 months ago)
+| |           Update README.md - Jaydeep Das
+| * 7509598 - Fri, 20 Nov 2020 23:56:27 +0530 (4 months ago)
+| |           Update README.md - Jaydeep Das
+* | d655396 - Mon, 23 Nov 2020 23:30:30 +0530 (4 months ago)
+|/            modified src/*.py, added test for module imports. - JDEEP
+* 7041f54 - Fri, 20 Nov 2020 13:55:20 +0530 (4 months ago)
+|           Removed unused dependencies - JDEEP
+*   77356e3 - Fri, 20 Nov 2020 13:48:22 +0530 (4 months ago)
+|\            Merge branch 'master' of https://github.com/Nova-Striker/Open-Palm Merging to push - JDEEP
+| * df608a3 - Thu, 19 Nov 2020 12:16:15 +0530 (5 months ago)
+| |           Delete .gitpod.Dockerfile - Jdeep
+| * 2741de0 - Thu, 19 Nov 2020 12:16:07 +0530 (5 months ago)
+| |           Delete .gitpod.yml - Jdeep
+| * 40aa277 - Thu, 19 Nov 2020 12:15:45 +0530 (5 months ago)
+| |           Update README.md - Jdeep
+| * 9a3225f - Thu, 19 Nov 2020 12:04:10 +0530 (5 months ago)
+| |           Update README.md - Jdeep
+| * fb25955 - Thu, 19 Nov 2020 00:54:33 +0530 (5 months ago)
+| |           Update .travis.yml - Jdeep
+| * 6b829db - Thu, 19 Nov 2020 00:53:43 +0530 (5 months ago)
+| |           Update .travis.yml - Jdeep
+| * 42d175e - Thu, 19 Nov 2020 00:51:28 +0530 (5 months ago)
+| |           Create .travis.yml - Jdeep
+| * 8978c14 - Wed, 18 Nov 2020 15:54:47 +0530 (5 months ago)
+| |           Update .gitpod.Dockerfile - Jdeep
+| * a5a8e1d - Wed, 18 Nov 2020 15:53:20 +0530 (5 months ago)
+| |           Update .gitpod.Dockerfile - Jdeep
+| * 2540adf - Wed, 18 Nov 2020 15:37:39 +0530 (5 months ago)
+| |           Update .gitpod.Dockerfile - Jdeep
+| * 921f4a1 - Wed, 18 Nov 2020 15:26:25 +0530 (5 months ago)
+| |           Update .gitpod.Dockerfile - Jdeep
+* | 180308c - Fri, 20 Nov 2020 13:48:00 +0530 (4 months ago)
+|/            Completed adding docstrings in the code. - JDEEP
+*   7f8e36d - Wed, 18 Nov 2020 14:41:56 +0530 (5 months ago)
+|\            Merge branch 'Nova-Striker/gitpod-setup' - JDEEP
+| *   63a8c98 - Wed, 18 Nov 2020 14:40:36 +0530 (5 months ago) (origin/Nova-Striker/gitpod-setup, Nova-Striker/gitpod-setup)
+| |\            Merge branch 'master' into Nova-Striker/gitpod-setup - Jdeep
+| |/  
+|/|   
+* | aa62147 - Wed, 18 Nov 2020 14:31:42 +0530 (5 months ago)
+| |           Update README.md - Jdeep
+* |   784ae34 - Wed, 18 Nov 2020 14:11:03 +0530 (5 months ago)
+|\ \            Merge pull request #8 from Nova-Striker/imgbot - Jdeep
+| * | f389263 - Wed, 18 Nov 2020 08:09:59 +0000 (5 months ago)
+| | |           [ImgBot] Optimize images - ImgBotApp
+* | | acb8d06 - Wed, 18 Nov 2020 14:08:00 +0530 (5 months ago)
+|/ /            Fully automate dev setup with Gitpod (#9) - Jdeep
+| * f0f7c4b - Wed, 18 Nov 2020 14:37:28 +0530 (5 months ago)
+| |           Update .gitpod.Dockerfile - Jdeep
+| * 2b2d68e - Wed, 18 Nov 2020 08:19:46 +0000 (5 months ago)
+|/            Fully automate dev setup with Gitpod - Nova-Striker
+* 87035d1 - Wed, 18 Nov 2020 13:32:26 +0530 (5 months ago)
+|           Update azure-pipelines.yml - Jdeep
+* 68de432 - Wed, 18 Nov 2020 13:29:02 +0530 (5 months ago)
+|           Update README.md - Jdeep
+* a9c22f1 - Wed, 18 Nov 2020 13:26:50 +0530 (5 months ago)
+|           Update azure-pipelines.yml - Jdeep
+* 3682ae0 - Wed, 18 Nov 2020 13:25:03 +0530 (5 months ago)
+|           added tests - JDEEP
+*   5845ad9 - Wed, 18 Nov 2020 12:51:53 +0530 (5 months ago)
+|\            Merge branch 'master' of https://github.com/Nova-Striker/Open-Palm - JDEEP
+| * c099ff8 - Wed, 18 Nov 2020 12:48:52 +0530 (5 months ago)
+| |           Update README.md - Jdeep
+| * 94e2200 - Wed, 18 Nov 2020 12:47:14 +0530 (5 months ago)
+| |           Update README.md - Jdeep
+| * d073421 - Wed, 18 Nov 2020 10:25:08 +0530 (5 months ago)
+| |           Set up CI with Azure Pipelines - Jdeep
+| * 6d8bfe3 - Tue, 17 Nov 2020 10:20:47 +0530 (5 months ago)
+| |           Update CONTRIBUTING.md - Jdeep
+| * 563bacf - Tue, 17 Nov 2020 10:19:53 +0530 (5 months ago)
+| |           Update README.md - Jdeep
+| * c39d92a - Tue, 17 Nov 2020 10:19:21 +0530 (5 months ago)
+| |           Update README.md - Jdeep
+* | 8a82b98 - Wed, 18 Nov 2020 12:51:37 +0530 (5 months ago)
+|/            removed Pillow as dependency to support older versions of Python - JDEEP
+* 376d84e - Mon, 16 Nov 2020 14:21:26 +0530 (5 months ago)
+|           Update README.md - Jdeep
+* 6eac90e - Mon, 16 Nov 2020 14:00:38 +0530 (5 months ago)
+|           made changes - JDEEP
+* 1f5e970 - Fri, 13 Nov 2020 00:01:51 +0530 (5 months ago)
+|           removed .vscode(idk how it was pushed) - JDEEP
+* ff82888 - Thu, 12 Nov 2020 23:55:45 +0530 (5 months ago)
+|           added more docstrings - JDEEP
+* 9b214c6 - Thu, 12 Nov 2020 23:10:36 +0530 (5 months ago)
+|           added docstrings for few methods - JDEEP
+*   75b67e3 - Wed, 11 Nov 2020 15:20:27 +0530 (5 months ago)
+|\            Merge branch 'master' of https://github.com/Nova-Striker/Open-Palm - JDEEP
+| * 222a503 - Tue, 10 Nov 2020 12:05:07 +0530 (5 months ago)
+| |           minor - Nova-Striker
+* | d97d1a2 - Wed, 11 Nov 2020 15:20:12 +0530 (5 months ago)
+| |           Added support for logs - JDEEP
+* | 1b91719 - Fri, 6 Nov 2020 23:39:25 +0530 (5 months ago)
+|/            Added files - JayD
+*   9b20c47 - Fri, 6 Nov 2020 23:31:49 +0530 (5 months ago)
+|\            Merge branch 'master' of https://github.com/Nova-Striker/Open-Palm - JayD
+| * 565fa24 - Thu, 5 Nov 2020 18:22:34 +0530 (5 months ago)
+| |           Delete photo.png - Jdeep
+| * dc0cbdd - Thu, 5 Nov 2020 18:22:24 +0530 (5 months ago)
+| |           Delete logo.png - Jdeep
+* | 744d2e4 - Fri, 6 Nov 2020 23:31:14 +0530 (5 months ago)
+| |           Added files - JayD
+* | eeb8781 - Fri, 30 Oct 2020 12:14:06 +0530 (5 months ago)
+|\|           Merge branch 'master' of https://github.com/Nova-Striker/Open-Palm - JayD
+| * e93938e - Fri, 30 Oct 2020 12:12:24 +0530 (5 months ago)
+| |           Create CONTRIBUTING.md - Jdeep
+| * 3cfa1cb - Fri, 30 Oct 2020 10:28:50 +0530 (5 months ago)
+| |           Update README.md - Jdeep
+* | 5ef6011 - Fri, 30 Oct 2020 12:14:01 +0530 (5 months ago)
+|/            added files - JayD
+* 7ea5633 - Sun, 25 Oct 2020 20:52:30 +0530 (5 months ago)
+|           Update README.md - Jdeep
+* 8845450 - Sat, 24 Oct 2020 15:03:32 +0530 (5 months ago)
+|           minore - JayD
+* 398ba4d - Sat, 24 Oct 2020 14:58:07 +0530 (5 months ago)
+|           Added requirements.txt & venv made - JayD
+*   bb70189 - Thu, 22 Oct 2020 00:16:08 +0530 (5 months ago)
+|\            Merge branch 'master' of https://github.com/Nova-Striker/Open-Palm - JayD
+| * 0c5d7ef - Wed, 21 Oct 2020 09:46:15 +0530 (5 months ago)
+| |           Update issue templates - Jdeep
+* | 0d07abc - Thu, 22 Oct 2020 00:16:01 +0530 (5 months ago)
+| |           Added requirements.txt - JayD
+* | 8768a81 - Mon, 19 Oct 2020 23:58:29 +0530 (6 months ago)
+|/            Added files - JayD
+* 2a8ec0c - Wed, 14 Oct 2020 10:21:36 +0530 (6 months ago)
+|           Create CODE_OF_CONDUCT.md - Jdeep
+| * 1ad843c - Fri, 13 Nov 2020 00:47:50 +0530 (5 months ago) (origin/gh-pages)
+| |           Set theme jekyll-theme-cayman - Jdeep
+| * c1f36b1 - Fri, 13 Nov 2020 00:45:28 +0530 (5 months ago)
+| |           Update index.md - Jdeep
+| * c4dcf8a - Thu, 12 Nov 2020 23:58:29 +0530 (5 months ago)
+| |           Update index.md - Jdeep
+| * 88b7ab8 - Wed, 28 Oct 2020 13:21:00 +0530 (5 months ago)
+| |           Set theme jekyll-theme-architect - Jdeep
+| * 6bf790b - Thu, 6 Aug 2020 00:42:15 +0530 (8 months ago)
+| |           Update index.md - Nova-Striker
+| * 0153ec2 - Thu, 6 Aug 2020 00:40:38 +0530 (8 months ago)
+| |           Update index.md - Nova-Striker
+| * 03c5989 - Thu, 6 Aug 2020 00:40:24 +0530 (8 months ago)
+|             Set theme jekyll-theme-cayman - Nova-Striker
+| * ee93608 - Wed, 14 Oct 2020 10:21:26 +0530 (6 months ago) (origin/add-code-of-conduct-1)
+|/            Create CODE_OF_CONDUCT.md - Jdeep
+* d451576 - Fri, 9 Oct 2020 23:44:13 +0530 (6 months ago)
+|           Update README.md - Jdeep
+* e07a950 - Fri, 9 Oct 2020 23:41:20 +0530 (6 months ago)
+|           Update README.md - Jdeep
+* 5e01cd9 - Fri, 9 Oct 2020 23:39:28 +0530 (6 months ago)
+|           added ss - JayD
+* e839194 - Fri, 9 Oct 2020 23:37:47 +0530 (6 months ago)
+|           Delete Screenshot from 2020-10-09 23-18-44.jpg - Jdeep
+* fa26002 - Fri, 9 Oct 2020 23:32:50 +0530 (6 months ago)
+|           Added ss - JayD
+* 17fd925 - Fri, 9 Oct 2020 23:31:06 +0530 (6 months ago)
+|           Update README.md - Jdeep
+* cd2c2b5 - Wed, 7 Oct 2020 23:38:48 +0530 (6 months ago)
+|           Update README.md - Jdeep
+* 83b2666 - Sat, 3 Oct 2020 22:08:56 +0530 (6 months ago) (tag: v0.1.1)
+|           Update MainUI.py - Jdeep
+* 8ceb491 - Sat, 3 Oct 2020 15:14:22 +0530 (6 months ago) (tag: 0.1)
+|           Final - JayD
+* 8cf767e - Fri, 2 Oct 2020 23:57:03 +0530 (6 months ago)
+|           minor - JayD
+* 931ab8b - Fri, 2 Oct 2020 16:13:00 +0530 (6 months ago)
+|           MasterPage Mods - JayD
+* fba5a00 - Thu, 1 Oct 2020 15:59:01 +0530 (6 months ago)
+|           Changes - JayD
+* 3782185 - Thu, 1 Oct 2020 00:41:48 +0530 (6 months ago)
+|           Update passmanager.py - Jdeep
+* 0024141 - Thu, 1 Oct 2020 00:41:20 +0530 (6 months ago)
+|           Update analyse.py - Jdeep
+* cce5065 - Thu, 1 Oct 2020 00:40:52 +0530 (6 months ago)
+|           Update MainUI.py - Jdeep
+* 3dc4c25 - Thu, 1 Oct 2020 00:40:28 +0530 (6 months ago)
+|           Update Mail.py - Jdeep
+* 8848f68 - Thu, 1 Oct 2020 00:40:00 +0530 (6 months ago)
+|           Update Database.py - Jdeep
+*   3aa8def - Wed, 30 Sep 2020 20:50:54 +0530 (6 months ago)
+|\            Merge pull request #2 from Nova-Striker/add-license-1 - Jdeep
+| * a6e356d - Wed, 30 Sep 2020 20:50:36 +0530 (6 months ago)
+|/            Create LICENSE - Jdeep
+* bccc251 - Wed, 30 Sep 2020 16:02:08 +0530 (6 months ago)
+|           Major Changes - JayD
+* 2335958 - Tue, 29 Sep 2020 15:30:33 +0530 (6 months ago)
+|           made script to analyse test cases - JayD
+*   a4c61a1 - Mon, 28 Sep 2020 15:26:56 +0530 (6 months ago)
+|\            Merge branch 'master' of https://github.com/Nova-Striker/Open-Palm - JayD
+| * 255ef6d - Sat, 26 Sep 2020 12:29:47 +0530 (6 months ago)
+| |           Delete .MainUI.py.swp - Jdeep
+* | 3a6b35f - Mon, 28 Sep 2020 15:26:25 +0530 (6 months ago)
+|/            modified Buttons using ttk - JayD
+* 69ccd85 - Sat, 26 Sep 2020 12:28:40 +0530 (6 months ago)
+|           Organised - JayD
+* 82bc9cb - Fri, 25 Sep 2020 14:59:54 +0530 (6 months ago)
+|           Made changes to MAIN UI (master page) - JayD
+* c1b9d92 - Thu, 24 Sep 2020 15:57:20 +0530 (6 months ago)
+|           Made a new Master Page - JayD
+*   af2c1ad - Thu, 24 Sep 2020 00:53:24 +0530 (6 months ago)
+|\            Merge branch 'master' of https://github.com/Nova-Striker/Open-Palm - JayD
+| * e18f19f - Wed, 23 Sep 2020 15:50:33 +0530 (6 months ago)
+| |           Update README.md - Nova-Striker
+| * 06fe72c - Wed, 23 Sep 2020 15:50:20 +0530 (6 months ago)
+| |           Update README.md - Nova-Striker
+* | 3bea418 - Thu, 24 Sep 2020 00:53:14 +0530 (6 months ago)
+|/            Made the UI and Login Processes better - JayD
+* 0a1d3c4 - Wed, 23 Sep 2020 15:44:38 +0530 (6 months ago)
+|           Made changes for Login and Sign up - JayD
+* 77608fd - Sat, 5 Sep 2020 16:10:33 +0530 (7 months ago)
+|           Deleted Test - JayD
+* 5e5ae71 - Sat, 5 Sep 2020 15:25:18 +0530 (7 months ago)
+|           Minor Changes - JayD
+*   f83492a - Sat, 5 Sep 2020 15:15:24 +0530 (7 months ago)
+|\            Merge branch 'master' of https://github.com/Nova-Striker/Open-Palm into linux - JayD
+| * e38a214 - Fri, 4 Sep 2020 13:53:30 +0530 (7 months ago)
+| |           Test Commit - JayD
+* | b4e3273 - Sat, 5 Sep 2020 15:15:13 +0530 (7 months ago)
+| |           Password Manager Code - JayD
+* | e6ef8c2 - Fri, 4 Sep 2020 13:50:34 +0530 (7 months ago)
+| |           Modified README - JayD
+* | 313b3ed - Fri, 4 Sep 2020 13:45:27 +0530 (7 months ago)
+|/            Made changes to support UI for Linux - JayD
+* 85a9906 - Sat, 8 Aug 2020 17:40:10 +0530 (8 months ago)
+|           Update MainUI.py - Nova-Striker
+* c9f9dcc - Fri, 7 Aug 2020 17:24:13 +0530 (8 months ago)
+|           Update MainUI.py - Nova-Striker
+*   c6af527 - Fri, 7 Aug 2020 17:12:52 +0530 (8 months ago)
+|\            Merge branch 'master' of https://github.com/Nova-Striker/Open-Palm - Nova-Striker
+| * ffc9fd4 - Fri, 7 Aug 2020 17:11:31 +0530 (8 months ago)
+| |           Delete .gitignore - Nova-Striker
+| * 22acec6 - Fri, 7 Aug 2020 17:11:22 +0530 (8 months ago)
+| |           Delete DataBase Integration.py - Nova-Striker
+* | a7930d1 - Fri, 7 Aug 2020 17:11:41 +0530 (8 months ago)
+|/            made changes to mainui - Nova-Striker
+*   76be346 - Fri, 7 Aug 2020 17:04:25 +0530 (8 months ago)
+|\            made changes to mainui - Nova-Striker
+| * ebc8739 - Fri, 7 Aug 2020 01:03:03 +0530 (8 months ago)
+| |           Delete DataBase Integration.py - Nova-Striker
+| * c260810 - Fri, 7 Aug 2020 00:33:58 +0530 (8 months ago)
+| |           Update MainUI.py - Nova-Striker
+* | e5ef7bf - Fri, 7 Aug 2020 17:00:14 +0530 (8 months ago)
+|/            added icons - Nova-Striker
+*   dba3f59 - Fri, 7 Aug 2020 00:32:51 +0530 (8 months ago)
+|\            Merge branch 'master' of https://github.com/Nova-Striker/Open-Palm - Nova-Striker
+| * ad272d5 - Thu, 6 Aug 2020 17:30:07 +0530 (8 months ago)
+| |           Update Database.py - Nova-Striker
+| * fd140da - Thu, 6 Aug 2020 16:47:35 +0530 (8 months ago)
+| |           Update Database.py - Nova-Striker
+| * c35137a - Thu, 6 Aug 2020 14:49:13 +0530 (8 months ago)
+| |           Update Database.py - Nova-Striker
+* | 3a649fe - Fri, 7 Aug 2020 00:32:46 +0530 (8 months ago)
+|/            Made the UI working - Nova-Striker
+* c6f7cb7 - Thu, 6 Aug 2020 00:06:03 +0530 (8 months ago)
+|           Update Database.py - Nova-Striker
+* c046322 - Thu, 6 Aug 2020 00:04:12 +0530 (8 months ago)
+|           Update Database.py - Nova-Striker
+* 8672fa6 - Wed, 5 Aug 2020 16:08:57 +0530 (8 months ago)
+|           Update Mail.py - Nova-Striker
+* 46094ff - Wed, 5 Aug 2020 15:51:47 +0530 (8 months ago)
+|           Commit1 - Nova-Striker
+* 4814cd4 - Wed, 5 Aug 2020 15:28:50 +0530 (8 months ago)
+            Initial commit - Nova-Striker
