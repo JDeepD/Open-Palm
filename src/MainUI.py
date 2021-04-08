@@ -459,6 +459,7 @@ class Teacher_Page_Login(tk.Frame):
 
         self.mainframe.pack()  # Packing of the mainframe
 
+    @validate
     def get_user_info(self, event=None):
         """This method is bound to `sign_in` button.
            It fetches whatever is written in the
