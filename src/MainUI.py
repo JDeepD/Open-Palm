@@ -7,6 +7,7 @@ from tkinter import ttk
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 import tkinter.messagebox  # pylint: disable=unused-import
 from importlib import reload
+from importlib.machinery import SourceFileLoader
 import passmanager as pm
 import Database as db
 import analyse as an
@@ -303,7 +304,7 @@ class Editor(tk.Frame):
         else:
             import test_it  # noqa: E501  # pylint: disable=import-outside-toplevel,syntax-error
             self.save_for_test()
-            test_it = reload(test_it)
+            test_it = SourceFileLoader('test_it', './test_it.py').load_module()
 
             ver_soln = an.chk(int(self.code), self.testcases[int(self.code)])
             user_soln = []
