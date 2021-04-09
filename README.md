@@ -3,7 +3,7 @@
 # Open Palm
 
 For pdf file, visit here: https://github.com/JDeepD/schoolproject
-
+[Try in browser](https://replit.com/join/nnbzvoew-jdeepd)
 
 ![GitHub Pipenv locked Python version](https://img.shields.io/github/pipenv/locked/python-version/JDeepD/Open-Palm)
 ![GitHub last commit](https://img.shields.io/github/last-commit/JDeepD/Open-Palm)
